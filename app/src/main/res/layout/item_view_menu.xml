@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:padding="6dp"
+    card_view:cardBackgroundColor="#FFBD45"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="6dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="18dp"
+            android:scaleType="fitXY"
+            card_view:layout_constraintEnd_toStartOf="@+id/btadd"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars[14]" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="152dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="128dp"
+            android:gravity="center"
+            android:text="餐點名稱"
+            android:textSize="20dp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/ivMenu" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:text="0"
+            android:textSize="20sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.503" />
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:text="0"
+            android:textSize="24sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@+id/btless"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.532" />
+
+        <Button
+            android:id="@+id/btadd"
+            android:layout_width="27dp"
+            android:layout_height="31dp"
+            android:layout_marginEnd="103dp"
+            android:background="@drawable/plus"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toStartOf="@+id/btless"
+            card_view:layout_constraintStart_toEndOf="@+id/ivMenu"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:layout_constraintVertical_bias="0.528" />
+
+        <Button
+            android:id="@+id/btless"
+            android:layout_width="26dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="80dp"
+            android:background="@drawable/minus"
+            card_view:layout_constraintBaseline_toBaselineOf="@+id/tvPrice"
+            card_view:layout_constraintStart_toEndOf="@+id/btadd" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">EZeats</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textBooking">Booking</string>
+    <string name="textPhone">Phone:</string>
+    <string name="textTime">Time:</string>
+    <string name="textAdult">Adult</string>
+    <string name="textPeriod">Period</string>
+    <string name="textDate">Date</string>
+    <string name="textChild">Child</string>
+    <string name="textInsert">Insert</string>
+    <string name="textCancel">Cancel</string>
+    <string name="textPhoneInvaild">Phone Is Invalid</string>
+    <string name="textNotselected">NotSelected</string>
+    <string name="textInsertFail">Insert Fail</string>
+    <string name="textInsertSuccess">Insert Success</string>
+    <string name="textNoNetWork">No NetWork</string>
+    <string name="textBookingfail">Warning</string>
+    <string name="textBookingSuccess">Success</string>
+    <string name="textMassage">Thanks</string>
+    <string name="textYes">YES</string>
+    <string name="textNo">NO</string>
+    <string name="textNoSelect">No Select</string>
+    <string name="textSelect">Select</string>
+    <string name="textBookingSelect">Booking Select</string>
+    <string name="textMealsSelect">Meals Select</string>
+    <string name="textTimeOver">Time Over</string>
+    <string-array name="textTimeArray">
+        <item>Select</item>
+        <item>09~11</item>
+        <item>13~15</item>
+        <item>17~21</item>
+    </string-array>
+    <string-array name="textAdultArray">
+        <item>Select</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="textChildArray">
+        <item>Select</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string name="textNoNetwork">no network connection available</string>
+    <string name="textNOMenu">no Menu</string>
+    <string name="textNOFood">未點選餐點</string>
+
+</resources>
