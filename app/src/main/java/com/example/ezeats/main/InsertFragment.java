@@ -43,8 +43,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-
+//
 public class InsertFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private final  static String TAG = "TAG_InsertFragment";
     private FragmentActivity activity;
@@ -75,7 +74,7 @@ public class InsertFragment extends Fragment implements DatePickerDialog.OnDateS
         super.onViewCreated(view, savedInstanceState);
         final NavController navController = Navigation.findNavController(view);
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        simpleDateFormat = new SimpleDateFormat("hh:MM");
+
             etPhone = view.findViewById(R.id.etPhone);
             etDate =view.findViewById(R.id.etDate);
 
