@@ -19,16 +19,16 @@
         android:id="@+id/homeFragment"
         android:name="com.example.ezeats.main.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.ezeats.member.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registeredFragment"
+            app:destination="@id/registeredFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registeredFragment"
         android:name="com.example.ezeats.member.RegisteredFragment"

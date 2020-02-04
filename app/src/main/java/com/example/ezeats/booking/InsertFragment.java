@@ -158,7 +158,7 @@ public class InsertFragment extends Fragment{
                         Log.e(TAG, e.toString());
                     }
                     String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
-                    String bkTime = String.valueOf(spTime.getSelectedItemPosition());
+                    String bkTime = String.valueOf(timeArray[spTime.getSelectedItemPosition()]);
                     if(bkTime.equals("Select")){
                         Common.showToast(getActivity(),R.string.textNoSelect);
                         return;
@@ -326,7 +326,7 @@ public class InsertFragment extends Fragment{
             }
         }
         if (spTime.getSelectedItemPosition() != 0 && etDate != null) {
-            Log.d(TAG, simpleDateFormat.format(bkDate) + " " + bkTime);
+//            Log.d(TAG, simpleDateFormat.format(bkDate) + " " + bkTime);
             List<String> tablesOrdered = bookings.stream().filter(v -> v.getBkTime().equals(bkTime)
                     && v.getBkDate().equals(bkDate))
                     .flatMap(v -> Stream.of(v.getTableId()))
