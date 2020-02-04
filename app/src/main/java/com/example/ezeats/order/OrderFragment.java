@@ -237,7 +237,7 @@ public class OrderFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Menu menu = menus.get(position);
-            String url = Url.URL + "MenuServlet";
+            String url = Url.URL + "/MenuServlet";
             String id = menu.getMENU_ID();
             menuImageTask = new ImageTask(url, id, imageSize, holder.imageView);
             menuImageTask.execute();
