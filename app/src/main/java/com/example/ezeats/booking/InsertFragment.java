@@ -1,15 +1,21 @@
-package com.example.ezeats.main;
-
+package com.example.ezeats.booking;
 
 
 import android.app.AlertDialog;
-
-
 import android.app.DatePickerDialog;
-
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,26 +24,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TimePicker;
-
-
 import com.example.ezeats.R;
-import com.example.ezeats.CommonTask;
-import com.example.ezeats.ImageTask;
+import com.example.ezeats.main.Common;
+import com.example.ezeats.main.Url;
+import com.example.ezeats.task.CommonTask;
+import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -164,7 +158,7 @@ public class InsertFragment extends Fragment implements DatePickerDialog.OnDateS
                         return;
                     }
                    if(Common.networkConnected(activity)){
-                       String url = Common.URL_SERVER + "BookingServlet";
+                       String url = Url.URL + "BookingServlet";
                        Booking booking = new Booking(bkTime, bkDate, bkChild,bkAdult, bkPhone);
                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                        JsonObject jsonObject = new JsonObject();

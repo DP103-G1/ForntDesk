@@ -1,17 +1,15 @@
-package com.example.ezeats;
+package com.example.ezeats.main;
+
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.CompoundButton;
 
 import com.example.ezeats.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

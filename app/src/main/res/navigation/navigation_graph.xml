@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/insertFragment"
-        android:name="com.example.ezeats.main.InsertFragment"
+        android:name="com.example.ezeats.booking.InsertFragment"
         android:label="fragment_insert"
         tools:layout="@layout/fragment_insert" />
     <fragment
         android:id="@+id/orderFragment"
-        android:name="com.example.ezeats.main.OrderFragment"
+        android:name="com.example.ezeats.order.OrderFragment"
         android:label="fragment_order"
         tools:layout="@layout/fragment_order" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.ezeats.HomeFragment"
+        android:name="com.example.ezeats.main.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -26,12 +26,12 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.ezeats.LoginFragment"
+        android:name="com.example.ezeats.member.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/registeredFragment"
-        android:name="com.example.ezeats.RegisteredFragment"
+        android:name="com.example.ezeats.member.RegisteredFragment"
         android:label="fragment_registered"
         tools:layout="@layout/fragment_registered" />
 </navigation>

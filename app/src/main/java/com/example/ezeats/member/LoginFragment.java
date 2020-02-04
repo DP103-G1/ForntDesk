@@ -1,22 +1,23 @@
-package com.example.ezeats;
+package com.example.ezeats.member;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+
+import com.example.ezeats.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegisteredFragment extends Fragment {
+public class LoginFragment extends Fragment {
 
 
-    public RegisteredFragment() {
+    public LoginFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +26,7 @@ public class RegisteredFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registered, container, false);
+        return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
 }

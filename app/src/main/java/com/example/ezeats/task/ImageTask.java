@@ -1,4 +1,4 @@
-package com.example.ezeats;
+package com.example.ezeats.task;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

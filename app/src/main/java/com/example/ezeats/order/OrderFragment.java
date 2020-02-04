@@ -3,9 +3,8 @@ package com.example.ezeats.order;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +20,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ezeats.main.Common;
 import com.example.ezeats.R;
-import com.example.ezeats.CommonTask;
-import com.example.ezeats.ImageTask;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.ezeats.main.Common;
+import com.example.ezeats.main.Url;
+import com.example.ezeats.task.CommonTask;
+import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -38,12 +37,16 @@ import java.util.List;
 public class OrderFragment extends Fragment {
     private static final String TAG = "TAG_OrderFragment";
     private RecyclerView rvMenu;
-    private TextView edTotal, edNote;
+    private TextView edTotal;
+    private ImageView btBell;
+    private Button btChect;
     private Activity activity;
     private CommonTask menuGetAllTask;
     private ImageTask menuImageTask;
     private List<Menu> menus;
     private int totalPrice;
+    int a = 0;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,10 +70,27 @@ public class OrderFragment extends Fragment {
         edTotal = view.findViewById(R.id.edTotal);
         edTotal.setText(String.valueOf(totalPrice));
         rvMenu = view.findViewById(R.id.rvMenu);
-        edNote = view.findViewById(R.id.edNote);
+        btBell = view.findViewById(R.id.btbell);
+        btChect = view.findViewById(R.id.btChect);
         rvMenu.setLayoutManager(new LinearLayoutManager(activity));
         menus = getMenu();
         showMenu(menus);
+
+        btBell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setBackgroundColor(Color.RED);
+            }
+        });
+
+        btChect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                String id =
+//                String name =
+
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -96,34 +116,14 @@ public class OrderFragment extends Fragment {
             }
         });
 
-
-        edNote.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                BottomNavigationView navbar = getActivity().findViewById(R.id.bv);
-                navbar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                BottomNavigationView navbar = getActivity().findViewById(R.id.bv);
-                navbar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                BottomNavigationView navbar = getActivity().findViewById(R.id.bv);
-                navbar.setVisibility(View.VISIBLE);
-            }
-        });
     }
 
     private List<Menu> getMenu() {
         List<Menu> menus = null;
         if (Common.networkConnected(activity)) {
-            String url = Common.URL_SERVER + "/MenuServlet";
+            String url = Url.URL + "/MenuServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getAll");
+            jsonObject.addProperty("action", "getAllShow");
             String jsonOut = jsonObject.toString();
             menuGetAllTask = new CommonTask(url, jsonOut);
             try {
@@ -172,6 +172,7 @@ public class OrderFragment extends Fragment {
         class MyViewHolder extends RecyclerView.ViewHolder {
             int amount;
             int price;
+            String id, name;
             ImageView imageView;
             TextView tvName, tvPrice, tvAmount;
             Button btAdd, btLess;
@@ -190,7 +191,6 @@ public class OrderFragment extends Fragment {
                     public void onClick(View v) {
                         amount++;
                         tvAmount.setText(String.valueOf(amount));
-                        tvPrice.setText(String.valueOf(amount * price));
                         totalPrice += price;
                         edTotal.setText(String.valueOf(totalPrice));
                     }
@@ -202,7 +202,6 @@ public class OrderFragment extends Fragment {
                         if(amount > 0) {
                             amount--;
                             tvAmount.setText(String.valueOf(amount));
-                            tvPrice.setText(String.valueOf(amount * price));
                             totalPrice -= price;
                             edTotal.setText(String.valueOf(totalPrice));
                         } else {
@@ -214,6 +213,12 @@ public class OrderFragment extends Fragment {
 
             public void setPrice(int price) {
                 this.price = price;
+            }
+            public void setId(String id) {
+                this.id = id;
+            }
+            public void setName(String name){
+                this.name = name;
             }
         }
 
@@ -232,13 +237,16 @@ public class OrderFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Menu menu = menus.get(position);
-            String url = com.example.ezeats.main.Common.URL_SERVER + "MenuServlet";
+            String url = Url.URL + "MenuServlet";
             String id = menu.getMENU_ID();
             menuImageTask = new ImageTask(url, id, imageSize, holder.imageView);
             menuImageTask.execute();
-            holder.tvName.setText(menu.getFOOD_NAME());
-            holder.tvPrice.setText("0");
-            holder.setPrice(menu.getFOOD_PRICE());
+                holder.tvName.setText(menu.getFOOD_NAME());
+                holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
+                holder.setName(menu.getFOOD_NAME());
+                holder.setPrice(menu.getFOOD_PRICE());
+                holder.setId(menu.getMENU_ID());
+
             }
         }
 
