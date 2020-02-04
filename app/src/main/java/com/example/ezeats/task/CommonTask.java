@@ -1,4 +1,4 @@
-package com.example.ezeats;
+package com.example.ezeats.task;
 
 import android.os.AsyncTask;
 import android.util.Log;

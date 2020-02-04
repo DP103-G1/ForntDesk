@@ -1,4 +1,4 @@
-package com.example.ezeats.main;
+package com.example.ezeats.booking;
 
 import androidx.annotation.NonNull;
 
