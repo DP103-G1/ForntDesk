@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".select.SelectMenuFragment" >
+
+    <ImageView
+        android:id="@+id/ivBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="236dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/ivOrderMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvOrderMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="OrderMenu"
+        app:layout_constraintEnd_toEndOf="@+id/ivOrderMenu"
+        app:layout_constraintStart_toStartOf="@+id/ivOrderMenu"
+        app:layout_constraintTop_toBottomOf="@+id/ivOrderMenu" />
+
+    <TextView
+        android:id="@+id/tvBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/textBooking"
+        app:layout_constraintEnd_toEndOf="@+id/ivBooking"
+        app:layout_constraintStart_toStartOf="@+id/ivBooking"
+        app:layout_constraintTop_toBottomOf="@+id/ivBooking" />
+</androidx.constraintlayout.widget.ConstraintLayout>

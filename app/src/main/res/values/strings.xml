@@ -29,9 +29,15 @@
     <string name="textTimeOver">Time Over</string>
     <string-array name="textTimeArray">
         <item>Select</item>
-        <item>09~11</item>
-        <item>13~15</item>
-        <item>17~21</item>
+        <item>0900</item>
+        <item>1000</item>
+        <item>1100</item>
+        <item>1200</item>
+        <item>1300</item>
+        <item>1400</item>
+        <item>1500</item>
+        <item>1600</item>
+        <item>1700</item>
     </string-array>
     <string-array name="textAdultArray">
         <item>Select</item>
@@ -53,5 +59,7 @@
     <string name="textNoNetwork">no network connection available</string>
     <string name="textNOMenu">no Menu</string>
     <string name="textNOFood">未點選餐點</string>
+    <string name="textTable">Table</string>
+    <string name="textNoSelectBooking">No Select Booking</string>
 
 </resources>

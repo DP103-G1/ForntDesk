@@ -2,84 +2,119 @@ package com.example.ezeats.booking;
 
 import androidx.annotation.NonNull;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Booking implements Serializable {
-
+public class Booking {
+	private String bkId;
+	private String memberId;
+	private String tableId;
 	private String bkTime;
 	private Date bkDate;
 	private String bkChild;
 	private String bkAdult;
 	private String bkPhone;
 
-public Booking(
-		String bkTime, Date bkDate, String bkChild, String bkAdult,
-		String bkPhone) {
-	super();
-
-	this.bkTime = bkTime;
-	this.bkDate = bkDate;
-	this.bkChild = bkChild;
-	this.bkAdult = bkAdult;
-	this.bkPhone = bkPhone;
-}
-
-
-
-	@NonNull
-	@Override
-	public String toString() {
-		return "Booking [bkTime=" + bkTime + ", bkDate=" + bkDate + ", bkChild=" + bkChild + ", bkAdult=" + bkAdult + ", bkPhone=" + bkPhone + "]";
+	public Booking(String bkId,String tableId,
+				   String bkTime, Date bkDate, String bkChild, String bkAdult,
+				   String bkPhone) {
+		super();
+		this.bkId = bkId;
+		this.tableId = tableId;
+		this.bkTime = bkTime;
+		this.bkDate = bkDate;
+		this.bkChild = bkChild;
+		this.bkAdult = bkAdult;
+		this.bkPhone = bkPhone;
 	}
 
 
 
 
 
+	public Booking( String tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,
+					String bkPhone) {
+		super();
+		this.tableId = tableId;
+		this.bkTime = bkTime;
+		this.bkDate = bkDate;
+		this.bkChild = bkChild;
+		this.bkAdult = bkAdult;
+		this.bkPhone = bkPhone;
+	}
 
 
 
+	@Override
+	public String toString() {
+		return "Booking [bkId=" + bkId + ", memberId=" + memberId + ", tableId=" + tableId + ", bkTime=" + bkTime
+				+ ", bkDate=" + bkDate + ", bkChild=" + bkChild + ", bkAdult=" + bkAdult + ", bkPhone=" + bkPhone + "]";
+	}
 
-public String getBkTime() {
-	return bkTime;
-}
 
-public void setBkTime(String bkTime) {
-	this.bkTime = bkTime;
-}
 
-public Date getBkDate() {
-	return bkDate;
-}
+	public String getBkId() {
+		return bkId;
+	}
 
-public void setBkDate(Date bkDate) {
-	this.bkDate = bkDate;
-}
+	public void setBkId(String bkId) {
+		this.bkId = bkId;
+	}
 
-public String getBkChild() {
-	return bkChild;
-}
+	public String getMemberId() {
+		return memberId;
+	}
 
-public void setBkChild(String bkChild) {
-	this.bkChild = bkChild;
-}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
-public String getBkAdult() {
-	return bkAdult;
-}
+	public String getTableId() {
+		return tableId;
+	}
 
-public void setBkAdult(String bkAdult) {
-	this.bkAdult = bkAdult;
-}
+	public void setTableId(String tableId) {
+		this.tableId = tableId;
+	}
 
-public String getBkPhone() {
-	return bkPhone;
-}
+	public String getBkTime() {
+		return bkTime;
+	}
 
-public void setBkPhone(String bkPhone) {
-	this.bkPhone = bkPhone;
-}
+	public void setBkTime(String bkTime) {
+		this.bkTime = bkTime;
+	}
+
+	public Date getBkDate() {
+		return bkDate;
+	}
+
+	public void setBkDate(Date bkDate) {
+		this.bkDate = bkDate;
+	}
+
+	public String getBkChild() {
+		return bkChild;
+	}
+
+	public void setBkChild(String bkChild) {
+		this.bkChild = bkChild;
+	}
+
+	public String getBkAdult() {
+		return bkAdult;
+	}
+
+	public void setBkAdult(String bkAdult) {
+		this.bkAdult = bkAdult;
+	}
+
+	public String getBkPhone() {
+		return bkPhone;
+	}
+
+	public void setBkPhone(String bkPhone) {
+		this.bkPhone = bkPhone;
+	}
 
 
 }

@@ -34,4 +34,18 @@
         android:name="com.example.ezeats.member.RegisteredFragment"
         android:label="fragment_registered"
         tools:layout="@layout/fragment_registered" />
+    <fragment
+        android:id="@+id/selectBookingFragment"
+        android:name="com.example.ezeats.select.SelectBookingFragment"
+        android:label="fragment_select_booking"
+        tools:layout="@layout/fragment_select_booking" />
+    <fragment
+        android:id="@+id/selectMenuFragment"
+        android:name="com.example.ezeats.select.SelectMenuFragment"
+        android:label="fragment_select_menu"
+        tools:layout="@layout/fragment_select_menu" >
+        <action
+            android:id="@+id/action_selectMenuFragment_to_selectBookingFragment"
+            app:destination="@id/selectBookingFragment" />
+    </fragment>
 </navigation>

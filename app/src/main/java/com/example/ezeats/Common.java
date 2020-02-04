@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.widget.Toast;
 
 public class Common {
+    public static final String MEMBER_PREFRENCE = "member";
     // check if the device connect to the network
     public static boolean networkConnected(Activity activity) {
         ConnectivityManager conManager =

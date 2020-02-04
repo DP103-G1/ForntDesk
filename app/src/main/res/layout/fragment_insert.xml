@@ -93,16 +93,6 @@
             android:layout_marginEnd="40dp"
             android:text="@string/textTime" />
 
-        <EditText
-            android:id="@+id/etTimer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
         <Spinner
             android:id="@+id/spTime"
             android:layout_width="match_parent"
@@ -111,6 +101,23 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="40dp"
             android:entries="@array/textTimeArray" />
+
+        <TextView
+            android:id="@+id/tvTable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="40dp"
+            android:text="@string/textTable" />
+
+        <Spinner
+            android:id="@+id/spTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp" />
 
         <TextView
             android:id="@+id/tvAdult"
