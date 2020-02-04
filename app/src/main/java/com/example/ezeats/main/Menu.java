@@ -7,7 +7,7 @@ public class Menu implements Serializable{
     private String MENU_ID;
     private String FOOD_NAME;
     private int FOOD_PRICE;
-    private boolean FOOD_STATUS;
+    private int FOOD_STATUS;
     private String FOOD_CONTENT;
 
     public Menu( String FOOD_NAME, int FOOD_PRICE) {
@@ -15,7 +15,7 @@ public class Menu implements Serializable{
         this.FOOD_PRICE = FOOD_PRICE;
     }
 
-    public Menu(String MENU_ID, String FOOD_NAME, int FOOD_PRICE, boolean FOOD_STATUS, String FOOD_CONTENT) {
+    public Menu(String MENU_ID, String FOOD_NAME, int FOOD_PRICE, int FOOD_STATUS, String FOOD_CONTENT) {
         this.MENU_ID = MENU_ID;
         this.FOOD_NAME = FOOD_NAME;
         this.FOOD_PRICE = FOOD_PRICE;
@@ -59,11 +59,11 @@ public class Menu implements Serializable{
         this.FOOD_PRICE = food_price;
     }
 
-    public boolean isFOOD_STATUS() {
+    public int getFOOD_STATUS() {
         return FOOD_STATUS;
     }
 
-    public void setFOOD_STATUS(boolean food_status) {
+    public void setFOOD_STATUS(int food_status) {
         this.FOOD_STATUS = food_status;
     }
 

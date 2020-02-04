@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".">
+    tools:context=".main.OrderFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -22,11 +22,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <ImageView
                 android:id="@+id/btbell"
                 android:layout_width="62dp"
                 android:layout_height="match_parent"
-                android:background="@drawable/ic_alarm_11s_128px" />
+                android:src="@drawable/ic_bell_1_128px" />
 
             <SearchView
                 android:id="@+id/searchView"
