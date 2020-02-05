@@ -36,5 +36,9 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Button btReg = view.findViewById(R.id.btReg);
         btReg.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registeredFragment));
+
+        Button btForget = view.findViewById(R.id.btForget);
+        btForget.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_forgetFragment));
     }
+
 }

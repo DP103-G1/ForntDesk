@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registeredFragment"
             app:destination="@id/registeredFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgetFragment"
+            app:destination="@id/forgetFragment" />
     </fragment>
     <fragment
         android:id="@+id/registeredFragment"
@@ -48,4 +51,9 @@
             android:id="@+id/action_selectMenuFragment_to_selectBookingFragment"
             app:destination="@id/selectBookingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/forgetFragment"
+        android:name="com.example.ezeats.ForgetFragment"
+        android:label="fragment_forget"
+        tools:layout="@layout/fragment_forget" />
 </navigation>
