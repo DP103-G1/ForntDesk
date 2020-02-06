@@ -28,7 +28,7 @@
             tools:text="textBkId" />
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/tvBkDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

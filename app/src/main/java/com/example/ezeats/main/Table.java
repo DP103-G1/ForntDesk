@@ -1,4 +1,4 @@
-package com.example.ezeats.booking;
+package com.example.ezeats.main;
 
 
 public class Table {

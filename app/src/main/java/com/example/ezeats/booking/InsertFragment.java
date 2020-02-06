@@ -25,8 +25,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.R;
+import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
@@ -44,7 +45,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-//
+
 
 public class InsertFragment extends Fragment{
     private final  static String TAG = "TAG_InsertFragment";
@@ -117,15 +118,17 @@ public class InsertFragment extends Fragment{
 
 
         etDate = view.findViewById(R.id.etDate);
-        etDate.setOnClickListener(v -> {
-            DatePickerDialog datePickerDialog = new DatePickerDialog(activity);
-                    DatePicker datePicker = datePickerDialog.getDatePicker();
-                    datePicker.setMinDate(new Date().getTime());
-                    datePickerDialog.show();
-            datePickerDialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
-                updateDisplay(year, month, dayOfMonth);
-                spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, comparison()));
-            });
+        etDate.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(activity);
+                DatePicker datePicker = datePickerDialog.getDatePicker();
+                datePicker.setMinDate(new Date().getTime());
+                datePickerDialog.show();
+                datePickerDialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
+                    updateDisplay(year, month, dayOfMonth);
+                    spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, comparison()));
+                });
+            }
         });
         spTable = view.findViewById(R.id.spTable);
 //            Set<String> tables = new HashSet<String>();
@@ -158,12 +161,12 @@ public class InsertFragment extends Fragment{
                         Log.e(TAG, e.toString());
                     }
                     String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
-                    String bkTime = String.valueOf(spTime.getSelectedItemPosition());
+                    String bkTime = String.valueOf(timeArray[spTime.getSelectedItemPosition()]);
                     if(bkTime.equals("Select")){
                         Common.showToast(getActivity(),R.string.textNoSelect);
                         return;
                     }
-                    String bkTable = tableIds.get(spTable.getSelectedItemPosition());
+                    String bkTable = tableIds.get(spTable.getSelectedItemPosition() - 1);
                     if (bkTable.equals("Select")){
                         Common.showToast(getActivity(),R.string.textNoSelect);
                         return;
@@ -314,7 +317,7 @@ public class InsertFragment extends Fragment{
 //                .append(pad(hour)).append(":")
 //                .append(pad(minute)));
 //    }
-//
+
     private List<String> comparison(){
         List<String> tablesAvalible = tableIds.stream().collect(Collectors.toList());
         tablesAvalible.add(0, "Select");
@@ -326,7 +329,7 @@ public class InsertFragment extends Fragment{
             }
         }
         if (spTime.getSelectedItemPosition() != 0 && etDate != null) {
-            Log.d(TAG, simpleDateFormat.format(bkDate) + " " + bkTime);
+//            Log.d(TAG, simpleDateFormat.format(bkDate) + " " + bkTime);
             List<String> tablesOrdered = bookings.stream().filter(v -> v.getBkTime().equals(bkTime)
                     && v.getBkDate().equals(bkDate))
                     .flatMap(v -> Stream.of(v.getTableId()))

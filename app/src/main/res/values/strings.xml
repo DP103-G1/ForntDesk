@@ -61,5 +61,6 @@
     <string name="textNOFood">未點選餐點</string>
     <string name="textTable">Table</string>
     <string name="textNoSelectBooking">No Select Booking</string>
+    <string name="textNoSelectBookingFound">No Select Booking Found</string>
 
 </resources>
