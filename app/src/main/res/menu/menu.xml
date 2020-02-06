@@ -17,7 +17,7 @@
         android:icon="@drawable/ic_food_128px"
         android:title="點餐" />
     <item
-        android:id="@+id/sug"
-        android:icon="@drawable/ic_text_128px"
-        android:title="操作導覽" />
+        android:id="@+id/loginFragment"
+        android:icon="@drawable/ic_people_1s_128px"
+        android:title="會員" />
 </menu>

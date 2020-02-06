@@ -19,16 +19,19 @@
         android:id="@+id/homeFragment"
         android:name="com.example.ezeats.main.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.ezeats.member.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registeredFragment"
+            app:destination="@id/registeredFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgetFragment"
+            app:destination="@id/forgetFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registeredFragment"
         android:name="com.example.ezeats.member.RegisteredFragment"
@@ -48,4 +51,9 @@
             android:id="@+id/action_selectMenuFragment_to_selectBookingFragment"
             app:destination="@id/selectBookingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/forgetFragment"
+        android:name="com.example.ezeats.ForgetFragment"
+        android:label="fragment_forget"
+        tools:layout="@layout/fragment_forget" />
 </navigation>
