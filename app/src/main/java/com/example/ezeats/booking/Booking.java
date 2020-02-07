@@ -2,9 +2,10 @@ package com.example.ezeats.booking;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Booking {
+public class Booking implements Serializable {
 	private String bkId;
 	private String memberId;
 	private String tableId;

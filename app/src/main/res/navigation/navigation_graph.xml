@@ -49,7 +49,11 @@
         android:id="@+id/selectBookingFragment"
         android:name="com.example.ezeats.select.SelectBookingFragment"
         android:label="fragment_select_booking"
-        tools:layout="@layout/fragment_select_booking" />
+        tools:layout="@layout/fragment_select_booking" >
+        <action
+            android:id="@+id/action_selectBookingFragment_to_selectBookingDetailFragment"
+            app:destination="@id/selectBookingDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/selectMenuFragment"
         android:name="com.example.ezeats.select.SelectMenuFragment"
@@ -69,4 +73,9 @@
         android:name="com.example.ezeats.MemberFragment"
         android:label="fragment_member"
         tools:layout="@layout/fragment_member" />
+    <fragment
+        android:id="@+id/selectBookingDetailFragment"
+        android:name="com.example.ezeats.select.SelectBookingDetailFragment"
+        android:label="fragment_select_booking_detail"
+        tools:layout="@layout/fragment_select_booking_detail" />
 </navigation>

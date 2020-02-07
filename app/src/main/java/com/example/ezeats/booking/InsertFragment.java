@@ -66,7 +66,7 @@ public class InsertFragment extends Fragment{
     private List<Booking> bookings;
     private List<String> tableIds;
     private String textPhone;
-
+    private String memberId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -156,7 +156,6 @@ public class InsertFragment extends Fragment{
             }
         });
         spTable = view.findViewById(R.id.spTable);
-//            Set<String> tables = new HashSet<String>();
         ArrayAdapter<String> tableArrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_spinner_item, comparison());
         spTable.setAdapter(tableArrayAdapter);
         spTable.setSelection(0,true);
@@ -189,13 +188,13 @@ public class InsertFragment extends Fragment{
                     String bkTime = timeArray[spTime.getSelectedItemPosition()];
                     Log.d(TAG, bkTime);
                     if(bkTime.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textNoSelect);
+                        Common.showToast(getActivity(),R.string.textTimeNoSelect);
                         return;
                     }
                     String bkTable = comparison().get(spTable.getSelectedItemPosition());
                     Log.d(TAG, bkTable);
                     if (bkTable.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textNoSelect);
+                        Common.showToast(getActivity(),R.string.textTableNoSelect);
                         return;
                     }
 
@@ -205,11 +204,11 @@ public class InsertFragment extends Fragment{
                     String bkChild = String.valueOf(childArray[spChild.getSelectedItemPosition()]);
                     Log.d(TAG, bkChild);
                     if(bkChild.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textNoSelect);
+                        Common.showToast(getActivity(),R.string.textChildNoSelect);
                         return;
                     }
 
-//                    Resources res = getResources();
+
                     String[] adultArray = getResources().getStringArray(R.array.textAdultArray);
                     String bkAdult = adultArray[spAdult.getSelectedItemPosition()];
                     Log.d(TAG, bkAdult);
@@ -310,47 +309,11 @@ public class InsertFragment extends Fragment{
         }
     }
 
-//    @Override
-//    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//        InsertFragment.hour = hourOfDay ;
-//        InsertFragment.minute = minute;
-//        updateTime();
-//    }
 
-//    private void showTime() {
-//        Calendar calendar = Calendar.getInstance();
-//        long time = System.currentTimeMillis();
-//        calendar.setTimeInMillis(time);
-//        hour = calendar.get(Calendar.HOUR_OF_DAY);
-//        minute = calendar.get(Calendar.MINUTE);
-//        int morningstart = (int) (time * 60) ;
-//        int morningend = 11 * 60 ;
-//        int afternoonstart = 12 * 60;
-//        int afternoonend = 15 * 60;
-//        int nightstart = 17 * 60;
-//        int nightend = 21 * 60;
-//        if (morningstart <= time && morningend >= time){
-//            updateTime();
-//        }else if (afternoonstart <= time && afternoonend >= time){
-//            updateTime();
-//        }else if (nightstart <= time && nightend >= time){
-//            updateTime();
-//        }else {
-//            Common.showToast(getActivity(),R.string.textTimeOver);
-//
-//        }
-//
-//    }
-
-//    private void updateTime(){
-//        etTimer.setText(new StringBuilder()
-//                .append(pad(hour)).append(":")
-//                .append(pad(minute)));
-//    }
 
     private List<String> comparison(){
         List<String> tablesAvalible = tableIds.stream().collect(Collectors.toList());
-        tablesAvalible.add(0, "Select");
+        tablesAvalible.add(0, "請選取");
         if (!etDate.getText().toString().isEmpty()) {
             try {
                 bkDate = simpleDateFormat.parse(etDate.getText().toString());
@@ -368,7 +331,7 @@ public class InsertFragment extends Fragment{
             return tablesAvalible;
         }
         List<String> tablesNoSelect = new ArrayList<>();
-        tablesNoSelect.add("Select");
+        tablesNoSelect.add("請選取");
         return tablesNoSelect;
     }
 
