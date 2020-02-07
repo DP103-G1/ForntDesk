@@ -70,7 +70,7 @@ public class InsertFragment extends Fragment{
         activity = getActivity();
         pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
         mem_id = pref.getString("mem_id", null);
-        mem_id = "0";
+        mem_id = "2";
     }
 
     @Override
@@ -161,12 +161,14 @@ public class InsertFragment extends Fragment{
                         Log.e(TAG, e.toString());
                     }
                     String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
-                    String bkTime = String.valueOf(timeArray[spTime.getSelectedItemPosition()]);
+                    String bkTime = timeArray[spTime.getSelectedItemPosition()];
+                    Log.d(TAG, bkTime);
                     if(bkTime.equals("Select")){
                         Common.showToast(getActivity(),R.string.textNoSelect);
                         return;
                     }
-                    String bkTable = tableIds.get(spTable.getSelectedItemPosition() - 1);
+                    String bkTable = comparison().get(spTable.getSelectedItemPosition());
+                    Log.d(TAG, bkTable);
                     if (bkTable.equals("Select")){
                         Common.showToast(getActivity(),R.string.textNoSelect);
                         return;
@@ -176,6 +178,7 @@ public class InsertFragment extends Fragment{
 
                     String[] childArray = getResources().getStringArray(R.array.textChildArray);
                     String bkChild = String.valueOf(childArray[spChild.getSelectedItemPosition()]);
+                    Log.d(TAG, bkChild);
                     if(bkChild.equals("Select")){
                         Common.showToast(getActivity(),R.string.textNoSelect);
                         return;
@@ -184,6 +187,7 @@ public class InsertFragment extends Fragment{
 //                    Resources res = getResources();
                     String[] adultArray = getResources().getStringArray(R.array.textAdultArray);
                     String bkAdult = adultArray[spAdult.getSelectedItemPosition()];
+                    Log.d(TAG, bkAdult);
                     if(bkAdult.equals("Select")){
                         Common.showToast(getActivity(),R.string.textNoSelect);
                         return;
