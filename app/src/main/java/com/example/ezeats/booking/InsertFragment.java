@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,6 +65,7 @@ public class InsertFragment extends Fragment{
     private SharedPreferences pref;
     private List<Booking> bookings;
     private List<String> tableIds;
+    private String textPhone;
 
 
     @Override
@@ -87,8 +91,29 @@ public class InsertFragment extends Fragment{
         final NavController navController = Navigation.findNavController(view);
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         etPhone = view.findViewById(R.id.etPhone);
-        spTime = view.findViewById(R.id.spTime);
+        etPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 10) {
+                    textPhone = s.subSequence(0, 10).toString();
+                    etPhone.setText(textPhone);
+                    etPhone.setSelection(textPhone.length());
+                }
+
+            }
+        });
+
+        spTime = view.findViewById(R.id.spTime);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_spinner_item,timeArray);
         bkDate = null;
@@ -221,6 +246,7 @@ public class InsertFragment extends Fragment{
                                   .setPositiveButton(R.string.textYes, new DialogInterface.OnClickListener() {
                                       @Override
                                       public void onClick(DialogInterface dialog, int which) {
+
                                           navController.popBackStack();
                                       }
                                   })
@@ -231,7 +257,7 @@ public class InsertFragment extends Fragment{
                        Common.showToast(getActivity(),R.string.textNoNetWork);
                    }
 
-                   navController.popBackStack();
+                   navController.navigate(R.id.action_insertFragment_to_homeFragment);
                 }
 
             });
