@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,7 +34,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class OrderFragment extends Fragment {
     private static final String TAG = "TAG_OrderFragment";
@@ -45,7 +49,8 @@ public class OrderFragment extends Fragment {
     private ImageTask menuImageTask;
     private List<Menu> menus;
     private int totalPrice;
-    int a = 0;
+    private Set<MenuDetail> menuDetails;
+
 
 
     @Override
@@ -65,6 +70,8 @@ public class OrderFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final NavController navController = Navigation.findNavController(view);
+        menuDetails = new HashSet<>();
         SearchView searchView = view.findViewById(R.id.searchView);
         totalPrice = 0;
         edTotal = view.findViewById(R.id.edTotal);
@@ -76,20 +83,31 @@ public class OrderFragment extends Fragment {
         menus = getMenu();
         showMenu(menus);
 
-        btBell.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setBackgroundColor(Color.RED);
-            }
-        });
+        btBell.setOnClickListener(v -> v.setBackgroundColor(Color.RED));
 
-        btChect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                String id =
-//                String name =
-
+        btChect.setOnClickListener(v -> {
+            if(Common.networkConnected(activity)) {
+               String url = Url.URL + "/MenuDetailServlet";
+               menuDetails.size();
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("action","add");
+                jsonObject.addProperty("menudetail", new Gson().toJson(menuDetails));
+                int count = 0;
+                try {
+                    String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                    count = Integer.valueOf(result);
+                } catch (Exception e) {
+                    Log.e(TAG, e.toString());
+                }
+                if (count == 0) {
+                    Common.showToast(getActivity(), R.string.textInsertFail);
+                } else {
+                    Common.showToast(getActivity(), R.string.textInsertSuccess);
+                }
+            } else {
+                Common.showToast(getActivity(), R.string.textNoNetwork);
             }
+            navController.popBackStack();
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -172,7 +190,7 @@ public class OrderFragment extends Fragment {
         class MyViewHolder extends RecyclerView.ViewHolder {
             int amount;
             int price;
-            String id, name;
+            String id;
             ImageView imageView;
             TextView tvName, tvPrice, tvAmount;
             Button btAdd, btLess;
@@ -186,27 +204,29 @@ public class OrderFragment extends Fragment {
                 tvAmount = itemView.findViewById(R.id.tvAmount);
                 amount = Integer.parseInt(tvAmount.getText().toString());
                 btAdd = itemView.findViewById(R.id.btadd);
-                btAdd.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        amount++;
-                        tvAmount.setText(String.valueOf(amount));
-                        totalPrice += price;
-                        edTotal.setText(String.valueOf(totalPrice));
-                    }
+                btAdd.setOnClickListener(v -> {
+                    amount++;
+                    tvAmount.setText(String.valueOf(amount));
+                    totalPrice += price;
+                    edTotal.setText(String.valueOf(totalPrice));
+                    MenuDetail menuDetail = new MenuDetail(id, amount, totalPrice);
+                    menuDetails.add(menuDetail);
                 });
                 btLess = itemView.findViewById(R.id.btless);
-                btLess.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(amount > 0) {
-                            amount--;
-                            tvAmount.setText(String.valueOf(amount));
-                            totalPrice -= price;
-                            edTotal.setText(String.valueOf(totalPrice));
+                btLess.setOnClickListener(v -> {
+                    if(amount > 0) {
+                        amount--;
+                        tvAmount.setText(String.valueOf(amount));
+                        totalPrice -= price;
+                        edTotal.setText(String.valueOf(totalPrice));
+                        MenuDetail menuDetail = new MenuDetail(id, amount, totalPrice);
+                        if (amount == 0) {
+                            menuDetails.remove(menuDetail);
                         } else {
-                            Common.showToast(activity, R.string.textNOFood);
+                            menuDetails.add(menuDetail);
                         }
+                    } else {
+                        Common.showToast(activity, R.string.textNOFood);
                     }
                 });
             }
@@ -216,9 +236,6 @@ public class OrderFragment extends Fragment {
             }
             public void setId(String id) {
                 this.id = id;
-            }
-            public void setName(String name){
-                this.name = name;
             }
         }
 
@@ -243,7 +260,6 @@ public class OrderFragment extends Fragment {
             menuImageTask.execute();
                 holder.tvName.setText(menu.getFOOD_NAME());
                 holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
-                holder.setName(menu.getFOOD_NAME());
                 holder.setPrice(menu.getFOOD_PRICE());
                 holder.setId(menu.getMENU_ID());
 
