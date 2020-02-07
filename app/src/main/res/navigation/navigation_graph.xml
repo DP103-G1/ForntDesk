@@ -19,7 +19,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.ezeats.main.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.ezeats.member.LoginFragment"
@@ -56,4 +60,9 @@
         android:name="com.example.ezeats.ForgetFragment"
         android:label="fragment_forget"
         tools:layout="@layout/fragment_forget" />
+    <fragment
+        android:id="@+id/memberFragment"
+        android:name="com.example.ezeats.MemberFragment"
+        android:label="fragment_member"
+        tools:layout="@layout/fragment_member" />
 </navigation>

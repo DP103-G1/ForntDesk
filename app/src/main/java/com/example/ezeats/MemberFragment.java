@@ -1,7 +1,9 @@
-package com.example.ezeats.main;
+package com.example.ezeats;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.ezeats.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.ezeats.main.Common;
 
-public class HomeFragment extends Fragment {
-    private static final String TAG = "TAG_HomeFragment";
+public class MemberFragment extends Fragment {
+    private static final String TAG = "TAG_MemberFragment";
     private Activity activity;
     private NavController navController;
-    private BottomNavigationView bottomNavigationView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,20 +31,18 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_member, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        if (Common.getMemId(activity) == null) {
-            navController.navigate(R.id.action_homeFragment_to_loginFragment);
-        }
-        handledViews();
-        bottomNavigationView.setVisibility(View.VISIBLE);
+        logout(activity);
     }
 
-    private void handledViews() {
-        bottomNavigationView = activity.findViewById(R.id.bv);
+    private void logout(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
+        pref.edit().putString("account", null).putString("password", null).putString("memId", null).apply();
+        navController.popBackStack(R.id.homeFragment, false);
     }
 }

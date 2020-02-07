@@ -62,5 +62,16 @@
     <string name="textTable">Table</string>
     <string name="textNoSelectBooking">No Select Booking</string>
     <string name="textNoSelectBookingFound">No Select Booking Found</string>
+    <string name="textInputEmail">請輸入E-mail</string>
+    <string name="textEmailFormateError">E-mail 格式錯誤</string>
+    <string name="textInputPassword">請輸入密碼</string>
+    <string name="textLoginSuccess">登入成功</string>
+    <string name="textPasswordComfirmedError">輸入密碼不一致</string>
+    <string name="textMale">男</string>
+    <string name="textFemale">女</string>
+    <string name="textInputPhone">請輸入電話</string>
+    <string name="textPhoneFormateError">電話格式錯誤</string>
+    <string name="textInputName">請輸入姓名</string>
+    <string name="textRegisterFail">註冊失敗</string>
 
 </resources>
