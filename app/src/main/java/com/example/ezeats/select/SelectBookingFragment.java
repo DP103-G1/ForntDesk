@@ -102,13 +102,16 @@ public class SelectBookingFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull SelectBookingHolder selectBookingHolder, int position) {
+        public void onBindViewHolder(@NonNull SelectBookingHolder holder, int position) {
+
+
             Booking booking = selectBooking.get(position);
             String url = Url.URL + "/BookingServlet";
             String memberId = booking.getMemberId();
             selectBookingTask = new ImageTask(url,memberId);
             selectBookingTask.execute();
-            selectBookingHolder.tvBkId.setText(booking.getBkId());
+            holder.tvBkId.setText(booking.getBkId());
+            holder.tvBkDate.setText(String.valueOf(booking.getBkDate()));
 
 
         }
