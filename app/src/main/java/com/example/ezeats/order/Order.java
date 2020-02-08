@@ -13,15 +13,13 @@ public class Order {
 	private boolean ORD_BILL;
 	private List<MenuDetail> menuDetails; 
 	
-	public Order(int ORD_ID, String MEMBER_ID, String TABLE_ID, boolean TABLE_BELL, int ORD_TOTAL,
-			boolean ORD_STATUS, boolean ORD_BILL) {
-		this.ORD_ID = ORD_ID;
+	public Order(String MEMBER_ID, String TABLE_ID, int ORD_TOTAL, List<MenuDetail> menuDetails) {
 		this.MEMBER_ID = MEMBER_ID;
 		this.TABLE_ID = TABLE_ID;
-		this.TABLE_BELL = TABLE_BELL;
 		this.ORD_TOTAL = ORD_TOTAL;
-		this.ORD_STATUS = ORD_STATUS;
-		this.ORD_BILL = ORD_BILL;
+		this.ORD_STATUS = false;
+		this.ORD_BILL = false;
+		this.menuDetails = menuDetails;
 	}
 
 	public Order(int ORD_ID, String MEMBER_ID, String TABLE_ID, boolean TABLE_BELL, int ORD_TOTAL,

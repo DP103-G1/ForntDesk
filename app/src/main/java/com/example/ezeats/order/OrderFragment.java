@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class OrderFragment extends Fragment {
     private static final String TAG = "TAG_OrderFragment";
@@ -70,6 +71,7 @@ public class OrderFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        String tableId = "1";
         final NavController navController = Navigation.findNavController(view);
         menuDetails = new HashSet<>();
         SearchView searchView = view.findViewById(R.id.searchView);
@@ -87,11 +89,16 @@ public class OrderFragment extends Fragment {
 
         btChect.setOnClickListener(v -> {
             if(Common.networkConnected(activity)) {
-               String url = Url.URL + "/MenuDetailServlet";
-               menuDetails.size();
+               String url = Url.URL + "/OrderServlet";
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("action","add");
-                jsonObject.addProperty("menudetail", new Gson().toJson(menuDetails));
+//                Order order = new Order(Common.getMemId(activity), tableId,
+//                        Integer.parseInt(edTotal.getText().toString()),
+//                        menuDetails.stream().collect(Collectors.toList()));
+                Order order = new Order("2", tableId,
+                        Integer.parseInt(edTotal.getText().toString()),
+                        menuDetails.stream().collect(Collectors.toList()));
+                jsonObject.addProperty("order", Common.gson.toJson(order));
                 int count = 0;
                 try {
                     String result = new CommonTask(url, jsonObject.toString()).execute().get();
@@ -209,7 +216,8 @@ public class OrderFragment extends Fragment {
                     tvAmount.setText(String.valueOf(amount));
                     totalPrice += price;
                     edTotal.setText(String.valueOf(totalPrice));
-                    MenuDetail menuDetail = new MenuDetail(id, amount, totalPrice);
+                    MenuDetail menuDetail = new MenuDetail(id, amount, price * amount);
+                    menuDetails.remove(menuDetail);
                     menuDetails.add(menuDetail);
                 });
                 btLess = itemView.findViewById(R.id.btless);
@@ -219,10 +227,9 @@ public class OrderFragment extends Fragment {
                         tvAmount.setText(String.valueOf(amount));
                         totalPrice -= price;
                         edTotal.setText(String.valueOf(totalPrice));
-                        MenuDetail menuDetail = new MenuDetail(id, amount, totalPrice);
-                        if (amount == 0) {
-                            menuDetails.remove(menuDetail);
-                        } else {
+                        MenuDetail menuDetail = new MenuDetail(id, amount, price * amount);
+                        menuDetails.remove(menuDetail);
+                        if (amount != 0) {
                             menuDetails.add(menuDetail);
                         }
                     } else {
