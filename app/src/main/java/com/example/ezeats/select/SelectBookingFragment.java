@@ -50,6 +50,7 @@ public class SelectBookingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+        memId = "3";
     }
 
     @Override
@@ -60,8 +61,8 @@ public class SelectBookingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        memId = Common.getMemId(activity);
         super.onViewCreated(view, savedInstanceState);
+        memId = Common.getMemId(activity);
         swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
         rvSelectBooking = view.findViewById(R.id.rvSelectBooking);
         rvSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
@@ -126,6 +127,14 @@ public class SelectBookingFragment extends Fragment {
             holder.tvBkId.setText(booking.getBkId());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("booking" ,booking);
+                    Navigation.findNavController(v).navigate(R.id.action_selectBookingFragment_to_selectBookingDetailFragment,bundle);
+                }
+            });
 
 
         }

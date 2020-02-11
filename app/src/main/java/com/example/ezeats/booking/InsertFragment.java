@@ -55,13 +55,11 @@ public class InsertFragment extends Fragment{
     private FragmentActivity activity;
     private EditText etPhone,etDate;
     private Spinner spTime,spAdult,spChild,spTable;
-    private static int year, month, day;
     private CommonTask bookingGetAllTask,getTableTask;
     private ImageTask bookingImageTask;
     private SimpleDateFormat simpleDateFormat;
-    private static int hour,minute;
     private Date bkDate;
-    private String bkTime, mem_id;
+    private String bkTime,mem_id;
     private SharedPreferences pref;
     private List<Booking> bookings;
     private List<String> tableIds;
@@ -73,8 +71,8 @@ public class InsertFragment extends Fragment{
         super.onCreate(savedInstanceState);
         activity = getActivity();
         pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
-        mem_id = pref.getString("mem_id", null);
-        mem_id = "2";
+        mem_id = pref.getString("member_Id", null);
+
     }
 
     @Override
