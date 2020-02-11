@@ -4,6 +4,7 @@ package com.example.ezeats.order;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,10 +33,16 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.Draft_17;
+import org.java_websocket.handshake.ServerHandshake;
+
 import java.lang.reflect.Type;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -51,7 +58,6 @@ public class OrderFragment extends Fragment {
     private List<Menu> menus;
     private int totalPrice;
     private Set<MenuDetail> menuDetails;
-
 
 
     @Override
@@ -177,6 +183,14 @@ public class OrderFragment extends Fragment {
         } else {
             menuAdapter.setMenus(menus);
             menuAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void changeConnectStatus(boolean b) {
+        if (b) {
+
+        }else {
+
         }
     }
 
