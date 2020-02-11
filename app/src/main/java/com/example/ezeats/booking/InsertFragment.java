@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,7 +65,8 @@ public class InsertFragment extends Fragment{
     private SharedPreferences pref;
     private List<Booking> bookings;
     private List<String> tableIds;
-
+    private String textPhone;
+    private String memberId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,8 +91,29 @@ public class InsertFragment extends Fragment{
         final NavController navController = Navigation.findNavController(view);
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         etPhone = view.findViewById(R.id.etPhone);
-        spTime = view.findViewById(R.id.spTime);
+        etPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 10) {
+                    textPhone = s.subSequence(0, 10).toString();
+                    etPhone.setText(textPhone);
+                    etPhone.setSelection(textPhone.length());
+                }
+
+            }
+        });
+
+        spTime = view.findViewById(R.id.spTime);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_spinner_item,timeArray);
         bkDate = null;
@@ -131,7 +156,6 @@ public class InsertFragment extends Fragment{
             }
         });
         spTable = view.findViewById(R.id.spTable);
-//            Set<String> tables = new HashSet<String>();
         ArrayAdapter<String> tableArrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_spinner_item, comparison());
         spTable.setAdapter(tableArrayAdapter);
         spTable.setSelection(0,true);
@@ -164,13 +188,13 @@ public class InsertFragment extends Fragment{
                     String bkTime = timeArray[spTime.getSelectedItemPosition()];
                     Log.d(TAG, bkTime);
                     if(bkTime.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textNoSelect);
+                        Common.showToast(getActivity(),R.string.textTimeNoSelect);
                         return;
                     }
                     String bkTable = comparison().get(spTable.getSelectedItemPosition());
                     Log.d(TAG, bkTable);
                     if (bkTable.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textNoSelect);
+                        Common.showToast(getActivity(),R.string.textTableNoSelect);
                         return;
                     }
 
@@ -180,11 +204,11 @@ public class InsertFragment extends Fragment{
                     String bkChild = String.valueOf(childArray[spChild.getSelectedItemPosition()]);
                     Log.d(TAG, bkChild);
                     if(bkChild.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textNoSelect);
+                        Common.showToast(getActivity(),R.string.textChildNoSelect);
                         return;
                     }
 
-//                    Resources res = getResources();
+
                     String[] adultArray = getResources().getStringArray(R.array.textAdultArray);
                     String bkAdult = adultArray[spAdult.getSelectedItemPosition()];
                     Log.d(TAG, bkAdult);
@@ -221,6 +245,7 @@ public class InsertFragment extends Fragment{
                                   .setPositiveButton(R.string.textYes, new DialogInterface.OnClickListener() {
                                       @Override
                                       public void onClick(DialogInterface dialog, int which) {
+
                                           navController.popBackStack();
                                       }
                                   })
@@ -231,7 +256,7 @@ public class InsertFragment extends Fragment{
                        Common.showToast(getActivity(),R.string.textNoNetWork);
                    }
 
-                   navController.popBackStack();
+                   navController.navigate(R.id.action_insertFragment_to_homeFragment);
                 }
 
             });
@@ -284,47 +309,11 @@ public class InsertFragment extends Fragment{
         }
     }
 
-//    @Override
-//    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-//        InsertFragment.hour = hourOfDay ;
-//        InsertFragment.minute = minute;
-//        updateTime();
-//    }
 
-//    private void showTime() {
-//        Calendar calendar = Calendar.getInstance();
-//        long time = System.currentTimeMillis();
-//        calendar.setTimeInMillis(time);
-//        hour = calendar.get(Calendar.HOUR_OF_DAY);
-//        minute = calendar.get(Calendar.MINUTE);
-//        int morningstart = (int) (time * 60) ;
-//        int morningend = 11 * 60 ;
-//        int afternoonstart = 12 * 60;
-//        int afternoonend = 15 * 60;
-//        int nightstart = 17 * 60;
-//        int nightend = 21 * 60;
-//        if (morningstart <= time && morningend >= time){
-//            updateTime();
-//        }else if (afternoonstart <= time && afternoonend >= time){
-//            updateTime();
-//        }else if (nightstart <= time && nightend >= time){
-//            updateTime();
-//        }else {
-//            Common.showToast(getActivity(),R.string.textTimeOver);
-//
-//        }
-//
-//    }
-
-//    private void updateTime(){
-//        etTimer.setText(new StringBuilder()
-//                .append(pad(hour)).append(":")
-//                .append(pad(minute)));
-//    }
 
     private List<String> comparison(){
         List<String> tablesAvalible = tableIds.stream().collect(Collectors.toList());
-        tablesAvalible.add(0, "Select");
+        tablesAvalible.add(0, "請選取");
         if (!etDate.getText().toString().isEmpty()) {
             try {
                 bkDate = simpleDateFormat.parse(etDate.getText().toString());
@@ -342,7 +331,7 @@ public class InsertFragment extends Fragment{
             return tablesAvalible;
         }
         List<String> tablesNoSelect = new ArrayList<>();
-        tablesNoSelect.add("Select");
+        tablesNoSelect.add("請選取");
         return tablesNoSelect;
     }
 

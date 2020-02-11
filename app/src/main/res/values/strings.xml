@@ -3,32 +3,32 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="textBooking">Booking</string>
-    <string name="textPhone">Phone:</string>
-    <string name="textTime">Time:</string>
-    <string name="textAdult">Adult</string>
-    <string name="textPeriod">Period</string>
-    <string name="textDate">Date</string>
-    <string name="textChild">Child</string>
-    <string name="textInsert">Insert</string>
-    <string name="textCancel">Cancel</string>
-    <string name="textPhoneInvaild">Phone Is Invalid</string>
-    <string name="textNotselected">NotSelected</string>
-    <string name="textInsertFail">Insert Fail</string>
-    <string name="textInsertSuccess">Insert Success</string>
-    <string name="textNoNetWork">No NetWork</string>
-    <string name="textBookingfail">Warning</string>
-    <string name="textBookingSuccess">Success</string>
-    <string name="textMassage">Thanks</string>
-    <string name="textYes">YES</string>
-    <string name="textNo">NO</string>
-    <string name="textNoSelect">No Select</string>
-    <string name="textSelect">Select</string>
-    <string name="textBookingSelect">Booking Select</string>
-    <string name="textMealsSelect">Meals Select</string>
-    <string name="textTimeOver">Time Over</string>
+    <string name="textBooking">訂位</string>
+    <string name="textPhone">電話:</string>
+    <string name="textTime">時段:</string>
+    <string name="textAdult">成人:</string>
+    <string name="textPeriod">時段</string>
+    <string name="textDate">日期:</string>
+    <string name="textChild">小孩:</string>
+    <string name="textInsert">新增</string>
+    <string name="textCancel">取消</string>
+    <string name="textPhoneInvaild">電話號碼無效</string>
+    <string name="textNotselected">未選取</string>
+    <string name="textInsertFail">新增失敗</string>
+    <string name="textInsertSuccess">新增成功</string>
+    <string name="textNoNetWork">沒網路</string>
+    <string name="textBookingfail">錯誤</string>
+    <string name="textBookingSuccess">訂位成功</string>
+    <string name="textMassage">謝謝</string>
+    <string name="textYes">確認</string>
+    <string name="textNo">取消</string>
+    <string name="textNoSelect">成人人數未選</string>
+    <string name="textSelect">請選取</string>
+    <string name="textBookingSelect">訂位選取</string>
+    <string name="textMealsSelect">請選餐點t</string>
+
     <string-array name="textTimeArray">
-        <item>Select</item>
+        <item>請選取</item>
         <item>0900</item>
         <item>1000</item>
         <item>1100</item>
@@ -40,7 +40,7 @@
         <item>1700</item>
     </string-array>
     <string-array name="textAdultArray">
-        <item>Select</item>
+        <item>請選取</item>
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -48,7 +48,7 @@
         <item>4</item>
     </string-array>
     <string-array name="textChildArray">
-        <item>Select</item>
+        <item>請選取</item>
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -56,12 +56,12 @@
         <item>4</item>
     </string-array>
 
-    <string name="textNoNetwork">no network connection available</string>
-    <string name="textNOMenu">no Menu</string>
+    <string name="textNoNetwork">網路連線無效</string>
+    <string name="textNOMenu">無餐點</string>
     <string name="textNOFood">未點選餐點</string>
-    <string name="textTable">Table</string>
-    <string name="textNoSelectBooking">No Select Booking</string>
-    <string name="textNoSelectBookingFound">No Select Booking Found</string>
+    <string name="textTable">桌位</string>
+    <string name="textNoSelectBooking">未查詢到訂位</string>
+    <string name="textNoSelectBookingFound">未查詢到訂位</string>
     <string name="textInputEmail">請輸入E-mail</string>
     <string name="textEmailFormateError">E-mail 格式錯誤</string>
     <string name="textInputPassword">請輸入密碼</string>
@@ -73,5 +73,17 @@
     <string name="textPhoneFormateError">電話格式錯誤</string>
     <string name="textInputName">請輸入姓名</string>
     <string name="textRegisterFail">註冊失敗</string>
+    <string name="textChildNoSelect">孩童人數未選</string>
+    <string name="textTableNoSelect">桌位未選</string>
+    <string name="textTimeNoSelect">時段未選</string>
+    <string name="textBkId">訂位編號</string>
+    <string name="textTableId">桌位</string>
+    <string name="textTime2">時段</string>
+    <string name="textDateㄉ">日期</string>
+    <string name="textChild2">小孩</string>
+    <string name="textAdult2">成人</string>
+    <string name="textPhone2">電話</string>
+    <string name="textBack">返回</string>
+    <string name="textOrder">餐點訂單</string>
 
 </resources>

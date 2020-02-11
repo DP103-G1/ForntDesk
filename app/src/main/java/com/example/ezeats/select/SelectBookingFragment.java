@@ -3,6 +3,7 @@ package com.example.ezeats.select;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -24,10 +26,12 @@ import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 
@@ -39,6 +43,7 @@ public class SelectBookingFragment extends Fragment {
     private List<Booking> selectBooking;
     private CommonTask selecetBookingGetAllTask;
     private ImageTask selectBookingTask;
+    private String memId;
 
 
     @Override
@@ -55,28 +60,24 @@ public class SelectBookingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        memId = Common.getMemId(activity);
         super.onViewCreated(view, savedInstanceState);
         swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
         rvSelectBooking = view.findViewById(R.id.rvSelectBooking);
         rvSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
         selectBooking = getSelectBooking();
         showSelectBooking(selectBooking);
-
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                showSelectBooking(selectBooking);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
-    private void showSelectBooking(List<Booking> selectBooking) {
-        if (selectBooking == null || selectBooking.isEmpty()) {
-            Common.showToast(activity, R.string.textNoSelectBookingFound);
-        }
-        SelectBookingAdapter selectBookingAdapter = (SelectBookingAdapter) rvSelectBooking.getAdapter();
 
-        if (selectBookingAdapter == null) {
-            rvSelectBooking.setAdapter(new SelectBookingAdapter(activity, selectBooking));
-        } else {
-            selectBookingAdapter.setSelectBooking(selectBooking);
-            selectBookingAdapter.notifyDataSetChanged();
-        }
-    }
 
 
     private class SelectBookingAdapter extends RecyclerView.Adapter<SelectBookingAdapter.SelectBookingHolder> {
@@ -93,6 +94,20 @@ public class SelectBookingFragment extends Fragment {
             this.selectBooking = selectBooking;
         }
 
+         class SelectBookingHolder extends RecyclerView.ViewHolder {
+            TextView tvBkId,tvBkDate;
+
+             SelectBookingHolder(View view) {
+                super(view);
+                tvBkDate = view.findViewById(R.id.tvBkDate);
+                tvBkId = view.findViewById(R.id.tvBkId);
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return selectBooking.size();
+        }
 
         @NonNull
         @Override
@@ -103,32 +118,18 @@ public class SelectBookingFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull SelectBookingHolder holder, int position) {
-
-
             Booking booking = selectBooking.get(position);
             String url = Url.URL + "/BookingServlet";
             String memberId = booking.getMemberId();
             selectBookingTask = new ImageTask(url,memberId);
             selectBookingTask.execute();
             holder.tvBkId.setText(booking.getBkId());
-            holder.tvBkDate.setText(String.valueOf(booking.getBkDate()));
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
 
 
         }
 
-        @Override
-        public int getItemCount() {
-            return selectBooking.size();
-        }
-
-        private class SelectBookingHolder extends RecyclerView.ViewHolder {
-            TextView tvBkId,tvBkDate;
-            public SelectBookingHolder(View view) {
-                super(view);
-                tvBkDate = view.findViewById(R.id.tvBkDate);
-                tvBkId = view.findViewById(R.id.tvBkId);
-            }
-        }
     }
 
     private List<Booking> getSelectBooking() {
@@ -136,14 +137,15 @@ public class SelectBookingFragment extends Fragment {
         if (Common.networkConnected(activity)){
             String url = Url.URL + "/BookingServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action","getMemberId");
+            jsonObject.addProperty("action","getAllByMemberId");
+            jsonObject.addProperty("memberId", memId);
             String jsonOut = jsonObject.toString();
             selecetBookingGetAllTask = new CommonTask(url,jsonOut);
             try {
                 String jsonIn = selecetBookingGetAllTask.execute().get();
                 Type listType = new TypeToken<List<Booking>>(){
                 }.getType();
-                selectBooking = new Gson().fromJson(jsonIn,listType);
+                selectBooking = Common.gson.fromJson(jsonIn,listType);
             }catch (Exception e){
                Log.e(TAG,e.toString());
             }
@@ -155,5 +157,30 @@ public class SelectBookingFragment extends Fragment {
         return selectBooking;
     }
 
+    private void showSelectBooking(List<Booking> selectBooking) {
+        if (selectBooking == null || selectBooking.isEmpty()) {
+            Common.showToast(activity, R.string.textNoSelectBookingFound);
+        }
+        SelectBookingAdapter selectBookingAdapter = (SelectBookingAdapter) rvSelectBooking.getAdapter();
 
+        if (selectBookingAdapter == null) {
+            rvSelectBooking.setAdapter(new SelectBookingAdapter(activity, selectBooking));
+        } else {
+            selectBookingAdapter.setSelectBooking(selectBooking);
+            selectBookingAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (selecetBookingGetAllTask != null){
+            selecetBookingGetAllTask.cancel(true);
+            selecetBookingGetAllTask = null;
+        }
+        if (selectBookingTask != null){
+            selectBookingTask.cancel(true);
+            selectBookingTask = null;
+        }
+    }
 }
