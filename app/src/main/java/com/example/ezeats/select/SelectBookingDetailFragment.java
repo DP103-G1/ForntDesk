@@ -34,8 +34,6 @@ public class SelectBookingDetailFragment extends Fragment {
         private TextView tvBkIdGet,tvTableGet,tvTimeGet,
                 tvDateGet,tvChildGet,tvAdultGet,tvPhoneGet;
         private Booking selectBookingDetail;
-        private ImageTask selectBookingDetailTask;
-        private SimpleDateFormat simpleDateFormat;
         private Button btBack;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

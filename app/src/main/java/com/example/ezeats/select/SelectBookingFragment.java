@@ -161,8 +161,6 @@ public class SelectBookingFragment extends Fragment {
         }else {
             Common.showToast(activity,R.string.textNoNetWork);
         }
-
-
         return selectBooking;
     }
 
