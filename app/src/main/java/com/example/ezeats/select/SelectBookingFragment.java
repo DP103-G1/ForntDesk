@@ -47,7 +47,6 @@ public class SelectBookingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-        memId = "3";
     }
 
     @Override
