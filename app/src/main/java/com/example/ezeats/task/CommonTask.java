@@ -22,10 +22,10 @@ public class CommonTask extends AsyncTask<String, Integer, String> {
     public static OrderWebSocketClient orderWebSocketClient;
     private String url, outStr;
 
-    public static void connectServer(Context context, String userName) {
+    public static void connectServer(Context context, String roles) {
         URI uri = null;
         try {
-            uri = new URI(SERVER_URI + userName);
+            uri = new URI(SERVER_URI + roles);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }

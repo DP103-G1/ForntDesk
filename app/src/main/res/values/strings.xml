@@ -85,5 +85,6 @@
     <string name="textPhone2">電話</string>
     <string name="textBack">返回</string>
     <string name="textOrder">餐點訂單</string>
+    <string name="noMenuDetail">請點餐</string>
 
 </resources>

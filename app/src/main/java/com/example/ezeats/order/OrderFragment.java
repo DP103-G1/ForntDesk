@@ -2,7 +2,10 @@ package com.example.ezeats.order;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -18,6 +22,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,8 +53,10 @@ import java.util.stream.Collectors;
 
 public class OrderFragment extends Fragment {
     private static final String TAG = "TAG_OrderFragment";
+    private LocalBroadcastManager broadcastManager;
     private RecyclerView rvMenu;
     private TextView edTotal;
+    private EditText edNote;
     private ImageView btBell;
     private Button btChect;
     private Activity activity;
@@ -70,9 +77,14 @@ public class OrderFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerChatReceiver();
         super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_order, container, false);
+
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
@@ -84,6 +96,7 @@ public class OrderFragment extends Fragment {
         totalPrice = 0;
         edTotal = view.findViewById(R.id.edTotal);
         edTotal.setText(String.valueOf(totalPrice));
+        edNote = view.findViewById(R.id.edNote);
         rvMenu = view.findViewById(R.id.rvMenu);
         btBell = view.findViewById(R.id.btbell);
         btChect = view.findViewById(R.id.btChect);
@@ -94,6 +107,10 @@ public class OrderFragment extends Fragment {
         btBell.setOnClickListener(v -> v.setBackgroundColor(Color.RED));
 
         btChect.setOnClickListener(v -> {
+            if (totalPrice <= 0){
+                Common.showToast(getActivity(), R.string.noMenuDetail);
+                return;
+            }
             if(Common.networkConnected(activity)) {
                String url = Url.URL + "/OrderServlet";
                 JsonObject jsonObject = new JsonObject();
@@ -186,13 +203,20 @@ public class OrderFragment extends Fragment {
         }
     }
 
-    private void changeConnectStatus(boolean b) {
-        if (b) {
-
-        }else {
-
-        }
+    private void registerChatReceiver() {
+        IntentFilter chatFilter = new IntentFilter("chat");
+        broadcastManager.registerReceiver(ChatReceiver, chatFilter);
     }
+
+    private BroadcastReceiver ChatReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("massage");
+            ChatMessage chatMessage = new Gson().fromJson(message, ChatMessage.class);
+            String sender = chatMessage.getSender();
+        }
+    };
+
 
     private class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
         private LayoutInflater layoutInflater;
@@ -299,7 +323,11 @@ public class OrderFragment extends Fragment {
             menuImageTask.cancel(true);
             menuImageTask = null;
         }
-
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        broadcastManager.registerReceiver(ChatReceiver);
     }
+}
