@@ -42,7 +42,7 @@ public class MemberFragment extends Fragment {
 
     private void logout(Context context) {
         SharedPreferences pref = context.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
-        pref.edit().putString("account", null).putString("password", null).putString("memId", null).apply();
+        pref.edit().putString("account", null).putString("password", null).putInt("memId", 0).apply();
         navController.popBackStack(R.id.homeFragment, false);
     }
 }

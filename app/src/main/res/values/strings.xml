@@ -87,5 +87,7 @@
     <string name="textOrder">餐點訂單</string>
     <string name="textSuccess">查詢成功</string>
     <string name="textFail">查詢失敗</string>
+    <string name="textUsingSameAccount">此Email已被註冊</string>
+    <string name="textRegisterSuccess">註冊成功</string>
 
 </resources>

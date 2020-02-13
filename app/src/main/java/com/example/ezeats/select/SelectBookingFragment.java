@@ -3,7 +3,6 @@ package com.example.ezeats.select;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,8 +24,6 @@ import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
@@ -43,7 +40,7 @@ public class SelectBookingFragment extends Fragment {
     private List<Booking> selectBooking;
     private CommonTask selecetBookingGetAllTask;
     private ImageTask selectBookingTask;
-    private String memId;
+    private int memId;
 
 
     @Override

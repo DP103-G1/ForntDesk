@@ -99,10 +99,11 @@ public class LoginFragment extends Fragment {
         jsonObject.addProperty("password", textPassword);
         loginTask = new CommonTask(url, jsonObject.toString());
         try {
-            String memId = loginTask.execute().get();
-            if (memId != null &&! memId.isEmpty()) {
+            String result = loginTask.execute().get();
+            int memId = Integer.parseInt(result);
+            if (memId != 0) {
                 SharedPreferences pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
-                pref.edit().putString("account", textAccount).putString("password", textPassword).putString("memId", memId).apply();
+                pref.edit().putString("account", textAccount).putString("password", textPassword).putInt("memId", memId).apply();
                 navController.popBackStack(R.id.homeFragment, false);
                 Common.showToast(activity, getString(R.string.textLoginSuccess));
             }

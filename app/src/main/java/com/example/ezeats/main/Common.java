@@ -23,9 +23,9 @@ public class Common {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    public static String getMemId(Context context) {
+    public static int getMemId(Context context) {
         SharedPreferences pref = context.getSharedPreferences(MEMBER_PREFRENCE, Context.MODE_PRIVATE);
-        return pref.getString("memId", null);
+        return pref.getInt("memId", 0);
     }
 
     public static void showToast(Context context, int messageResId) {

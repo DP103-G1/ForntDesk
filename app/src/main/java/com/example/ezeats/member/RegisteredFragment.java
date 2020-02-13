@@ -180,16 +180,20 @@ public class RegisteredFragment extends Fragment {
             Member member = new Member(textAccount, textPassword, textName, textPhone);
             jsonObject.addProperty("member",  Common.gson.toJson(member));
             memberInsertTask = new CommonTask(url, jsonObject.toString());
-            String memId = "";
+            int memId = 0;
             try {
-                memId = memberInsertTask.execute().get();
+                String result = memberInsertTask.execute().get();
+                memId = Integer.parseInt(result);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (!memId.equals("0")) {
+            if (memId > 0) {
                 SharedPreferences pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
-                pref.edit().putString("account", textAccount).putString("password", textPassword).putString("memId", memId).apply();
+                pref.edit().putString("account", textAccount).putString("password", textPassword).putInt("memId", memId).apply();
+                Common.showToast(activity, R.string.textRegisterSuccess);
                 navController.popBackStack(R.id.homeFragment, false);
+            } else if (memId == -1) {
+                Common.showToast(activity, R.string.textUsingSameAccount);
             } else {
                 Common.showToast(activity, R.string.textRegisterFail);
             }

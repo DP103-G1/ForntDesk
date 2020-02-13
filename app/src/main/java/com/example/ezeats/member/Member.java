@@ -2,14 +2,14 @@ package com.example.ezeats.member;
 
 public class Member {
 
-	private String member_Id;
+	private int member_Id;
 	private String account;
 	private String password;
 	private String name;
 	private String phone;
 	
 
-	public Member(String member_Id, String account, String password, String name, String phone) {
+	public Member(int member_Id, String account, String password, String name, String phone) {
 		this.member_Id = member_Id;
 		this.account = account;
 		this.password = password;
@@ -18,14 +18,14 @@ public class Member {
 	}
 	
 	public Member(String account, String password, String name, String phone) {
-		this(null, account, password, name, phone);
+		this(0, account, password, name, phone);
 	}
 
-	public String getmember_Id() {
+	public int getmember_Id() {
 		return member_Id;
 	}
 
-	public void setmember_Id(String member_Id) {
+	public void setmember_Id(int member_Id) {
 		this.member_Id = member_Id;
 	}
 
