@@ -18,11 +18,7 @@
         android:id="@+id/orderFragment"
         android:name="com.example.ezeats.order.OrderFragment"
         android:label="fragment_order"
-        tools:layout="@layout/fragment_order" >
-        <action
-            android:id="@+id/action_orderFragment_to_menuDetailFragment"
-            app:destination="@id/menuDetailFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_order" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.ezeats.main.HomeFragment"
@@ -81,7 +77,11 @@
         android:id="@+id/selectBookingDetailFragment"
         android:name="com.example.ezeats.select.SelectBookingDetailFragment"
         android:label="fragment_select_booking_detail"
-        tools:layout="@layout/fragment_select_booking_detail" />
+        tools:layout="@layout/fragment_select_booking_detail" >
+        <action
+            android:id="@+id/action_selectBookingDetailFragment_to_selectBookingFragment"
+            app:destination="@id/selectBookingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/menuDetailFragment"
         android:name="com.example.ezeats.MenuDetailFragment"

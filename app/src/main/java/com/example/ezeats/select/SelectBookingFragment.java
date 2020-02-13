@@ -3,7 +3,6 @@ package com.example.ezeats.select;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,8 +24,6 @@ import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
@@ -43,13 +40,14 @@ public class SelectBookingFragment extends Fragment {
     private List<Booking> selectBooking;
     private CommonTask selecetBookingGetAllTask;
     private ImageTask selectBookingTask;
-    private String memId;
+    private int memId;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+        memId = "3";
     }
 
     @Override
@@ -60,8 +58,8 @@ public class SelectBookingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        memId = Common.getMemId(activity);
         super.onViewCreated(view, savedInstanceState);
+        memId = Common.getMemId(activity);
         swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
         rvSelectBooking = view.findViewById(R.id.rvSelectBooking);
         rvSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
@@ -126,6 +124,14 @@ public class SelectBookingFragment extends Fragment {
             holder.tvBkId.setText(booking.getBkId());
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("booking" ,booking);
+                    Navigation.findNavController(v).navigate(R.id.action_selectBookingFragment_to_selectBookingDetailFragment,bundle);
+                }
+            });
 
 
         }
@@ -152,8 +158,6 @@ public class SelectBookingFragment extends Fragment {
         }else {
             Common.showToast(activity,R.string.textNoNetWork);
         }
-
-
         return selectBooking;
     }
 

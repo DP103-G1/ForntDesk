@@ -2,6 +2,7 @@ package com.example.ezeats.select;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.ezeats.R;
-
+import com.example.ezeats.main.Common;
 
 
 public class SelectMenuFragment extends Fragment {
@@ -29,6 +30,7 @@ public class SelectMenuFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
+
     }
 
     @Override

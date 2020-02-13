@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
-        if (Common.getMemId(activity) == null) {
+        if (Common.getMemId(activity) == 0) {
             navController.navigate(R.id.action_homeFragment_to_loginFragment);
         }
         handledViews();
