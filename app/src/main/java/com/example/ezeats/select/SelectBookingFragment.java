@@ -30,6 +30,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 
 public class SelectBookingFragment extends Fragment {
@@ -64,13 +65,10 @@ public class SelectBookingFragment extends Fragment {
         rvSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
         selectBooking = getSelectBooking();
         showSelectBooking(selectBooking);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                showSelectBooking(selectBooking);
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            showSelectBooking(selectBooking);
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 
@@ -121,15 +119,12 @@ public class SelectBookingFragment extends Fragment {
             selectBookingTask = new ImageTask(url,memberId);
             selectBookingTask.execute();
             holder.tvBkId.setText(booking.getBkId());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("booking" ,booking);
-                    Navigation.findNavController(v).navigate(R.id.action_selectBookingFragment_to_selectBookingDetailFragment,bundle);
-                }
+            holder.itemView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("booking" ,booking);
+                Navigation.findNavController(v).navigate(R.id.action_selectBookingFragment_to_selectBookingDetailFragment,bundle);
             });
 
 
