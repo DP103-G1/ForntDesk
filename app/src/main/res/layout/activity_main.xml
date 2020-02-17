@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context=".main.MainActivity" >
+    tools:context=".main.MainActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -28,7 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/colortitle"
         app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/colortext"
+        app:itemTextColor="@color/colortext"
         app:menu="@menu/menu" />
 </LinearLayout>

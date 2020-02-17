@@ -28,6 +28,7 @@
                 android:id="@+id/tvaccs"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
+                android:textColor="@color/colortext"
                 android:gravity="center"
                 android:text="帳號:" />
 
@@ -36,6 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
@@ -51,6 +54,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="密碼:" />
 
             <EditText
@@ -58,6 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
@@ -73,6 +79,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="密碼確認:" />
 
             <EditText
@@ -80,6 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
@@ -95,6 +104,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="姓名:" />
 
             <EditText
@@ -102,6 +112,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:ems="10"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
@@ -117,6 +129,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="電話:" />
 
             <EditText
@@ -124,6 +137,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:ems="10"
                 android:inputType="phone" />
         </LinearLayout>
@@ -135,6 +150,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="77dp"
         android:layout_marginTop="30dp"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
         android:text="確定"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -147,6 +164,8 @@
         android:layout_marginStart="85dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="77dp"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
         android:text="取消"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
