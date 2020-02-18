@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ezeats.SUGBox.SUGBoxFragment" >
+
+    <TextView
+        android:id="@+id/tvContact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="@string/tvContact"
+        android:textColor="@color/colortext"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btSent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
+        android:text="@string/btSent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMessage" />
+
+    <EditText
+        android:id="@+id/etMessage"
+        android:layout_width="404dp"
+        android:layout_height="198dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimaryDark"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/etContent"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/tvShowDate"
+        app:layout_constraintStart_toStartOf="@+id/btDatePicker"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    <TextView
+        android:id="@+id/tvTopic"
+        android:layout_width="54dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="@string/tvMainTitle"
+        android:textColor="@color/colortext"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/etTopicKeyIn"
+        app:layout_constraintStart_toStartOf="@+id/tvContact"
+        app:layout_constraintTop_toBottomOf="@+id/tvContact" />
+
+    <EditText
+        android:id="@+id/etTopicKeyIn"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/colortext"
+        android:theme="@style/MyEditText"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTopic"
+        app:layout_constraintTop_toBottomOf="@+id/tvContact" />
+
+    <EditText
+        android:id="@+id/etPurpose"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:textColor="@color/colortext"
+        android:theme="@style/MyEditText"
+        android:textColorHint="@color/colortext"
+        android:hint="@string/etPurpose"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/etTopicKeyIn"
+        app:layout_constraintStart_toStartOf="@+id/tvTopic"
+        app:layout_constraintTop_toBottomOf="@+id/etTopicKeyIn" />
+
+    <EditText
+        android:id="@+id/etSource"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:textColor="@color/colortext"
+        android:theme="@style/MyEditText"
+        android:textColorHint="@color/colortext"
+        android:hint="@string/etSource"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/etPurpose"
+        app:layout_constraintStart_toStartOf="@+id/etPurpose"
+        app:layout_constraintTop_toBottomOf="@+id/etPurpose" />
+
+    <Button
+        android:id="@+id/btDatePicker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center|start"
+        android:text="@string/btDatePicker"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/etSource"
+        app:layout_constraintTop_toBottomOf="@+id/etSource" />
+
+    <TextView
+        android:id="@+id/tvShowDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="21dp"
+        android:gravity="fill"
+        android:textSize="18sp"
+        android:textColor="@color/colortext"
+        app:layout_constraintEnd_toEndOf="@+id/etSource"
+        app:layout_constraintStart_toEndOf="@+id/btDatePicker"
+        app:layout_constraintTop_toBottomOf="@+id/etSource"
+        tools:text="@string/tvShowDate" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:numStars="5"
+        android:rating="0"
+        android:stepSize="0.5"
+        android:progressTint="#B4E239"
+        android:layout_width="245dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toEndOf="@+id/tvRating"
+        app:layout_constraintTop_toBottomOf="@+id/tvShowDate" />
+
+    <TextView
+        android:id="@+id/tvRating"
+        android:layout_width="125dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/tvRating"
+        android:textColor="@color/colortext"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/btDatePicker"
+        app:layout_constraintTop_toBottomOf="@+id/btDatePicker" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

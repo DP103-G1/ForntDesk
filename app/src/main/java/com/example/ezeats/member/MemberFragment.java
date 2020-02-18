@@ -1,4 +1,4 @@
-package com.example.ezeats;
+package com.example.ezeats.member;
 
 
 import android.app.Activity;
@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
 
 public class MemberFragment extends Fragment {
