@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Printer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,20 +60,20 @@ public class InsertFragment extends Fragment{
     private ImageTask bookingImageTask;
     private SimpleDateFormat simpleDateFormat;
     private Date bkDate;
-    private String bkTime,mem_id;
+    private String bkTime;
+    private int mem_id;
     private SharedPreferences pref;
     private List<Booking> bookings;
-    private List<String> tableIds;
+    private List<Integer> tableIds;
     private String textPhone;
-    private String memberId;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-        pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
-        mem_id = pref.getString("member_Id", null);
-
+        mem_id = Common.getMemId(activity);
+        Log.d(TAG, String.valueOf(mem_id));
     }
 
     @Override
@@ -113,7 +114,7 @@ public class InsertFragment extends Fragment{
 
         spTime = view.findViewById(R.id.spTime);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_spinner_item,timeArray);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_dropdown_item_1line,timeArray);
         bkDate = null;
         bkTime = null;
         spTime.setAdapter(arrayAdapter);
@@ -122,7 +123,7 @@ public class InsertFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bkTime = timeArray[position];
-                spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, comparison()));
+                spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, comparison()));
             }
 
             @Override
@@ -149,12 +150,13 @@ public class InsertFragment extends Fragment{
                 datePickerDialog.show();
                 datePickerDialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
                     updateDisplay(year, month, dayOfMonth);
-                    spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, comparison()));
+                spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, comparison()));
+
                 });
             }
         });
         spTable = view.findViewById(R.id.spTable);
-        ArrayAdapter<String> tableArrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_spinner_item, comparison());
+        ArrayAdapter<String> tableArrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_dropdown_item_1line, comparison());
         spTable.setAdapter(tableArrayAdapter);
         spTable.setSelection(0,true);
         spTable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -189,11 +191,14 @@ public class InsertFragment extends Fragment{
                         Common.showToast(getActivity(),R.string.textTimeNoSelect);
                         return;
                     }
-                    String bkTable = comparison().get(spTable.getSelectedItemPosition());
-                    Log.d(TAG, bkTable);
-                    if (bkTable.equals("Select")){
+                    int bkTable;
+                    String bkTableStr = comparison().get(spTable.getSelectedItemPosition());
+                    Log.d(TAG, bkTableStr);
+                    if (bkTableStr.equals("Select")){
                         Common.showToast(getActivity(),R.string.textTableNoSelect);
                         return;
+                    } else {
+                        bkTable = Integer.parseInt(bkTableStr);
                     }
 
 
@@ -222,7 +227,7 @@ public class InsertFragment extends Fragment{
                     }
                    if(Common.networkConnected(activity)){
                        String url = Url.URL + "/BookingServlet";
-                       Booking booking = new Booking(bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone);
+                       Booking booking = new Booking(mem_id,bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone);
                        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                        JsonObject jsonObject = new JsonObject();
                        jsonObject.addProperty("action","bookingInsert");
@@ -310,8 +315,8 @@ public class InsertFragment extends Fragment{
 
 
     private List<String> comparison(){
-        List<String> tablesAvalible = tableIds.stream().collect(Collectors.toList());
-        tablesAvalible.add(0, "請選取");
+        List<Integer> tablesAvalible = tableIds.stream().collect(Collectors.toList());
+//        tablesAvalible.add(0, "請選取");
         if (!etDate.getText().toString().isEmpty()) {
             try {
                 bkDate = simpleDateFormat.parse(etDate.getText().toString());
@@ -321,21 +326,22 @@ public class InsertFragment extends Fragment{
         }
         if (spTime.getSelectedItemPosition() != 0 && etDate != null) {
 //            Log.d(TAG, simpleDateFormat.format(bkDate) + " " + bkTime);
-            List<String> tablesOrdered = bookings.stream().filter(v -> v.getBkTime().equals(bkTime)
-                    && v.getBkDate().equals(bkDate))
-                    .flatMap(v -> Stream.of(v.getTableId()))
+            List<Integer> tablesOrdered = bookings.stream().filter(v -> v.getBkTime().equals(bkTime)
+                    && v.getBkDate().equals(bkDate)).map(v -> v.getTableId())
                     .collect(Collectors.toList());
             tablesOrdered.forEach(tablesAvalible::remove);
-            return tablesAvalible;
+            List<String> selectTableList = tablesAvalible.stream().map(String::valueOf).collect(Collectors.toList());
+            selectTableList.add(0, "請選取");
+            return selectTableList;
         }
         List<String> tablesNoSelect = new ArrayList<>();
-        tablesNoSelect.add("請選取");
+//        tablesNoSelect.add("請選取");
         return tablesNoSelect;
     }
 
-    private List<String> getTableIds() {
+    private List<Integer> getTableIds() {
 
-        List<Table> tables = new ArrayList<>();
+        List<Integer> tableIds = new ArrayList<>();
 
         if (Common.networkConnected(activity)) {
             String url = Url.URL + "/TableServlet";
@@ -347,19 +353,18 @@ public class InsertFragment extends Fragment{
                 String jsonIn = getTableTask.execute().get();
                 Type listType = new TypeToken<List<Table>>() {}.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                tables = gson.fromJson(jsonIn, listType);
+                List<Table> tables = gson.fromJson(jsonIn, listType);
+                tableIds = tables.stream().map(v -> v.getTableId()).collect(Collectors.toList());
             } catch (Exception e) {
                 Log.e(TAG, toString());
             }
-            List<String> tableIds = tables.stream()
-                    .flatMap(v -> Stream.of(v.getTableId())).collect(Collectors.toList());
         }else {
             Common.showToast(getActivity(),R.string.textNoNetWork);
         }
-        List<String> tableIds = new ArrayList<>();
-        for (Table table : tables) {
-            tableIds.add(table.getTableId());
-        }
+//        List<String> tableIds = new ArrayList<>();
+//        for (Table table : tables) {
+//            tableIds.add(table.getTableId());
+//        }
 //        List<String> tableIds = tables.stream()
 //                .flatMap(v -> Stream.of(v.getTableId())).collect(Collectors.toList());
         return tableIds;

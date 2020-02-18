@@ -91,5 +91,39 @@
     <string name="textUsingSameAccount">此Email已被註冊</string>
     <string name="textRegisterSuccess">註冊成功</string>
     <string name="textLogin">會員登入</string>
+    <string name="Hometext">首頁</string>
+    <string name="tvTitle">導覽</string>
+    <string name="btQA"><![CDATA[Q&A]]></string>
+    <string name="btHow">操作導引</string>
+    <string name="btGame">小遊戲</string>
+    <string name="btBox">意見箱</string>
+    <string name="tvIntroduce">簡介</string>
+    <string name="tvQA"><![CDATA[Q&A]]></string>
+    <string name="tvNumber">Q1.</string>
+    <string name="tvMainTitle">標題</string>
+    <string name="tvHowTo">操作導引</string>
+    <string name="tvContact">聯絡我們</string>
+    <string name="btSent">傳送</string>
+    <string name="tvDots">連連看</string>
+    <string name="btPlay">進入遊戲</string>
+    <string name="tvUserName">名字</string>
+    <string name="btCode">我的優惠碼</string>
+    <string name="tvTimer" translatable="false">PlaceHolder</string>
+    <string name="navFront">mainGraph</string>
+    <string name="etPurpose">輸入用餐目的</string>
+    <string name="etSource">請輸入得知來源</string>
+    <string name="etContent">請輸入意見</string>
+    <string name="tvheadline">我是標題</string>
+    <string name="btDatePicker" translatable="false">請選擇用餐日期</string>
+    <string name="tvShowDate">選擇的時間</string>
+    <string name="tvRating">喜歡EZeat嗎？</string>
+    <string name="textBoxSuccess">已傳送</string>
+    <string name="textMessage">感謝您的寶貴意見，我們將儘速回覆。</string>
+    <string name="textConfirm">確定</string>
+    <string name="textDisconnected">未連接網路</string>
+    <string name="textNoFail">新增失敗</string>
+    <string name="textMessageFound">您的留言數為0</string>
+    <string name="btLeave">我要留言</string>
+    <string name="btCheck">查看留言</string>
 
 </resources>

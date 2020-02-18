@@ -6,6 +6,78 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
+        android:id="@+id/howToFragment"
+        android:name="com.example.ezeats.HowTo.HowToFragment"
+        android:label="fragment_how_to"
+        tools:layout="@layout/fragment_how_to" />
+    <fragment
+        android:id="@+id/gamePlayFragment2"
+        android:name="com.example.ezeats.game.GamePlayFragment"
+        android:label="fragment_game_play"
+        tools:layout="@layout/fragment_game_play" />
+    <fragment
+        android:id="@+id/linkFragment"
+        android:name="com.example.ezeats.main.LinkFragment"
+        android:label="fragment_link"
+        tools:layout="@layout/fragment_link">
+        <action
+            android:id="@+id/action_linkFragment_to_QAFragment"
+            app:destination="@id/QAFragment" />
+        <action
+            android:id="@+id/action_linkFragment_to_howToFragment"
+            app:destination="@id/howToFragment" />
+        <action
+            android:id="@+id/action_linkFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_linkFragment_to_checkFragment"
+            app:destination="@id/checkFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listBoxFragment"
+        android:name="com.example.ezeats.SUGBox.ListBoxFragment"
+        android:label="fragment_list_box"
+        tools:layout="@layout/fragment_list_box" />
+    <fragment
+        android:id="@+id/SUGBoxFragment"
+        android:name="com.example.ezeats.SUGBox.SUGBoxFragment"
+        android:label="fragment_sugbox"
+        tools:layout="@layout/fragment_sugbox">
+        <action
+            android:id="@+id/action_SUGBoxFragment_to_listBoxFragment"
+            app:destination="@id/listBoxFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.example.ezeats.game.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game">
+        <action
+            android:id="@+id/action_gameFragment_to_gamePlayFragment2"
+            app:destination="@id/gamePlayFragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/QAFragment"
+        android:name="com.example.ezeats.qa.QAFragment"
+        android:label="fragment_q_a"
+        tools:layout="@layout/fragment_q_a" />
+    <fragment
+        android:id="@+id/checkFragment"
+        android:name="com.example.ezeats.SUGBox.CheckFragment"
+        android:label="fragment_check"
+        tools:layout="@layout/fragment_check">
+        <action
+            android:id="@+id/action_checkFragment_to_SUGBoxFragment"
+            app:destination="@id/SUGBoxFragment" />
+        <action
+            android:id="@+id/action_checkFragment_to_listBoxFragment"
+            app:destination="@id/listBoxFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/insertFragment"
         android:name="com.example.ezeats.booking.InsertFragment"
         android:label="fragment_insert"
@@ -27,6 +99,9 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_linkFragment"
+            app:destination="@id/linkFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -65,12 +140,12 @@
     </fragment>
     <fragment
         android:id="@+id/forgetFragment"
-        android:name="com.example.ezeats.ForgetFragment"
+        android:name="com.example.ezeats.member.ForgetFragment"
         android:label="fragment_forget"
         tools:layout="@layout/fragment_forget" />
     <fragment
         android:id="@+id/memberFragment"
-        android:name="com.example.ezeats.MemberFragment"
+        android:name="com.example.ezeats.member.MemberFragment"
         android:label="fragment_member"
         tools:layout="@layout/fragment_member" />
     <fragment
@@ -84,7 +159,7 @@
     </fragment>
     <fragment
         android:id="@+id/menuDetailFragment"
-        android:name="com.example.ezeats.MenuDetailFragment"
+        android:name="com.example.ezeats.order.MenuDetailFragment"
         android:label="fragment_menu_detail"
         tools:layout="@layout/fragment_menu_detail" />
 </navigation>

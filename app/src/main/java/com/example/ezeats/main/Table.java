@@ -3,12 +3,12 @@ package com.example.ezeats.main;
 
 public class Table {
 	
-	private String tableId;
+	private int tableId;
 	private String tablePeople;
 	private int tableStatus;
 	
 	
-	public Table(String tableId, String tablePeople, int tableStatus) {
+	public Table(int tableId, String tablePeople, int tableStatus) {
 		super();
 		this.tableId = tableId;
 		this.tablePeople = tablePeople;
@@ -26,19 +26,19 @@ public class Table {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return this.tableId.equals(((Table)obj).tableId);
+		return this.tableId == tableId;
 	}
 	
 	@Override
 	public int hashCode() {
-		return tableId.hashCode();
-	}
-
-	public String getTableId() {
 		return tableId;
 	}
 
-	public void setTableId(String tableId) {
+	public int getTableId() {
+		return tableId;
+	}
+
+	public void setTableId(int tableId) {
 		this.tableId = tableId;
 	}
 

@@ -34,7 +34,7 @@ public class SelectBookingDetailFragment extends Fragment {
         private TextView tvBkIdGet,tvTableGet,tvTimeGet,
                 tvDateGet,tvChildGet,tvAdultGet,tvPhoneGet;
         private Booking selectBookingDetail;
-        private Button btBack;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,34 +58,26 @@ public class SelectBookingDetailFragment extends Fragment {
         tvChildGet = view.findViewById(R.id.tvChildGet);
         tvAdultGet = view.findViewById(R.id.tvAdultGet);
         tvPhoneGet = view.findViewById(R.id.tvPhoneGet);
-        btBack = view.findViewById(R.id.btBack);
         Bundle bundle = getArguments();
         if (bundle != null){
             selectBookingDetail = (Booking)bundle.getSerializable("booking");
             showSelectBookinDetail();
         }
-        btBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Navigation.findNavController(v).navigate(R.id.action_selectBookingDetailFragment_to_selectBookingFragment);
-
-            }
-        });
 
     }
 
     private void showSelectBookinDetail() {
         String url = Url.URL + "BookingServlet";
-        String memId = selectBookingDetail.getMemberId();
+        int memId = selectBookingDetail.getMemberId();
         Bitmap bitmap = null;
         try {
-            bitmap = new ImageTask(url,memId).execute().get();
+            bitmap = new ImageTask(url,String.valueOf(memId)).execute().get();
         }catch (Exception e){
             Log.e(TAG,e.toString());
         }
 
-        tvBkIdGet.setText(selectBookingDetail.getBkId());
-        tvTableGet.setText(selectBookingDetail.getTableId());
+        tvBkIdGet.setText(String.valueOf(selectBookingDetail.getBkId()));
+        tvTableGet.setText(String.valueOf(selectBookingDetail.getTableId()));
         tvTimeGet.setText(selectBookingDetail.getBkTime());
         String date = new SimpleDateFormat("yyyy-MM-dd").format(selectBookingDetail.getBkDate());
         tvDateGet.setText(date);
