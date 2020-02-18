@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
+import com.example.ezeats.booking.Booking;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,6 +16,7 @@ public class Common {
     public static final String REGEX_EMAIL = "^\\w+((-\\w+)|(.\\w+))*@[A-Za-z0-9]+((\\.|\\-)[A-Za-z0-9]+)*\\.[A-Za-z]+$";
     public static final String REGEX_PHONE = "^09[0-9]{8}$";
     public static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+
     // check if the device connect to the network
     public static boolean networkConnected(Activity activity) {
         ConnectivityManager conManager =
@@ -25,7 +27,7 @@ public class Common {
 
     public static int getMemId(Context context) {
         SharedPreferences pref = context.getSharedPreferences(MEMBER_PREFRENCE, Context.MODE_PRIVATE);
-        return pref.getInt("memId", 0);
+        return pref.getInt("memId",0);
     }
 
     public static void showToast(Context context, int messageResId) {

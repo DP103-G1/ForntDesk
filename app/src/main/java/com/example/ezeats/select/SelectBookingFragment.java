@@ -94,8 +94,9 @@ public class SelectBookingFragment extends Fragment {
 
              SelectBookingHolder(View view) {
                 super(view);
+                 tvBkId = view.findViewById(R.id.tvBkId);
                 tvBkDate = view.findViewById(R.id.tvBkDate);
-                tvBkId = view.findViewById(R.id.tvBkId);
+
             }
         }
 
@@ -115,10 +116,10 @@ public class SelectBookingFragment extends Fragment {
         public void onBindViewHolder(@NonNull SelectBookingHolder holder, int position) {
             Booking booking = selectBooking.get(position);
             String url = Url.URL + "/BookingServlet";
-            String memberId = booking.getMemberId();
-            selectBookingTask = new ImageTask(url,memberId);
+            int memberId = booking.getMemberId();
+            selectBookingTask = new ImageTask(url,String.valueOf(memberId));
             selectBookingTask.execute();
-            holder.tvBkId.setText(booking.getBkId());
+            holder.tvBkId.setText(String.valueOf(booking.getBkId()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
             holder.itemView.setOnClickListener(v -> {
