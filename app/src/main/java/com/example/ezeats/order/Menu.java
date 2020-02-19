@@ -10,6 +10,11 @@ public class Menu implements Serializable{
     private int FOOD_STATUS;
     private String FOOD_CONTENT;
 
+    public Menu(String FOOD_NAME, String FOOD_CONTENT){
+        this.FOOD_NAME = FOOD_NAME;
+        this.FOOD_CONTENT = FOOD_CONTENT;
+    }
+
     public Menu( String FOOD_NAME, int FOOD_PRICE) {
         this.FOOD_NAME = FOOD_NAME;
         this.FOOD_PRICE = FOOD_PRICE;

@@ -31,11 +31,11 @@
 
             <SearchView
                 android:id="@+id/searchView"
-                android:layout_width="351dp"
-                android:layout_height="wrap_content"
+                android:layout_width="347dp"
+                android:layout_height="37dp"
+                android:iconifiedByDefault="false"
                 android:textColor="@color/colortext"
-                android:theme="@style/MyEditText"
-                android:iconifiedByDefault="false">
+                android:theme="@style/MyEditText">
 
             </SearchView>
         </LinearLayout>
@@ -43,8 +43,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMenu"
-            android:layout_width="match_parent"
-            android:layout_height="338dp">
+            android:layout_width="411dp"
+            android:layout_height="462dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 

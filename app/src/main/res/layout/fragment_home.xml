@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.HomeFragment">
+    tools:context=".order.HomeFragment">
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
+        android:layout_width="417dp"
+        android:layout_height="56dp"
         android:background="@color/colortitle"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:contentInsetStart="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -38,9 +37,10 @@
 
             <Button
                 android:id="@+id/btOpi"
-                android:layout_width="76dp"
-                android:layout_height="66dp"
-                android:layout_marginEnd="5dp"
+                android:layout_width="49dp"
+                android:layout_height="43dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
                 android:background="@drawable/ic_text_128px"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -48,25 +48,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHome"
-        android:layout_width="413dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="5dp"
+        android:layout_width="415dp"
+        android:layout_height="617dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarOrder" />
 
-    <ImageView
-        android:id="@+id/homeImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="3dp"
-        android:src="@android:drawable/btn_star_big_on"
-        app:layout_constraintBottom_toTopOf="@+id/rvHome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarOrder" />
 </androidx.constraintlayout.widget.ConstraintLayout>

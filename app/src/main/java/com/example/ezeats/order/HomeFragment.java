@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -73,26 +74,20 @@ public class HomeFragment extends Fragment {
         }
         handledViews();
         bottomNavigationView.setVisibility(View.VISIBLE);
-    }
 
-    private void showMenu(List<Menu> menus) {
-        if (menus == null || menus.isEmpty()) {
-            Common.showToast(activity, R.string.textNOMenu);
-        }
-        MenuAdapter menuAdapter = (MenuAdapter) rvHome.getAdapter();
-
-        if (menuAdapter == null) {
-            rvHome.setAdapter(new MenuAdapter(activity, menus));
-        } else {
-            menuAdapter.setMenus(menus);
-            menuAdapter.notifyDataSetChanged();
-        }
+        Button btOpi = view.findViewById(R.id.btOpi);
+        btOpi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_linkFragment);
+            }
+        });
     }
 
     private List<Menu> getMenu() {
         List<Menu> menus = null;
         if (Common.networkConnected(activity)) {
-            String url = Url.URL + "MenuServlet";
+            String url = Url.URL + "/MenuServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
             String jsonOut = jsonObject.toString();
@@ -110,6 +105,21 @@ public class HomeFragment extends Fragment {
             Common.showToast(activity, R.string.textNoNetwork);
         }
         return menus;
+    }
+
+
+    private void showMenu(List<Menu> menus) {
+        if (menus == null || menus.isEmpty()) {
+            Common.showToast(activity, R.string.textNOMenu);
+        }
+          MenuAdapter menuAdapter = (MenuAdapter) rvHome.getAdapter();
+
+        if (menuAdapter == null) {
+            rvHome.setAdapter(new MenuAdapter(activity, menus));
+        } else {
+            menuAdapter.setMenus(menus);
+            menuAdapter.notifyDataSetChanged();
+        }
     }
 
     private class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder>{
@@ -131,7 +141,7 @@ public class HomeFragment extends Fragment {
             ImageView ivMenu;
             TextView tvName, tvContent;
 
-            MyViewHolder(@NonNull View itemView) {
+            MyViewHolder(View itemView) {
                 super(itemView);
                 ivMenu = itemView.findViewById(R.id.ivMenu);
                 tvName = itemView.findViewById(R.id.tvName);
@@ -146,7 +156,7 @@ public class HomeFragment extends Fragment {
 
         @NonNull
         @Override
-        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public MenuAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemview = layoutInflater.inflate(R.layout.item_view_home, parent, false);
             return new MyViewHolder(itemview);
         }
@@ -154,14 +164,32 @@ public class HomeFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Menu menu = menus.get(position);
-            String url = Url.URL + "MenuServlet";
+            String url = Url.URL + "/MenuServlet";
             String id = menu.getMENU_ID();
-
-            
+            homeImageTask = new ImageTask(url, id, imageSize, holder.ivMenu);
+            homeImageTask.execute();
+            holder.tvName.setText(menu.getFOOD_NAME());
+            holder.tvContent.setText(menu.getFOOD_CONTENT());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment);
+                }
+            });
         }
+    }
 
-
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (homeGetAllTask != null){
+            homeGetAllTask.cancel(true);
+            homeGetAllTask = null;
+        }
+        if (homeImageTask != null) {
+            homeImageTask.cancel(true);
+            homeImageTask = null;
+        }
     }
 
     private void handledViews() {
