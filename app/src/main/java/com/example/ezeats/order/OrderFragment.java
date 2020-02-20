@@ -130,7 +130,7 @@ public class OrderFragment extends Fragment {
             } else {
                 Common.showToast(getActivity(), R.string.textNoNetwork);
             }
-            navController.popBackStack();
+            Navigation.findNavController(v).navigate(R.id.action_orderFragment_to_menuDetailFragment);
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

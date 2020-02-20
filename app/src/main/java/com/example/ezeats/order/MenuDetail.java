@@ -3,7 +3,9 @@ package com.example.ezeats.order;
 public class MenuDetail {
 
 	private int ORD_ID;
+	private int TABLE_ID;
 	private String MENU_ID;
+	private String FOOD_NAME;
 	private int FOOD_AMOUNT;
 	private boolean FOOD_ARRIVAL;
 	private int TOTAL;
@@ -21,6 +23,17 @@ public class MenuDetail {
 	
 	public MenuDetail(String MENU_ID, int FOOD_AMOUNT, int TOTAL) {
 		this(0, MENU_ID, FOOD_AMOUNT, false, TOTAL, false);
+	}
+
+	public MenuDetail(int ORD_ID, int TABLE_ID, String MENU_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, boolean FOOD_STATUS) {
+		this.ORD_ID = ORD_ID;
+		this.TABLE_ID = TABLE_ID;
+		this.MENU_ID = MENU_ID;
+		this.FOOD_NAME = FOOD_NAME;
+		this.FOOD_AMOUNT = FOOD_AMOUNT;
+		this.FOOD_ARRIVAL = FOOD_ARRIVAL;
+		this.TOTAL = TOTAL;
+		this.FOOD_STATUS = FOOD_STATUS;
 	}
 	
 
@@ -101,4 +114,19 @@ public class MenuDetail {
 		FOOD_STATUS = food_status;
 	}
 
+	public String getFOOD_NAME() {
+		return FOOD_NAME;
+	}
+
+	public void setFOOD_NAME(String FOOD_NAME) {
+		this.FOOD_NAME = FOOD_NAME;
+	}
+
+	public int getTABLE_ID() {
+		return TABLE_ID;
+	}
+
+	public void setTABLE_ID(int TABLE_ID) {
+		this.TABLE_ID = TABLE_ID;
+	}
 }
