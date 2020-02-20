@@ -25,20 +25,24 @@
         android:id="@+id/btPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
+        android:layout_marginTop="70dp"
         android:text="@string/btPlay"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="221dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="76dp"
-        android:src="@drawable/dish"
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="87dp"
+        android:src="@drawable/dishremovebg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/connect＿the＿dots" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
