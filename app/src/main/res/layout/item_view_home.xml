@@ -5,7 +5,7 @@
     android:id="@+id/cardview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
+    android:layout_margin="3dp"
     android:padding="6dp"
     card_view:cardBackgroundColor="#FFBD45"
     card_view:cardCornerRadius="4dp"
