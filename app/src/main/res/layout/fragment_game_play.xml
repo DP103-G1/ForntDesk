@@ -10,8 +10,8 @@
     <ImageButton
         android:id="@+id/ibMatch2"
         android:layout_width="150dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="16dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,9 +22,9 @@
     <ImageButton
         android:id="@+id/ibMatch1"
         android:layout_width="150dp"
-        android:layout_height="160dp"
+        android:layout_height="132dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="16dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toStartOf="@+id/ibMatch2"
@@ -35,7 +35,7 @@
     <ImageButton
         android:id="@+id/ibMatch6"
         android:layout_width="150dp"
-        android:layout_height="160dp"
+        android:layout_height="132dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
     <ImageButton
         android:id="@+id/ibMatch8"
         android:layout_width="150dp"
-        android:layout_height="160dp"
+        android:layout_height="132dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
     <ImageButton
         android:id="@+id/ibMatch5"
         android:layout_width="150dp"
-        android:layout_height="160dp"
+        android:layout_height="132dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
@@ -69,7 +69,7 @@
     <ImageButton
         android:id="@+id/ibMatch7"
         android:layout_width="150dp"
-        android:layout_height="160dp"
+        android:layout_height="132dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
@@ -81,7 +81,7 @@
     <ImageButton
         android:id="@+id/ibMatch4"
         android:layout_width="150dp"
-        android:layout_height="160dp"
+        android:layout_height="132dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +92,7 @@
     <ImageButton
         android:id="@+id/ibMatch3"
         android:layout_width="150dp"
-        android:layout_height="160dp"
+        android:layout_height="132dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
@@ -104,11 +104,11 @@
     <TextView
         android:id="@+id/tvTimer"
         android:layout_width="68dp"
-        android:layout_height="15dp"
-        android:layout_marginTop="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="16dp"
-        android:textColor="@color/colorWhite"
         android:text="TextView"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="@id/tvDots"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,7 +116,7 @@
         android:id="@+id/tvDots"
         android:layout_width="0dp"
         android:layout_height="33dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/tvDots"
         android:textColor="@color/colortext"
