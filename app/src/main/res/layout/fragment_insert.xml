@@ -1,204 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     tools:context=".booking.InsertFragment">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarOrder"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colortext"
-            android:text="Booking"
-            android:textSize="26sp"
-            android:gravity="center"/>
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="20dp"
+            android:background="@color/colortitle"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:contentInsetStart="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/rvHome"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="3dp">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textBooking"
+                    android:textColor="@color/colortext"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="40dp"
-        android:orientation="vertical">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colortext"
-            android:text="1"
-            android:background="@color/colortext"
-            android:textSize="0.5dp"/>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbarOrder"
+            android:layout_marginTop="-16dp"
+            android:orientation="vertical"
+            android:paddingBottom="10dp">
 
 
-        <TextView
-            android:id="@+id/tvPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:text="@string/textPhone"
-            android:textColor="@color/colortext"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/textPhone"
+                android:textColor="@color/colortext"
+                android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/colortext"
-            android:theme="@style/MyEditText"
-            android:ems="10"
-            android:inputType="phone"
-            android:textSize="14sp" />
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:ems="10"
+                android:inputType="phone"
+                android:textColor="@color/colortext"
+                android:textSize="14sp"
+                android:theme="@style/MyEditText" />
 
-        <TextView
-            android:id="@+id/tvBkDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            android:text="@string/textDate"
-            android:textColor="@color/colortext"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tvBkDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/textDate"
+                android:textColor="@color/colortext"
+                android:textSize="14sp" />
 
-        <EditText
-            android:id="@+id/etDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/colortext"
-            android:theme="@style/MyEditText"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textSize="14sp" />
+            <EditText
+                android:id="@+id/etDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="@color/colortext"
+                android:textSize="14sp"
+                android:theme="@style/MyEditText" />
 
-        <TextView
-            android:id="@+id/tvTime2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/colortext"
-            android:text="@string/textTime" />
+            <TextView
+                android:id="@+id/tvTime2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/textTime"
+                android:textColor="@color/colortext" />
 
-        <Spinner
-            android:id="@+id/spTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/colortext"
-            android:theme="@style/MyEditText"
-            android:entries="@array/textTimeArray" />
+            <Spinner
+                android:id="@+id/spTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:entries="@array/textTimeArray"
+                android:textColor="@color/colortext"
+                android:theme="@style/MyEditText" />
 
-        <TextView
-            android:id="@+id/tvTable"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/colortext"
-            android:text="@string/textTable" />
+            <TextView
+                android:id="@+id/tvTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/textTable"
+                android:textColor="@color/colortext" />
 
-        <Spinner
-            android:id="@+id/spTable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:theme="@style/MyEditText"
-            android:textColor="@color/colortext" />
+            <Spinner
+                android:id="@+id/spTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:textColor="@color/colortext"
+                android:theme="@style/MyEditText" />
 
-        <TextView
-            android:id="@+id/tvAdult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/colortext"
-            android:text="@string/textAdult" />
+            <TextView
+                android:id="@+id/tvAdult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/textAdult"
+                android:textColor="@color/colortext" />
 
-        <Spinner
-            android:id="@+id/spAdult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/colortext"
-            android:theme="@style/MyEditText"
-            android:entries="@array/textAdultArray" />
+            <Spinner
+                android:id="@+id/spAdult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:entries="@array/textAdultArray"
+                android:textColor="@color/colortext"
+                android:theme="@style/MyEditText" />
 
-        <TextView
-            android:id="@+id/tvChild"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="40dp"
-            android:textColor="@color/colortext"
-            android:text="@string/textChild" />
+            <TextView
+                android:id="@+id/tvChild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="40dp"
+                android:text="@string/textChild"
+                android:textColor="@color/colortext" />
 
-        <Spinner
-            android:id="@+id/spChild"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/colortext"
-            android:theme="@style/MyEditText"
-            android:entries="@array/textChildArray" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colortext"
-            android:text="1"
-            android:background="@color/colortext"
-            android:textSize="0.5dp"/>
+            <Spinner
+                android:id="@+id/spChild"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/colortext"
+                android:entries="@array/textChildArray"
+                android:theme="@style/MyEditText" />
 
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:weightSum="1"
-       android:orientation="horizontal"
-       android:layout_marginTop="15dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-       <Button
-           android:id="@+id/btInsert"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="40dp"
-           android:layout_marginEnd="40dp"
-           android:layout_weight="0.5"
-           android:textColor="@color/colortext"
-           android:background="@color/colortitle"
-           android:text="@string/textInsert" />
+                <Button
+                    android:id="@+id/btInsert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_weight="0.5"
+                    android:background="@color/colortitle"
+                    android:text="@string/textInsert"
+                    android:textColor="@color/colortext" />
 
-   </LinearLayout>
-    </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>
