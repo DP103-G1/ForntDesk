@@ -7,16 +7,47 @@
     android:layout_height="match_parent"
     tools:context=".order.OrderFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colortitle"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:contentInsetStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTopic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textMenu"
+                android:textColor="@color/colortext"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="397dp"
+        android:layout_height="671dp"
+        android:layout_marginTop="70dp"
         android:orientation="vertical"
-        android:padding="2px"
+        android:padding="3px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarOrder">
 
         <LinearLayout
             android:layout_width="426dp"
@@ -44,7 +75,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMenu"
             android:layout_width="411dp"
-            android:layout_height="404dp">
+            android:layout_height="376dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -66,13 +97,13 @@
                 android:id="@+id/edNote"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:theme="@style/MyEditText"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColor="@color/colortext"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:theme="@style/MyEditText" />
         </LinearLayout>
 
         <LinearLayout

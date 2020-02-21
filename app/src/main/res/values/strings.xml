@@ -131,5 +131,10 @@
     <string name="textSelectBooking">訂位查詢</string>
     <string name="textMenuDetail">餐點明細</string>
     <string name="textBookingDetail">訂位明細</string>
+    <string name="textSelecttitle">查詢</string>
+    <string name="textcommonproblem">操作導覽</string>
+    <string name="textcommon">操作導引</string>
+    <string name="textconnection">聯絡我們</string>
+    <string name="textMenu">點餐</string>
 
 </resources>
