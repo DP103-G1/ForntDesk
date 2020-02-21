@@ -137,5 +137,6 @@
     <string name="textconnection">聯絡我們</string>
     <string name="textMenu">點餐</string>
     <string name="textqa"><![CDATA[Q&A]]></string>
+    <string name="textRegister">註冊</string>
 
 </resources>
