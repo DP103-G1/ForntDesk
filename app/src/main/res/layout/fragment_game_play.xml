@@ -7,51 +7,60 @@
     android:configChanges="orientation|keyboardHidden"
     tools:context="com.example.ezeats.game.GamePlayFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colortitle"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:contentInsetStart="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/ibMatch2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/textLianliankan"
+                android:textColor="@color/colortext"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
     <ImageButton
-        android:id="@+id/ibMatch2"
+        android:id="@+id/ibMatch4"
         android:layout_width="150dp"
         android:layout_height="132dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ibMatch1"
-        app:layout_constraintTop_toBottomOf="@+id/tvDots"
+        app:layout_constraintStart_toEndOf="@+id/ibMatch3"
+        app:layout_constraintTop_toBottomOf="@+id/ibMatch2"
         tools:src="@tools:sample/avatars[0]" />
 
     <ImageButton
         android:id="@+id/ibMatch1"
         android:layout_width="150dp"
         android:layout_height="132dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="37dp"
         android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/ibMatch2"
         app:layout_constraintEnd_toStartOf="@+id/ibMatch2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDots"
-        tools:src="@tools:sample/avatars[0]" />
-
-    <ImageButton
-        android:id="@+id/ibMatch6"
-        android:layout_width="150dp"
-        android:layout_height="132dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ibMatch5"
-        app:layout_constraintTop_toBottomOf="@+id/ibMatch4"
-        tools:src="@tools:sample/avatars[0]" />
-
-    <ImageButton
-        android:id="@+id/ibMatch8"
-        android:layout_width="150dp"
-        android:layout_height="132dp"
-        android:layout_marginEnd="8dp"
-        android:scaleType="centerInside"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ibMatch7"
-        app:layout_constraintTop_toBottomOf="@+id/ibMatch6"
+        app:layout_constraintTop_toTopOf="@+id/ibMatch2"
+        app:layout_constraintVertical_bias="0.0"
         tools:src="@tools:sample/avatars[0]" />
 
     <ImageButton
@@ -67,6 +76,20 @@
         tools:src="@tools:sample/avatars[0]" />
 
     <ImageButton
+        android:id="@+id/ibMatch2"
+        android:layout_width="150dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="522dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ibMatch1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars[0]" />
+
+    <ImageButton
         android:id="@+id/ibMatch7"
         android:layout_width="150dp"
         android:layout_height="132dp"
@@ -79,14 +102,25 @@
         tools:src="@tools:sample/avatars[0]" />
 
     <ImageButton
-        android:id="@+id/ibMatch4"
+        android:id="@+id/ibMatch8"
         android:layout_width="150dp"
         android:layout_height="132dp"
         android:layout_marginEnd="8dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ibMatch3"
-        app:layout_constraintTop_toBottomOf="@+id/ibMatch2"
+        app:layout_constraintStart_toEndOf="@+id/ibMatch7"
+        app:layout_constraintTop_toBottomOf="@+id/ibMatch6"
+        tools:src="@tools:sample/avatars[0]" />
+
+    <ImageButton
+        android:id="@+id/ibMatch6"
+        android:layout_width="150dp"
+        android:layout_height="132dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ibMatch5"
+        app:layout_constraintTop_toBottomOf="@+id/ibMatch4"
         tools:src="@tools:sample/avatars[0]" />
 
     <ImageButton
@@ -109,21 +143,7 @@
         android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textColor="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="@id/tvDots"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvDots"
-        android:layout_width="0dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="@string/tvDots"
-        android:textColor="@color/colortext"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -125,5 +125,11 @@
     <string name="textMessageFound">您的留言數為0</string>
     <string name="btLeave">我要留言</string>
     <string name="btCheck">查看留言</string>
+    <string name="textBox">意見箱</string>
+    <string name="textForget">忘記密碼</string>
+    <string name="textLianliankan">連連看</string>
+    <string name="textSelectBooking">訂位查詢</string>
+    <string name="textMenuDetail">餐點明細</string>
+    <string name="textBookingDetail">訂位明細</string>
 
 </resources>
