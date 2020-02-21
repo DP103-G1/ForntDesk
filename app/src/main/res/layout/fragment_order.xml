@@ -39,19 +39,18 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="397dp"
-        android:layout_height="671dp"
-        android:layout_marginTop="70dp"
+        android:layout_width="392dp"
+        android:layout_height="580dp"
+        android:layout_marginTop="60dp"
         android:orientation="vertical"
         android:padding="3px"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarOrder">
+        app:layout_constraintTop_toTopOf="@+id/toolbarOrder">
 
         <LinearLayout
-            android:layout_width="426dp"
-            android:layout_height="wrap_content"
+            android:layout_width="397dp"
+            android:layout_height="35dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -62,8 +61,8 @@
 
             <SearchView
                 android:id="@+id/searchView"
-                android:layout_width="347dp"
-                android:layout_height="37dp"
+                android:layout_width="338dp"
+                android:layout_height="33dp"
                 android:iconifiedByDefault="false"
                 android:textColor="@color/colortext"
                 android:theme="@style/MyEditText">
@@ -74,8 +73,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMenu"
-            android:layout_width="411dp"
-            android:layout_height="376dp">
+            android:layout_width="392dp"
+            android:layout_height="383dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 

@@ -38,14 +38,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMd"
-        android:layout_width="405dp"
-        android:layout_height="0dp"
+        android:layout_width="407dp"
+        android:layout_height="442dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="39dp"
-        app:layout_constraintBottom_toTopOf="@+id/btBill"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,12 +52,12 @@
         android:id="@+id/btBill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="74dp"
+        android:layout_marginTop="10dp"
         android:background="@color/colortitle"
         android:text="結帳"
         android:textColor="@color/colortext"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvMd" />
 </androidx.constraintlayout.widget.ConstraintLayout>

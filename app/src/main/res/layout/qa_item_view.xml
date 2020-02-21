@@ -18,11 +18,11 @@
 
             <TextView
                 android:id="@+id/tvNumber"
-                android:layout_width="64dp"
-                android:layout_height="49dp"
+                android:layout_width="82dp"
+                android:layout_height="48dp"
                 android:padding="16dp"
-                android:textColor="@color/colortext"
                 android:text="@string/tvNumber"
+                android:textColor="@color/colortext"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
