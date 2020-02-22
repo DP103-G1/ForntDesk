@@ -3,6 +3,7 @@ package com.example.ezeats.order;
 public class MenuDetail {
 
 	private int ORD_ID;
+	private int MEMBER_ID;
 	private int TABLE_ID;
 	private String MENU_ID;
 	private String FOOD_NAME;
@@ -12,7 +13,7 @@ public class MenuDetail {
 	private boolean FOOD_STATUS;
 
 	public MenuDetail(int ORD_ID, String MENU_ID, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL,
-			boolean FOOD_STATUS) {
+					  boolean FOOD_STATUS) {
 		this.ORD_ID = ORD_ID;
 		this.MENU_ID = MENU_ID;
 		this.FOOD_AMOUNT = FOOD_AMOUNT;
@@ -20,9 +21,24 @@ public class MenuDetail {
 		this.TOTAL = TOTAL;
 		this.FOOD_STATUS = FOOD_STATUS;
 	}
-	
+
 	public MenuDetail(String MENU_ID, int FOOD_AMOUNT, int TOTAL) {
 		this(0, MENU_ID, FOOD_AMOUNT, false, TOTAL, false);
+	}
+
+	public MenuDetail(int ORD_ID, int MEMBER_ID, String MENU_ID, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL,
+			boolean FOOD_STATUS) {
+		this.ORD_ID = ORD_ID;
+		this.MEMBER_ID = MEMBER_ID;
+		this.MENU_ID = MENU_ID;
+		this.FOOD_AMOUNT = FOOD_AMOUNT;
+		this.FOOD_ARRIVAL = FOOD_ARRIVAL;
+		this.TOTAL = TOTAL;
+		this.FOOD_STATUS = FOOD_STATUS;
+	}
+
+	public MenuDetail(int MEMBER_ID, String MENU_ID, int FOOD_AMOUNT, int TOTAL) {
+		this(0,MEMBER_ID, MENU_ID, FOOD_AMOUNT, false, TOTAL, false);
 	}
 
 	public MenuDetail(int ORD_ID, int TABLE_ID, String MENU_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, boolean FOOD_STATUS) {
@@ -128,5 +144,13 @@ public class MenuDetail {
 
 	public void setTABLE_ID(int TABLE_ID) {
 		this.TABLE_ID = TABLE_ID;
+	}
+
+	public int getMEMBER_ID() {
+		return MEMBER_ID;
+	}
+
+	public void setMEMBER_ID(int MEMBER_ID) {
+		this.MEMBER_ID = MEMBER_ID;
 	}
 }

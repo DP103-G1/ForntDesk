@@ -111,7 +111,7 @@ public class OrderFragment extends Fragment {
 //                Order order = new Order(Common.getMemId(activity), tableId,
 //                        Integer.parseInt(edTotal.getText().toString()),
 //                        menuDetails.stream().collect(Collectors.toList()));
-                Order order = new Order("2", tableId,
+                Order order = new Order(Common.getMemId(activity), Integer.parseInt(tableId),
                         Integer.parseInt(edTotal.getText().toString()),
                         menuDetails.stream().collect(Collectors.toList()));
                 jsonObject.addProperty("order", Common.gson.toJson(order));

@@ -5,15 +5,15 @@ import java.util.List;
 public class Order {
 
 	private int ORD_ID;
-	private String MEMBER_ID;
-	private String TABLE_ID;
+	private int MEMBER_ID;
+	private int TABLE_ID;
 	private boolean TABLE_BELL;
 	private int ORD_TOTAL;
 	private boolean ORD_STATUS;
 	private boolean ORD_BILL;
 	private List<MenuDetail> menuDetails; 
 	
-	public Order(String MEMBER_ID, String TABLE_ID, int ORD_TOTAL, List<MenuDetail> menuDetails) {
+	public Order(int MEMBER_ID, int TABLE_ID, int ORD_TOTAL, List<MenuDetail> menuDetails) {
 		this.MEMBER_ID = MEMBER_ID;
 		this.TABLE_ID = TABLE_ID;
 		this.ORD_TOTAL = ORD_TOTAL;
@@ -22,7 +22,7 @@ public class Order {
 		this.menuDetails = menuDetails;
 	}
 
-	public Order(int ORD_ID, String MEMBER_ID, String TABLE_ID, boolean TABLE_BELL, int ORD_TOTAL,
+	public Order(int ORD_ID, int MEMBER_ID, int TABLE_ID, boolean TABLE_BELL, int ORD_TOTAL,
 			boolean ORD_STATUS, boolean ORD_BILL, List<MenuDetail> menuDetails) {
 		this.ORD_ID = ORD_ID;
 		this.MEMBER_ID = MEMBER_ID;
@@ -42,19 +42,19 @@ public class Order {
 		ORD_ID = ord_id;
 	}
 
-	public String getMEMBER_ID() {
+	public int getMEMBER_ID() {
 		return MEMBER_ID;
 	}
 
-	public void setMEMBER_ID(String member_id) {
+	public void setMEMBER_ID(int member_id) {
 		MEMBER_ID = member_id;
 	}
 
-	public String getTABLE_ID() {
+	public int getTABLE_ID() {
 		return TABLE_ID;
 	}
 
-	public void setTABLE_ID(String table_id) {
+	public void setTABLE_ID(int table_id) {
 		TABLE_ID = table_id;
 	}
 
