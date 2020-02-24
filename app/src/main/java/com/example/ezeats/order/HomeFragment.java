@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
         if (Common.networkConnected(activity)) {
             String url = Url.URL + "/MenuServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getAll");
+            jsonObject.addProperty("action", "getAllShow");
             String jsonOut = jsonObject.toString();
             homeGetAllTask = new CommonTask(url, jsonOut);
             try {

@@ -45,11 +45,18 @@ public class SelectMenuFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ivBooking = view.findViewById(R.id.ivBooking);
         ivOrderMenu = view.findViewById(R.id.ivOrderMenu);
+        ivOrderMenu = view.findViewById(R.id.ivOrderMenu);
 
         ivBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_selectMenuFragment_to_selectBookingFragment);
+            }
+        });
+        ivOrderMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_selectMenuFragment_to_selectOrderFragment);
             }
         });
     }

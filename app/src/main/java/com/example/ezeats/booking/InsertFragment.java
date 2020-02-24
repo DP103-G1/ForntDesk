@@ -249,7 +249,6 @@ public class InsertFragment extends Fragment{
                                       @Override
                                       public void onClick(DialogInterface dialog, int which) {
 
-                                          navController.popBackStack();
                                       }
                                   })
                                   .show();

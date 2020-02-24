@@ -61,7 +61,7 @@ public class SelectBookingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         memId = Common.getMemId(activity);
         swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
-        rvSelectBooking = view.findViewById(R.id.rvSelectBooking);
+        rvSelectBooking = view.findViewById(R.id.rvSO);
         rvSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
         selectBooking = getSelectBooking();
         showSelectBooking(selectBooking);
@@ -94,8 +94,8 @@ public class SelectBookingFragment extends Fragment {
 
              SelectBookingHolder(View view) {
                 super(view);
-                 tvBkId = view.findViewById(R.id.tvBkId);
-                tvBkDate = view.findViewById(R.id.tvBkDate);
+                 tvBkId = view.findViewById(R.id.tvOrdId);
+                tvBkDate = view.findViewById(R.id.tvTabid);
 
             }
         }

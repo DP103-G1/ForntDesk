@@ -21,7 +21,7 @@
 
 
         <TextView
-            android:id="@+id/tvBkId"
+            android:id="@+id/tvOrdId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -32,14 +32,14 @@
             tools:text="textBkId" />
 
         <TextView
-            android:id="@+id/tvBkDate"
+            android:id="@+id/tvTabid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textColor="@color/colortext"
-            app:layout_constraintEnd_toEndOf="@+id/tvBkId"
-            app:layout_constraintStart_toStartOf="@+id/tvBkId"
-            app:layout_constraintTop_toBottomOf="@+id/tvBkId"
+            app:layout_constraintEnd_toEndOf="@+id/tvOrdId"
+            app:layout_constraintStart_toStartOf="@+id/tvOrdId"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrdId"
             tools:text="textBkDate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
