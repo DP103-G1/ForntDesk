@@ -11,6 +11,16 @@ public class Box {
     private String feed_back;
     private boolean expanded;
 
+    public Box(int member, String topic, String purpose, String info, String date, float satisfied, String feed_back) {
+        this.member = member;
+        this.topic = topic;
+        this.purpose = purpose;
+        this.info = info;
+        this.date = date;
+        this.satisfied = satisfied;
+        this.feed_back = feed_back;
+    }
+
     public Box(int id, int member, String purpose, String info, String date, float satisfied, String feed_back) {
         this.id = id;
         this.member = member;
