@@ -49,14 +49,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
-
-public class InsertFragment extends Fragment{
-    private final  static String TAG = "TAG_InsertFragment";
+public class InsertFragment extends Fragment {
+    private final static String TAG = "TAG_InsertFragment";
     private FragmentActivity activity;
-    private EditText etPhone,etDate;
-    private Spinner spTime,spAdult,spChild,spTable;
-    private CommonTask bookingGetAllTask,getTableTask;
+    private EditText etPhone, etDate;
+    private Spinner spTime, spAdult, spChild, spTable;
+    private CommonTask bookingGetAllTask, getTableTask;
     private ImageTask bookingImageTask;
     private SimpleDateFormat simpleDateFormat;
     private Date bkDate;
@@ -114,11 +112,11 @@ public class InsertFragment extends Fragment{
 
         spTime = view.findViewById(R.id.spTime);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_dropdown_item_1line,timeArray);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, timeArray);
         bkDate = null;
         bkTime = null;
         spTime.setAdapter(arrayAdapter);
-        spTime.setSelection(0,true);
+        spTime.setSelection(0, true);
         spTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -133,11 +131,11 @@ public class InsertFragment extends Fragment{
         });
 
         spAdult = view.findViewById(R.id.spAdult);
-        spAdult.setSelection(0,true);
+        spAdult.setSelection(0, true);
         spAdult.setOnItemSelectedListener(listener);
 
         spChild = view.findViewById(R.id.spChild);
-        spChild.setSelection(0,true);
+        spChild.setSelection(0, true);
         spChild.setOnItemSelectedListener(listener);
 
 
@@ -150,15 +148,15 @@ public class InsertFragment extends Fragment{
                 datePickerDialog.show();
                 datePickerDialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
                     updateDisplay(year, month, dayOfMonth);
-                spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, comparison()));
+                    spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, comparison()));
 
                 });
             }
         });
         spTable = view.findViewById(R.id.spTable);
-        ArrayAdapter<String> tableArrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_dropdown_item_1line, comparison());
+        ArrayAdapter<String> tableArrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, comparison());
         spTable.setAdapter(tableArrayAdapter);
-        spTable.setSelection(0,true);
+        spTable.setSelection(0, true);
         spTable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -172,149 +170,144 @@ public class InsertFragment extends Fragment{
         });
 
 
+        Button btInsert = view.findViewById(R.id.btInsert);
+        btInsert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            Button btInsert = view.findViewById(R.id.btInsert);
-            btInsert.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Date bkDate = null;
-                    try {
-                        bkDate = simpleDateFormat.parse(etDate.getText().toString().trim());
-                    } catch (ParseException e) {
-                        Log.e(TAG, e.toString());
-                    }
-                    String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
-                    String bkTime = timeArray[spTime.getSelectedItemPosition()];
-                    Log.d(TAG, bkTime);
-                    if(bkTime.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textTimeNoSelect);
-                        return;
-                    }
-                    int bkTable;
-                    String bkTableStr = comparison().get(spTable.getSelectedItemPosition());
-                    Log.d(TAG, bkTableStr);
-                    if (bkTableStr.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textTableNoSelect);
-                        return;
-                    } else {
-                        bkTable = Integer.parseInt(bkTableStr);
-                    }
-
-
-
-                    String[] childArray = getResources().getStringArray(R.array.textChildArray);
-                    String bkChild = String.valueOf(childArray[spChild.getSelectedItemPosition()]);
-                    Log.d(TAG, bkChild);
-                    if(bkChild.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textChildNoSelect);
-                        return;
-                    }
-
-
-                    String[] adultArray = getResources().getStringArray(R.array.textAdultArray);
-                    String bkAdult = adultArray[spAdult.getSelectedItemPosition()];
-                    Log.d(TAG, bkAdult);
-                    if(bkAdult.equals("Select")){
-                        Common.showToast(getActivity(),R.string.textNoSelect);
-                        return;
-                    }
-
-                    String bkPhone = etPhone.getText().toString().trim();
-                    if (bkPhone.length() <= 0) {
-                        Common.showToast(getActivity(), R.string.textPhoneInvaild);
-                        return;
-                    }
-                   if(Common.networkConnected(activity)){
-                       String url = Url.URL + "/BookingServlet";
-                       Booking booking = new Booking(mem_id,bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone);
-                       Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                       JsonObject jsonObject = new JsonObject();
-                       jsonObject.addProperty("action","bookingInsert");
-                       jsonObject.addProperty("booking",gson.toJson(booking));
-                       int count = 0;
-                       try {
-                           String result = new CommonTask(url,jsonObject.toString()).execute().get();
-                           count = Integer.valueOf(result);
-                       }catch (Exception e){
-                           Log.e(TAG,toString());
-                       }
-                       if (count == 0){
-                           Common.showToast(getActivity(),R.string.textInsertFail);
-                       }else {
-                          new AlertDialog.Builder(activity)
-                                  .setTitle(R.string.textBookingSuccess)
-                                  .setMessage(R.string.textMassage)
-                                  .setPositiveButton(R.string.textYes, new DialogInterface.OnClickListener() {
-                                      @Override
-                                      public void onClick(DialogInterface dialog, int which) {
-
-                                          navController.popBackStack();
-                                      }
-                                  })
-                                  .show();
-
-                       }
-                   }else {
-                       Common.showToast(getActivity(),R.string.textNoNetWork);
-                   }
-
-                   navController.navigate(R.id.action_insertFragment_to_homeFragment);
+                Date bkDate = null;
+                try {
+                    bkDate = simpleDateFormat.parse(etDate.getText().toString().trim());
+                } catch (ParseException e) {
+                    Log.e(TAG, e.toString());
+                }
+                String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
+                String bkTime = timeArray[spTime.getSelectedItemPosition()];
+                Log.d(TAG, bkTime);
+                if (bkTime.equals("Select")) {
+                    Common.showToast(getActivity(), R.string.textTimeNoSelect);
+                    return;
+                }
+                int bkTable;
+                String bkTableStr = comparison().get(spTable.getSelectedItemPosition());
+                Log.d(TAG, bkTableStr);
+                if (bkTableStr.equals("Select")) {
+                    Common.showToast(getActivity(), R.string.textTableNoSelect);
+                    return;
+                } else {
+                    bkTable = Integer.parseInt(bkTableStr);
                 }
 
-            });
+
+                String[] childArray = getResources().getStringArray(R.array.textChildArray);
+                String bkChild = String.valueOf(childArray[spChild.getSelectedItemPosition()]);
+                Log.d(TAG, bkChild);
+                if (bkChild.equals("Select")) {
+                    Common.showToast(getActivity(), R.string.textChildNoSelect);
+                    return;
+                }
+
+
+                String[] adultArray = getResources().getStringArray(R.array.textAdultArray);
+                String bkAdult = adultArray[spAdult.getSelectedItemPosition()];
+                Log.d(TAG, bkAdult);
+                if (bkAdult.equals("Select")) {
+                    Common.showToast(getActivity(), R.string.textNoSelect);
+                    return;
+                }
+
+                String bkPhone = etPhone.getText().toString().trim();
+                if (bkPhone.length() <= 0) {
+                    Common.showToast(getActivity(), R.string.textPhoneInvaild);
+                    return;
+                }
+                if (Common.networkConnected(activity)) {
+                    String url = Url.URL + "/BookingServlet";
+                    Booking booking = new Booking(mem_id, bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone);
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("action", "bookingInsert");
+                    jsonObject.addProperty("booking", gson.toJson(booking));
+                    int count = 0;
+                    try {
+                        String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                        count = Integer.valueOf(result);
+                    } catch (Exception e) {
+                        Log.e(TAG, toString());
+                    }
+                    if (count == 0) {
+                        Common.showToast(getActivity(), R.string.textInsertFail);
+                    } else {
+                        new AlertDialog.Builder(activity)
+                                .setTitle(R.string.textBookingSuccess)
+                                .setMessage(R.string.textMassage)
+                                .setPositiveButton(R.string.textYes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+
+                                    }
+                                })
+                                .show();
+
+                    }
+                } else {
+                    Common.showToast(getActivity(), R.string.textNoNetWork);
+                }
+
+                navController.navigate(R.id.action_insertFragment_to_homeFragment);
+            }
+
+        });
 
 
     }
 
 
     Spinner.OnItemSelectedListener listener = new Spinner.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
+        }
 
-    }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-};
-
+        }
+    };
 
 
-    private String pad(int number){
-        if(number>=10){
+    private String pad(int number) {
+        if (number >= 10) {
             return String.valueOf(number);
-        }else {
-            return  "0" + number;
+        } else {
+            return "0" + number;
         }
     }
 
     private void updateDisplay(int year, int month, int day) {
         etDate.setText(new StringBuffer().append(year).append("-")
-        .append(pad(month+1)).append("-")
-        .append(pad(day)));
+                .append(pad(month + 1)).append("-")
+                .append(pad(day)));
     }
 
 
     @Override
     public void onStop() {
         super.onStop();
-        if (bookingGetAllTask !=null){
-           bookingGetAllTask.cancel(true);
+        if (bookingGetAllTask != null) {
+            bookingGetAllTask.cancel(true);
             bookingGetAllTask = null;
         }
-        if (bookingImageTask!=null){
+        if (bookingImageTask != null) {
             bookingImageTask.cancel(true);
             bookingImageTask = null;
         }
     }
 
 
-
-    private List<String> comparison(){
+    private List<String> comparison() {
         List<Integer> tablesAvalible = tableIds.stream().collect(Collectors.toList());
 //        tablesAvalible.add(0, "請選取");
         if (!etDate.getText().toString().isEmpty()) {
@@ -351,15 +344,16 @@ public class InsertFragment extends Fragment{
             getTableTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = getTableTask.execute().get();
-                Type listType = new TypeToken<List<Table>>() {}.getType();
+                Type listType = new TypeToken<List<Table>>() {
+                }.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                 List<Table> tables = gson.fromJson(jsonIn, listType);
                 tableIds = tables.stream().map(v -> v.getTableId()).collect(Collectors.toList());
             } catch (Exception e) {
                 Log.e(TAG, toString());
             }
-        }else {
-            Common.showToast(getActivity(),R.string.textNoNetWork);
+        } else {
+            Common.showToast(getActivity(), R.string.textNoNetWork);
         }
 //        List<String> tableIds = new ArrayList<>();
 //        for (Table table : tables) {
@@ -382,14 +376,15 @@ public class InsertFragment extends Fragment{
             getTableTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = getTableTask.execute().get();
-                Type listType = new TypeToken<List<Booking>>() {}.getType();
+                Type listType = new TypeToken<List<Booking>>() {
+                }.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                 bookings = gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, toString());
             }
-        }else {
-            Common.showToast(getActivity(),R.string.textNoNetWork);
+        } else {
+            Common.showToast(getActivity(), R.string.textNoNetWork);
         }
         return bookings;
     }

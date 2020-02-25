@@ -1,9 +1,12 @@
-package com.example.ezeats.order;
+package com.example.ezeats.main;
 
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -22,8 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ezeats.R;
-import com.example.ezeats.main.Common;
-import com.example.ezeats.main.Url;
+import com.example.ezeats.order.Menu;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,18 +35,19 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "TAG_HomeFragment";
     private Activity activity;
     private NavController navController;
-    private ImageView homeImage;
     private RecyclerView rvHome;
-    private CommonTask homeGetAllTask;
+    private CommonTask homeGetAllTask, getRanImagesTask;
     private ImageTask homeImageTask;
     private List<Menu> menus;
     private BottomNavigationView bottomNavigationView;
+    private ViewFlipper flipperImage;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,17 +66,23 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvHome = view.findViewById(R.id.rvHome);
-
+        flipperImage = view.findViewById(R.id.flipperImage);
+        flipperImages(getMenuImages());
         rvHome.setLayoutManager(new LinearLayoutManager(activity));
         menus = getMenu();
         showMenu(menus);
-
         navController = Navigation.findNavController(view);
         if (Common.getMemId(activity) == 0) {
             navController.navigate(R.id.action_homeFragment_to_loginFragment);
         }
         handledViews();
         bottomNavigationView.setVisibility(View.VISIBLE);
+        flipperImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment);
+            }
+        });
 
         Button btOpi = view.findViewById(R.id.btOpi);
         btOpi.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +121,7 @@ public class HomeFragment extends Fragment {
         if (menus == null || menus.isEmpty()) {
             Common.showToast(activity, R.string.textNOMenu);
         }
-          MenuAdapter menuAdapter = (MenuAdapter) rvHome.getAdapter();
+        MenuAdapter menuAdapter = (MenuAdapter) rvHome.getAdapter();
 
         if (menuAdapter == null) {
             rvHome.setAdapter(new MenuAdapter(activity, menus));
@@ -122,7 +131,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder>{
+    private class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
         private LayoutInflater layoutInflater;
         private List<Menu> menus;
         private int imageSize;
@@ -182,7 +191,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (homeGetAllTask != null){
+        if (homeGetAllTask != null) {
             homeGetAllTask.cancel(true);
             homeGetAllTask = null;
         }
@@ -194,5 +203,51 @@ public class HomeFragment extends Fragment {
 
     private void handledViews() {
         bottomNavigationView = activity.findViewById(R.id.bv);
+    }
+
+    private List<byte[]> getMenuImages() {
+        List<String> base64Images = null;
+        if (Common.networkConnected(activity)) {
+            String url = Url.URL + "/MenuServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getImageList");
+            String jsonOut = jsonObject.toString();
+            getRanImagesTask = new CommonTask(url, jsonOut);
+            try {
+                String jsonIn = getRanImagesTask.execute().get();
+                Type listType = new TypeToken<List<String>>() {
+                }.getType();
+                base64Images = Common.gson.fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetWork);
+        }
+        return getImages(base64Images);
+    }
+
+    private List<byte[]> getImages(List<String> base64Images) {
+        List<byte[]> images = new ArrayList<>();
+        for (String base64Image : base64Images) {
+            byte[] image = Base64.decode(base64Image, Base64.DEFAULT);
+            images.add(image);
+        }
+
+        return images;
+    }
+
+    private void flipperImages(List<byte[]> images) {
+        for (byte[] image : images) {
+            ImageView imageView = new ImageView(activity);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            imageView.setImageBitmap(bitmap);
+            flipperImage.addView(imageView);
+            flipperImage.setFlipInterval(2500);
+            flipperImage.setAutoStart(true);
+        }
+        flipperImage.setInAnimation(activity, android.R.anim.slide_in_left);
+        flipperImage.setOutAnimation(activity, android.R.anim.slide_out_right);
+        flipperImage.startFlipping();
     }
 }
