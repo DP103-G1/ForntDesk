@@ -144,6 +144,9 @@
         <action
             android:id="@+id/action_selectMenuFragment_to_selectBookingFragment"
             app:destination="@id/selectBookingFragment" />
+        <action
+            android:id="@+id/action_selectMenuFragment_to_selectOrderFragment"
+            app:destination="@id/selectOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgetFragment"
@@ -159,14 +162,15 @@
         android:id="@+id/selectBookingDetailFragment"
         android:name="com.example.ezeats.select.SelectBookingDetailFragment"
         android:label="fragment_select_booking_detail"
-        tools:layout="@layout/fragment_select_booking_detail" >
-        <action
-            android:id="@+id/action_selectBookingDetailFragment_to_selectBookingFragment"
-            app:destination="@id/selectBookingFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_select_booking_detail" />
     <fragment
         android:id="@+id/menuDetailFragment"
         android:name="com.example.ezeats.order.MenuDetailFragment"
         android:label="fragment_menu_detail"
         tools:layout="@layout/fragment_menu_detail" />
+    <fragment
+        android:id="@+id/selectOrderFragment"
+        android:name="com.example.ezeats.select.SelectOrderFragment"
+        android:label="fragment_select_order"
+        tools:layout="@layout/fragment_select_order" />
 </navigation>

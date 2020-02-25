@@ -49,21 +49,22 @@
 
     <ImageView
         android:id="@+id/ivOrderMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="132dp"
+        android:layout_height="146dp"
         android:layout_marginTop="244dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@drawable/a"
+        tools:src="@tools:sample/avatars[15]" />
 
     <TextView
         android:id="@+id/tvOrderMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colortext"
+        android:layout_marginTop="16dp"
         android:text="@string/textOrder"
+        android:textColor="@color/colortext"
         app:layout_constraintEnd_toEndOf="@+id/ivOrderMenu"
         app:layout_constraintStart_toStartOf="@+id/ivOrderMenu"
         app:layout_constraintTop_toBottomOf="@+id/ivOrderMenu" />

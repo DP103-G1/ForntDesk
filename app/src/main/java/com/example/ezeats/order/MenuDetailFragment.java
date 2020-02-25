@@ -42,6 +42,7 @@ public class MenuDetailFragment extends Fragment {
     private CommonTask DetailGetAllTask;
     private ImageTask DetailImageTask;
     private List<MenuDetail> menuDetails;
+    private int memId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class MenuDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         final NavController navigation = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
+        memId = Common.getMemId(activity);
         rvMd = view.findViewById(R.id.rvMd);
 
         rvMd.setLayoutManager(new LinearLayoutManager(activity));
@@ -72,7 +74,8 @@ public class MenuDetailFragment extends Fragment {
         if (Common.networkConnected(activity)) {
             String url = Url.URL + "/MenuDetailServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getAll");
+            jsonObject.addProperty("action", "getAllByMemberId");
+            jsonObject.addProperty("memberId", memId);
             String jsonOut = jsonObject.toString();
             DetailGetAllTask = new CommonTask(url, jsonOut);
             try {
@@ -150,6 +153,7 @@ public class MenuDetailFragment extends Fragment {
         public void onBindViewHolder(@NonNull MenuDetailAdapter.MyviewHolder holder, int position) {
             final MenuDetail menuDetail = menuDetails.get(position);
             String url = Url.URL + "/MenuDetailServlet";
+            int memId = menuDetail.getMEMBER_ID();
             String id = menuDetail.getMENU_ID();
             DetailImageTask = new ImageTask(url, id);
             DetailImageTask.execute();
