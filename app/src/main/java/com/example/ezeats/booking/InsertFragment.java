@@ -249,9 +249,10 @@ public class InsertFragment extends Fragment{
                                       @Override
                                       public void onClick(DialogInterface dialog, int which) {
 
-                                      }
-                                  })
-                                  .show();
+
+                                    }
+                                })
+                                .show();
 
                        }
                    }else {
