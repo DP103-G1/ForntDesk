@@ -2,22 +2,18 @@ package com.example.ezeats.select;
 
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import com.example.ezeats.R;
-import com.example.ezeats.main.Common;
 
 
 public class SelectMenuFragment extends Fragment {
@@ -47,18 +43,8 @@ public class SelectMenuFragment extends Fragment {
         ivOrderMenu = view.findViewById(R.id.ivOrderMenu);
         ivOrderMenu = view.findViewById(R.id.ivOrderMenu);
 
-        ivBooking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_selectMenuFragment_to_selectBookingFragment);
-            }
-        });
-        ivOrderMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_selectMenuFragment_to_selectOrderFragment);
-            }
-        });
+        ivBooking.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_selectMenuFragment_to_selectBookingFragment));
+        ivOrderMenu.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_selectMenuFragment_to_selectOrderFragment));
     }
 
 }

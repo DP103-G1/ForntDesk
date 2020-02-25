@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ezeats.R;
+import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
@@ -54,8 +55,11 @@ public class OrderFragment extends Fragment {
     private Button btChect;
     private Activity activity;
     private CommonTask menuGetAllTask;
+    private CommonTask bookingGetAllTask;
     private ImageTask menuImageTask;
+    private ImageTask bookingImageTask;
     private List<Menu> menus;
+    private List<Booking> bookings;
     private int totalPrice;
     private Set<MenuDetail> menuDetails;
 
@@ -82,7 +86,6 @@ public class OrderFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String tableId = "1";
         final NavController navController = Navigation.findNavController(view);
         menuDetails = new HashSet<>();
         SearchView searchView = view.findViewById(R.id.searchView);
@@ -95,6 +98,7 @@ public class OrderFragment extends Fragment {
         btChect = view.findViewById(R.id.btChect);
         rvMenu.setLayoutManager(new LinearLayoutManager(activity));
         menus = getMenu();
+        bookings = getBooking();
         showMenu(menus);
 
         btBell.setOnClickListener(v -> v.setBackgroundColor(Color.RED));
@@ -111,7 +115,7 @@ public class OrderFragment extends Fragment {
 //                Order order = new Order(Common.getMemId(activity), tableId,
 //                        Integer.parseInt(edTotal.getText().toString()),
 //                        menuDetails.stream().collect(Collectors.toList()));
-                Order order = new Order(Common.getMemId(activity), Integer.parseInt(tableId),
+                Order order = new Order(Common.getMemId(activity),
                         Integer.parseInt(edTotal.getText().toString()),
                         menuDetails.stream().collect(Collectors.toList()));
                 jsonObject.addProperty("order", Common.gson.toJson(order));
@@ -182,6 +186,30 @@ public class OrderFragment extends Fragment {
         return menus;
     }
 
+    private List<Booking> getBooking() {
+        List<Booking> booking = null;
+        if (Common.networkConnected(activity)) {
+            String url2 = Url.URL + "/BookingServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action","getAll");
+            String jsonOut = jsonObject.toString();
+            bookingGetAllTask = new CommonTask(url2, jsonOut);
+            try {
+                String jsonIn = bookingGetAllTask.execute().get();
+                Type ListbookingType = new TypeToken<List<Booking>>() {
+                }.getType();
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                booking = gson.fromJson(jsonIn, ListbookingType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
+        }
+        return booking;
+    }
+
+
     private void showMenu(List<Menu> menus) {
         if (menus == null || menus.isEmpty()) {
             Common.showToast(activity, R.string.textNOMenu);
@@ -228,6 +256,7 @@ public class OrderFragment extends Fragment {
         class MyViewHolder extends RecyclerView.ViewHolder {
             int amount;
             int price;
+            int bkid;
             String id;
             ImageView imageView;
             TextView tvName, tvPrice, tvAmount;
@@ -275,6 +304,10 @@ public class OrderFragment extends Fragment {
             public void setId(String id) {
                 this.id = id;
             }
+
+            public void setBookingId(int bkId) {
+                this.bkid = bkId;
+            }
         }
 
         @Override
@@ -300,7 +333,12 @@ public class OrderFragment extends Fragment {
                 holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
                 holder.setPrice(menu.getFOOD_PRICE());
                 holder.setId(menu.getMENU_ID());
-
+//            final Booking booking = bookings.get(position);
+//            String url2 = Url.URL + "/BookingServlet";
+//            int id2 = booking.getBkId();
+//            bookingImageTask = new ImageTask(url2, String.valueOf(id2));
+//            bookingImageTask.execute();
+//                holder.setBookingId(booking.getBkId());
             }
         }
 

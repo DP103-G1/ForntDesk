@@ -6,34 +6,40 @@ public class Order {
 
 	private int ORD_ID;
 	private int MEMBER_ID;
-	private int TABLE_ID;
-	private boolean TABLE_BELL;
+	private int BK_ID;
 	private int ORD_TOTAL;
 	private boolean ORD_STATUS;
 	private boolean ORD_BILL;
-	private List<MenuDetail> menuDetails; 
-	
-	public Order(int MEMBER_ID, int TABLE_ID, int ORD_TOTAL, List<MenuDetail> menuDetails) {
+	private List<MenuDetail> menuDetails;
+
+	public Order(int MEMBER_ID, int BK_ID, int ORD_TOTAL, List<MenuDetail> menuDetails) {
 		this.MEMBER_ID = MEMBER_ID;
-		this.TABLE_ID = TABLE_ID;
+		this.BK_ID = BK_ID;
 		this.ORD_TOTAL = ORD_TOTAL;
 		this.ORD_STATUS = false;
 		this.ORD_BILL = false;
 		this.menuDetails = menuDetails;
 	}
 
-	public Order(int ORD_ID, int MEMBER_ID, int TABLE_ID, boolean TABLE_BELL, int ORD_TOTAL,
+	public Order(int MEMBER_ID, int ORD_TOTAL, List<MenuDetail> menuDetails) {
+		this.MEMBER_ID = MEMBER_ID;
+		this.ORD_TOTAL = ORD_TOTAL;
+		this.ORD_STATUS = false;
+		this.ORD_BILL = false;
+		this.menuDetails = menuDetails;
+	}
+
+	public Order(int ORD_ID, int MEMBER_ID, int BK_ID, int ORD_TOTAL,
 			boolean ORD_STATUS, boolean ORD_BILL, List<MenuDetail> menuDetails) {
 		this.ORD_ID = ORD_ID;
 		this.MEMBER_ID = MEMBER_ID;
-		this.TABLE_ID = TABLE_ID;
-		this.TABLE_BELL = TABLE_BELL;
+		this.BK_ID = BK_ID;
 		this.ORD_TOTAL = ORD_TOTAL;
 		this.ORD_STATUS = ORD_STATUS;
 		this.ORD_BILL = ORD_BILL;
 		this.menuDetails = menuDetails;
 	}
-	
+
 	public int getORD_ID() {
 		return ORD_ID;
 	}
@@ -50,20 +56,12 @@ public class Order {
 		MEMBER_ID = member_id;
 	}
 
-	public int getTABLE_ID() {
-		return TABLE_ID;
+	public int getBK_ID() {
+		return BK_ID;
 	}
 
-	public void setTABLE_ID(int table_id) {
-		TABLE_ID = table_id;
-	}
-
-	public boolean isTABLE_BELL() {
-		return TABLE_BELL;
-	}
-
-	public void setTABLE_BELL(boolean table_bell) {
-		TABLE_BELL = table_bell;
+	public void setBK_ID(int bk_id) {
+		BK_ID = bk_id;
 	}
 
 	public int getORD_TOTAL() {
@@ -89,7 +87,7 @@ public class Order {
 	public void setORD_BILL(boolean ord_bill) {
 		ORD_BILL = ord_bill;
 	}
-	
+
 	public List<MenuDetail> getMenuDetails() {
 		return menuDetails;
 	}

@@ -4,6 +4,11 @@ package com.example.ezeats.select;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,12 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
@@ -65,13 +64,10 @@ public class SelectOrderFragment extends Fragment {
         showorders(orders);
 
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                showorders(orders);
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            showorders(orders);
+            swipeRefreshLayout.setRefreshing(false);
         });
     }
 
@@ -165,7 +161,7 @@ public class SelectOrderFragment extends Fragment {
             OrderTask = new ImageTask(url, String.valueOf(memberId));
             OrderTask.execute();
             holder.tvOrdid.setText(String.valueOf(order.getORD_ID()));
-            holder.tvTabid.setText(String.valueOf(order.getTABLE_ID()));
+            holder.tvTabid.setText(String.valueOf(order.getBK_ID()));
             holder.tvTotal.setText(String.valueOf(order.getORD_TOTAL()));
             holder.setStatus(order.isORD_BILL());
             if (order.isORD_BILL()) {

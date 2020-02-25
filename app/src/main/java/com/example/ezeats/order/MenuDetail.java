@@ -3,6 +3,7 @@ package com.example.ezeats.order;
 public class MenuDetail {
 
 	private int ORD_ID;
+	private int BK_ID;
 	private int MEMBER_ID;
 	private int TABLE_ID;
 	private String MENU_ID;
@@ -41,17 +42,17 @@ public class MenuDetail {
 		this(0,MEMBER_ID, MENU_ID, FOOD_AMOUNT, false, TOTAL, false);
 	}
 
-	public MenuDetail(int ORD_ID, int TABLE_ID, String MENU_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, boolean FOOD_STATUS) {
+	public MenuDetail(int ORD_ID, String MENU_ID, int TABLE_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, boolean FOOD_STATUS) {
 		this.ORD_ID = ORD_ID;
-		this.TABLE_ID = TABLE_ID;
 		this.MENU_ID = MENU_ID;
+		this.TABLE_ID = TABLE_ID;
 		this.FOOD_NAME = FOOD_NAME;
 		this.FOOD_AMOUNT = FOOD_AMOUNT;
 		this.FOOD_ARRIVAL = FOOD_ARRIVAL;
 		this.TOTAL = TOTAL;
 		this.FOOD_STATUS = FOOD_STATUS;
 	}
-	
+
 
 	@Override
 	public int hashCode() {

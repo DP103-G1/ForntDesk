@@ -7,7 +7,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
-import com.example.ezeats.booking.Booking;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
