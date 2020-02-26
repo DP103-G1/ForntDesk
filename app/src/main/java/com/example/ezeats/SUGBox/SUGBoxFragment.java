@@ -3,7 +3,9 @@ package com.example.ezeats.SUGBox;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,14 +47,15 @@ public class SUGBoxFragment extends Fragment
     private SimpleDateFormat simpleDateFormat;
     private EditText etTopicKeyIn,etPurpose,etSource,etMessage;
     private RatingBar ratingBar;
-    private CommonTask boxTask;
-    private SimpleFormatter simpleFormatter;
+    private int mem_id;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
         activity = getActivity();
+        mem_id = Common.getMemId(activity);
+        Log.d(TAG,String.valueOf(mem_id));
 
     }
 
@@ -67,7 +70,7 @@ public class SUGBoxFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final NavController navController = Navigation.findNavController(view);
-
+//        SharedPreferences pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE,Context.MODE_PRIVATE);
         etTopicKeyIn = view.findViewById(R.id.etTopicKeyIn);
         etPurpose = view.findViewById(R.id.etPurpose);
         etSource = view.findViewById(R.id.etSource);
@@ -80,10 +83,12 @@ public class SUGBoxFragment extends Fragment
         btDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(
+                DatePickerDialog dialog = new DatePickerDialog(
                         activity,
                         SUGBoxFragment.this,
-                        SUGBoxFragment.year,SUGBoxFragment.month,SUGBoxFragment.day).show();
+                        SUGBoxFragment.year,SUGBoxFragment.month,SUGBoxFragment.day);
+                dialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
+                dialog.show();
             }
         });
 
@@ -119,7 +124,8 @@ public class SUGBoxFragment extends Fragment
 
                 if(Common.networkConnected(activity)) {
                     String url = Url.URL + "/BoxServlet";
-                    Box box = new Box(topic, purpose, info, dateTime, satisfied, feed_back);
+
+                    Box box = new Box(mem_id, topic, purpose, info, dateTime, satisfied, feed_back);
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","boxInsert");

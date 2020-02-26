@@ -19,6 +19,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 
 import com.example.ezeats.R;
@@ -50,6 +52,7 @@ public class GamePlayFragment extends Fragment {
         private long startTime2;
         private int timeTaken;
         private int cardsDone;
+        private NavController navController;
 
         private final Handler timerHandler = new Handler();
 
@@ -117,10 +120,12 @@ public class GamePlayFragment extends Fragment {
         builder1.setNegativeButton("離開", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                homeIntent.addCategory(Intent.CATEGORY_HOME);
-                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(homeIntent);
+                //跳出程式方法
+//                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+//                homeIntent.addCategory(Intent.CATEGORY_HOME);
+//                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(homeIntent);
+                navController.popBackStack(R.id.linkFragment, false);
             }
         });
 
@@ -144,6 +149,7 @@ public class GamePlayFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = getActivity();
 }
 
     @Override
@@ -153,6 +159,7 @@ public class GamePlayFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        navController = Navigation.findNavController(view);
         tvTimer = view.findViewById(R.id.tvTimer);
         cards[0] = view.findViewById(R.id.ibMatch1);
         cards[1] = view.findViewById(R.id.ibMatch2);
@@ -177,6 +184,7 @@ public class GamePlayFragment extends Fragment {
                         if (pressed) {
                             tempPhoto.clearColorFilter();
                             if (location.get(tempPhoto.getId()) == location.get(pressCard.getId())) {
+                                cardsDone++;
                                 if (cardsDone == 4) {
                                     openDialog();
                                 }
@@ -186,28 +194,25 @@ public class GamePlayFragment extends Fragment {
                                 timerSleeping = false;
                             }
                             pressed = false;
-                            if (timerSleeping) {
+                            if (timerSleeping)
                                 pressCard = null;
-                            }
+
                         } else {
                             tempPhoto.clearColorFilter();
                             pressCard = tempPhoto;
                             pressed = true;
                         }
                     }
-                    if (timerSleeping) {
+                    if (timerSleeping)
                         for (ImageButton Card: cards) {
                             Card.setClickable(true);
                         }
-                    }
                 }
             });
             startTime = System.currentTimeMillis();
             timerHandler.postDelayed(timerRunnable,0);
         }
     }
-
-
 }
 
 
