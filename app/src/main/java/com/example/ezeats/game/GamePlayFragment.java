@@ -107,27 +107,27 @@ public class GamePlayFragment extends Fragment {
 
     private void openDialog() {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
-        builder1.setMessage("成功");
+        builder1.setMessage("獲得優惠碼" + "\n" + "\n" + "AA123b");
         builder1.setCancelable(false);
 
-        builder1.setPositiveButton("再玩一次", new DialogInterface.OnClickListener() {
+        builder1.setPositiveButton("確定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 OnCreatHelper();
             }
         });
 
-        builder1.setNegativeButton("離開", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                //跳出程式方法
-//                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-//                homeIntent.addCategory(Intent.CATEGORY_HOME);
-//                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(homeIntent);
-                navController.popBackStack(R.id.linkFragment, false);
-            }
-        });
+//        builder1.setNegativeButton("離開", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int id) {
+//                //跳出程式方法
+////                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+////                homeIntent.addCategory(Intent.CATEGORY_HOME);
+////                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+////                startActivity(homeIntent);
+//                navController.popBackStack(R.id.linkFragment, false);
+//            }
+//        });
 
         AlertDialog alert1 = builder1.create();
         alert1.show();
