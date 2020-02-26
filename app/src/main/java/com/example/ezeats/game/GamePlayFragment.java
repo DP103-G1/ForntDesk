@@ -24,6 +24,7 @@ import androidx.navigation.Navigation;
 
 
 import com.example.ezeats.R;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -34,12 +35,10 @@ public class GamePlayFragment extends Fragment {
         private Activity activity;
         private final int cardColor = Color.argb(255,235,203,95);
         private final int[] imageId = {R.drawable.banana,R.drawable.buger,R.drawable.drink,R.drawable.pizza};
-        ImageView ivHead;
-        Button btCode;
         private ImageButton cards[] = new ImageButton[8];
         private ImageButton pressCard;
         private ImageButton tempPhoto;
-        private TextView tvTimer,tvUserName2;
+        private TextView tvTimer;
 
         private HashMap<Integer,Integer> location = new HashMap<>();
 
@@ -47,7 +46,7 @@ public class GamePlayFragment extends Fragment {
 
         private boolean pressed;
         private boolean timerSleeping;
-
+        private boolean timesOut;
         private long startTime;
         private long startTime2;
         private int timeTaken;
@@ -110,28 +109,53 @@ public class GamePlayFragment extends Fragment {
         builder1.setMessage("獲得優惠碼" + "\n" + "\n" + "AA123b");
         builder1.setCancelable(false);
 
-        builder1.setPositiveButton("確定", new DialogInterface.OnClickListener() {
+        builder1.setNegativeButton("確定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                OnCreatHelper();
+                //跳出程式方法
+//                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+//                homeIntent.addCategory(Intent.CATEGORY_HOME);
+//                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(homeIntent);
+                navController.popBackStack(R.id.linkFragment, false);
             }
         });
-
-//        builder1.setNegativeButton("離開", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int id) {
-//                //跳出程式方法
-////                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-////                homeIntent.addCategory(Intent.CATEGORY_HOME);
-////                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-////                startActivity(homeIntent);
-//                navController.popBackStack(R.id.linkFragment, false);
-//            }
-//        });
 
         AlertDialog alert1 = builder1.create();
         alert1.show();
     }
+
+//    private void timesOutDialog(){
+//            AlertDialog.Builder builder2 = new AlertDialog.Builder(activity);
+//            builder2.setMessage("挑戰失敗" + "\n" + "\n" + "再玩一次嗎？");
+//            builder2.setCancelable(false);
+//
+//        builder2.setPositiveButton("再玩一次", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int id) {
+//                OnCreatHelper();
+//            }
+//        });
+//
+//        builder2.setNegativeButton("離開", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int id) {
+//                navController.popBackStack(R.id.linkFragment,false);
+//            }
+//        });
+//
+//        AlertDialog alert2 = builder2.create();
+//        alert2.show();
+//
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    builder2.show();
+//                                }
+//                            },6000
+//        );
+//    }
 
 
         public static int[] getRandomNumbers(){
@@ -212,6 +236,7 @@ public class GamePlayFragment extends Fragment {
             startTime = System.currentTimeMillis();
             timerHandler.postDelayed(timerRunnable,0);
         }
+
     }
 }
 
