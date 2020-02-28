@@ -140,5 +140,6 @@
     <string name="textRegister">註冊</string>
     <string name="textSelectOrder">訂單查詢</string>
     <string name="textNoOrder">沒有訂單</string>
+    <string name="textSeclectMenuDetail">餐點明細</string>
 
 </resources>

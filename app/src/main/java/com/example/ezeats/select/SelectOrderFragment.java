@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -158,8 +159,8 @@ public class SelectOrderFragment extends Fragment {
             Order order = orders.get(position);
             String url = Url.URL + "/OrderServlet";
             int memberId = order.getMEMBER_ID();
-            OrderTask = new ImageTask(url, String.valueOf(memberId));
-            OrderTask.execute();
+//            OrderTask = new ImageTask(url, String.valueOf(memberId));
+//            OrderTask.execute();
             holder.tvOrdid.setText(String.valueOf(order.getORD_ID()));
             holder.tvTabid.setText(String.valueOf(order.getBK_ID()));
             holder.tvTotal.setText(String.valueOf(order.getORD_TOTAL()));
@@ -169,6 +170,14 @@ public class SelectOrderFragment extends Fragment {
             } else {
                 holder.tvBill.setText("尚未結帳");
             }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("order",order.getORD_ID());
+                    Navigation.findNavController(v).navigate(R.id.action_selectOrderFragment_to_selectMenuDetailFragment,bundle);
+                }
+            });
         }
 
     }
