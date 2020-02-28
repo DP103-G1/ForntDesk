@@ -70,7 +70,6 @@ public class SUGBoxFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final NavController navController = Navigation.findNavController(view);
-//        SharedPreferences pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE,Context.MODE_PRIVATE);
         etTopicKeyIn = view.findViewById(R.id.etTopicKeyIn);
         etPurpose = view.findViewById(R.id.etPurpose);
         etSource = view.findViewById(R.id.etSource);
