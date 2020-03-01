@@ -1,6 +1,8 @@
 package com.example.ezeats.order;
 
-public class MenuDetail {
+import java.io.Serializable;
+
+public class MenuDetail implements Serializable{
 
 	private int ORD_ID;
 	private int BK_ID;

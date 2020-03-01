@@ -1,10 +1,16 @@
 package com.example.ezeats.order;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
 
 	private int ORD_ID;
+	private String MENU_ID;
+	private String FOOD_NAME;
+	private int FOOD_AMOUNT;
+	private boolean FOOD_ARRIVAL;
+	private int TOTAL;
 	private int MEMBER_ID;
 	private int BK_ID;
 	private int ORD_TOTAL;
@@ -38,6 +44,54 @@ public class Order {
 		this.ORD_STATUS = ORD_STATUS;
 		this.ORD_BILL = ORD_BILL;
 		this.menuDetails = menuDetails;
+	}
+
+	public Order(String menuId, String foodName, int foodAmount, boolean foodArrival, int total ) {
+		this.MENU_ID = menuId;
+		this.FOOD_NAME = foodName;
+		this.FOOD_AMOUNT = foodAmount;
+		this.FOOD_ARRIVAL = foodArrival;
+		this.TOTAL = total;
+	}
+
+	public String getMENU_ID() {
+		return MENU_ID;
+	}
+
+	public void setMENU_ID(String MENU_ID) {
+		this.MENU_ID = MENU_ID;
+	}
+
+	public String getFOOD_NAME() {
+		return FOOD_NAME;
+	}
+
+	public void setFOOD_NAME(String FOOD_NAME) {
+		this.FOOD_NAME = FOOD_NAME;
+	}
+
+	public int getFOOD_AMOUNT() {
+		return FOOD_AMOUNT;
+	}
+
+	public void setFOOD_AMOUNT(int FOOD_AMOUNT) {
+		this.FOOD_AMOUNT = FOOD_AMOUNT;
+	}
+
+	public boolean isFOOD_ARRIVAL() {
+		return FOOD_ARRIVAL;
+	}
+
+	public void setFOOD_ARRIVAL(boolean FOOD_ARRIVAL) {
+		this.FOOD_ARRIVAL = FOOD_ARRIVAL;
+	}
+
+	public int getTOTAL() {
+		return TOTAL;
+	}
+
+	public void setTOTAL(int TOTAL) {
+		this.TOTAL = TOTAL;
 	}
 
 	public int getORD_ID() {

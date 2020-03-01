@@ -167,6 +167,7 @@ public class MenuDetailFragment extends Fragment {
                 holder.tvStatus.setText("未送達");
             }
 
+
         }
     }
 

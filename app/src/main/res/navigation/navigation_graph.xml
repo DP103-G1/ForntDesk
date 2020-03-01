@@ -114,7 +114,8 @@
         android:id="@+id/loginFragment"
         android:name="com.example.ezeats.member.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login"
+        app:startDestination="@id/action_loginFragment_to_registeredFragment">
         <action
             android:id="@+id/action_loginFragment_to_registeredFragment"
             app:destination="@id/registeredFragment" />
@@ -172,5 +173,14 @@
         android:id="@+id/selectOrderFragment"
         android:name="com.example.ezeats.select.SelectOrderFragment"
         android:label="fragment_select_order"
-        tools:layout="@layout/fragment_select_order" />
+        tools:layout="@layout/fragment_select_order" >
+        <action
+            android:id="@+id/action_selectOrderFragment_to_selectMenuDetailFragment"
+            app:destination="@id/selectMenuDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectMenuDetailFragment"
+        android:name="com.example.ezeats.select.SelectMenuDetailFragment"
+        android:label="fragment_select_menu_detail"
+        tools:layout="@layout/fragment_select_menu_detail" />
 </navigation>
