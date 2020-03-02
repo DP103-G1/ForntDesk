@@ -27,6 +27,20 @@
     <string name="textBookingSelect">訂位選取</string>
     <string name="textMealsSelect">請選餐點t</string>
 
+    <string-array name="textMounth">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
     <string-array name="textTimeArray">
         <item>請選取</item>
         <item>0900</item>
@@ -54,6 +68,39 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+    </string-array>
+    <string-array name="textDay">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
     </string-array>
 
     <string name="textNoNetwork">網路連線無效</string>
@@ -141,5 +188,6 @@
     <string name="textSelectOrder">訂單查詢</string>
     <string name="textNoOrder">沒有訂單</string>
     <string name="textSeclectMenuDetail">餐點明細</string>
+    <string name="textBill">結帳</string>
 
 </resources>

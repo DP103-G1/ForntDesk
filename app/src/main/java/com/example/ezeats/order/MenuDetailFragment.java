@@ -4,21 +4,20 @@ package com.example.ezeats.order;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
@@ -32,12 +31,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
 public class MenuDetailFragment extends Fragment {
     private static final String TAG = "TAG_MenuDetailFragment";
     private RecyclerView rvMd;
+    private Button btBill;
     private Activity activity;
     private CommonTask DetailGetAllTask;
     private ImageTask DetailImageTask;
@@ -63,6 +62,8 @@ public class MenuDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         memId = Common.getMemId(activity);
         rvMd = view.findViewById(R.id.rvMd);
+        btBill = view.findViewById(R.id.btBill);
+        btBill.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_menuDetailFragment_to_billFragment));
 
         rvMd.setLayoutManager(new LinearLayoutManager(activity));
         menuDetails = getMenuDetail();
