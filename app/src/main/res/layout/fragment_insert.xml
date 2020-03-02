@@ -113,14 +113,14 @@
                 android:textColor="@color/colortext" />
 
             <Spinner
-                android:id="@+id/spMou"
+                android:id="@+id/spTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:entries="@array/textTimeArray"
-                android:popupBackground="@color/browser_actions_title_color"
+                android:popupBackground="#494B49"
                 android:textColor="@color/colortext"
                 android:theme="@style/MyEditText" />
 
@@ -141,6 +141,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
+                android:popupBackground="#494B49"
                 android:textColor="@color/colortext"
                 android:theme="@style/MyEditText" />
 
@@ -162,6 +163,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:entries="@array/textAdultArray"
+                android:popupBackground="#494B49"
                 android:textColor="@color/colortext"
                 android:theme="@style/MyEditText" />
 
@@ -183,8 +185,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colortext"
                 android:entries="@array/textChildArray"
+                android:popupBackground="#494B49"
                 android:theme="@style/MyEditText" />
 
 

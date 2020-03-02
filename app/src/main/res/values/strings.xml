@@ -108,7 +108,7 @@
     <string name="textNoNetwork">網路連線無效</string>
     <string name="textNOMenu">無餐點</string>
     <string name="textNOFood">未點選餐點</string>
-    <string name="textTable">桌位</string>
+    <string name="textTable">桌位:</string>
     <string name="textNoSelectBooking">未查詢到訂位</string>
     <string name="textNoSelectBookingFound">未查詢到訂位</string>
     <string name="textInputEmail">請輸入E-mail</string>
