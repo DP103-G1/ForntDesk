@@ -3,7 +3,6 @@ package com.example.ezeats.order;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,7 +33,6 @@ public class BillFragment extends Fragment {
     private EditText edName, edNumber, edLast;
     private Button btBillCheck;
     private Spinner spMou, spDay;
-    private CommonTask BillTadk;
     private int mem_id;
 
     @Override
@@ -126,13 +124,8 @@ public class BillFragment extends Fragment {
                     } else {
                         new AlertDialog.Builder(activity)
                                 .setTitle(R.string.textBillOK)
-                                .setMessage("總金額" + "0")
-                                .setPositiveButton(R.string.textYes, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        navigation.navigate(R.id.action_billFragment_to_homeFragment);
-                                    }
-                                })
+                                .setMessage("總金額" + " " + "0")
+                                .setPositiveButton(R.string.textYes, (dialog, which) -> navigation.navigate(R.id.action_billFragment_to_homeFragment))
                                 .show();
                     }
                 }else {

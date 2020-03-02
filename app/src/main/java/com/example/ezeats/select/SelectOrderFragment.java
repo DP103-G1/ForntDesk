@@ -170,13 +170,10 @@ public class SelectOrderFragment extends Fragment {
             } else {
                 holder.tvBill.setText("尚未結帳");
             }
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("order",order.getORD_ID());
-                    Navigation.findNavController(v).navigate(R.id.action_selectOrderFragment_to_selectMenuDetailFragment,bundle);
-                }
+            holder.itemView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putInt("order",order.getORD_ID());
+                Navigation.findNavController(v).navigate(R.id.action_selectOrderFragment_to_selectMenuDetailFragment,bundle);
             });
         }
 

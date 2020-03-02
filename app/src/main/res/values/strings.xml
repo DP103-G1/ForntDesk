@@ -200,5 +200,7 @@
     <string name="textMonthDay">請選擇日期</string>
     <string name="textNoBill">結帳失敗</string>
     <string name="textBillOK">付費成功</string>
+    <string name="textdisok">優惠碼輸入成功</string>
+    <string name="textdiserror">優惠碼輸入錯誤</string>
 
 </resources>

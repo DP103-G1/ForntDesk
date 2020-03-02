@@ -157,7 +157,8 @@ public class SelectMenuDetailFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Navigation.findNavController(v).navigate(R.id.action_selectMenuDetailFragment_to_menuDetailFragment);
+                    if(!selectMenuDetail.isFOOD_ARRIVAL() || !selectMenuDetail.isORD_BILL())
+                        Navigation.findNavController(v).navigate(R.id.action_selectMenuDetailFragment_to_menuDetailFragment);
                 }
             });
         }

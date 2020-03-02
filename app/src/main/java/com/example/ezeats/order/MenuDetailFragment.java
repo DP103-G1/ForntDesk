@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,8 @@ public class MenuDetailFragment extends Fragment {
     private static final String TAG = "TAG_MenuDetailFragment";
     private RecyclerView rvMd;
     private Button btBill;
+    private TextView tvTotal;
+    private EditText edDiscount;
     private Activity activity;
     private CommonTask DetailGetAllTask;
     private ImageTask DetailImageTask;
@@ -61,11 +64,27 @@ public class MenuDetailFragment extends Fragment {
         final NavController navigation = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
         memId = Common.getMemId(activity);
+        tvTotal = view.findViewById(R.id.tvTotal);
+        edDiscount = view.findViewById(R.id.edDiscount);
+
         rvMd = view.findViewById(R.id.rvMd);
         btBill = view.findViewById(R.id.btBill);
-        btBill.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_menuDetailFragment_to_billFragment));
+
+
+        btBill.setOnClickListener(v -> {
+            String dis = edDiscount.getText().toString().trim();
+            if (dis.equals("AA123b")){
+                Common.showToast(getActivity(),R.string.textdisok);
+            } else if(dis.length() != 0){
+                edDiscount.setError(getString(R.string.textdiserror));
+                return;
+            }
+                Navigation.findNavController(v).navigate(R.id.action_menuDetailFragment_to_billFragment);
+        });
 
         rvMd.setLayoutManager(new LinearLayoutManager(activity));
+
+
         menuDetails = getMenuDetail();
         showMenuDetail(menuDetails);
     }
@@ -162,10 +181,12 @@ public class MenuDetailFragment extends Fragment {
             holder.tvAmount.setText(String.valueOf(menuDetail.getFOOD_AMOUNT()));
             holder.tvPrice.setText(String.valueOf(menuDetail.getTOTAL()));
             holder.setStatus(menuDetail.isFOOD_ARRIVAL());
-            if (menuDetail.isFOOD_ARRIVAL()) {
+            if (menuDetail.isFOOD_ARRIVAL() && menuDetail.isFOOD_STATUS()) {
                 holder.tvStatus.setText("已送達");
-            } else {
+            } else if(!menuDetail.isFOOD_ARRIVAL() && menuDetail.isFOOD_STATUS()){
                 holder.tvStatus.setText("未送達");
+            } else {
+                holder.tvStatus.setText("製作中");
             }
 
 
