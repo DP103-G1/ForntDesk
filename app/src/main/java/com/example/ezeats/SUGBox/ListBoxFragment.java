@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -108,13 +109,17 @@ public class ListBoxFragment extends Fragment {
 
         class MyViewHolder extends RecyclerView.ViewHolder{
             ConstraintLayout expandedLayout;
-            TextView tvNumber,tvQuestion,tvDetail;
+            LinearLayout reMessageLinearlayout;
+            TextView tvNumber,tvQuestion,tvDetail,tvIsReply,tvReplyContent;
 
          public MyViewHolder(View itemView){
                 super(itemView);
                 tvNumber = itemView.findViewById(R.id.tvNumber);
                 tvQuestion = itemView.findViewById(R.id.tvQuestion);
                 tvDetail = itemView.findViewById(R.id.tvDetail);
+                tvIsReply = itemView.findViewById(R.id.tvIsReply);
+                tvReplyContent = itemView.findViewById(R.id.tvReplyContent);
+                reMessageLinearlayout = itemView.findViewById(R.id.reMessageLinearlayout);
                 expandedLayout = itemView.findViewById(R.id.ExpandedLayout);//給他連線啊！
 
                 tvQuestion.setOnClickListener(new View.OnClickListener() {
@@ -144,10 +149,15 @@ public class ListBoxFragment extends Fragment {
         public void onBindViewHolder(@NonNull BoxAdapter.MyViewHolder holder, int position) {
             final Box box = boxes.get(position);
             String url = Url.URL + "/BoxServlet";
-            int id = box.getId();
             holder.tvNumber.setText(String.valueOf(box.getId()));
             holder.tvQuestion.setText(box.getTopic());
             holder.tvDetail.setText(box.getFeed_back());
+            if(box.getReply() != null){
+                holder.reMessageLinearlayout.setVisibility(View.VISIBLE);
+                holder.tvReplyContent.setText(box.getReply());
+            }else {
+                holder.reMessageLinearlayout.setVisibility(View.GONE);
+            }
 
             boolean isExpanded = boxes.get(position).isExpanded();
             holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
