@@ -148,7 +148,7 @@
     <string name="btBox">意見箱</string>
     <string name="tvIntroduce">簡介</string>
     <string name="tvQA"><![CDATA[Q&A]]></string>
-    <string name="tvNumber">Q1.</string>
+    <string name="tvNumber">1</string>
     <string name="tvMainTitle">標題</string>
     <string name="tvHowTo">操作導引</string>
     <string name="tvContact">聯絡我們</string>
@@ -162,7 +162,7 @@
     <string name="etPurpose">輸入用餐目的</string>
     <string name="etSource">請輸入得知來源</string>
     <string name="etContent">請輸入意見</string>
-    <string name="tvheadline">我是標題</string>
+    <string name="tvheadline">意見</string>
     <string name="btDatePicker" translatable="false">請選擇用餐日期</string>
     <string name="tvShowDate">選擇的時間</string>
     <string name="tvRating">喜歡EZeat嗎？</string>
@@ -189,6 +189,9 @@
     <string name="textRegister">註冊</string>
     <string name="textSelectOrder">訂單查詢</string>
     <string name="textNoOrder">沒有訂單</string>
+    <string name="tvIsReply">回覆狀態</string>
+    <string name="tvReplyContent">回覆</string>
+    <string name="tvNo">No.</string>
     <string name="textSeclectMenuDetail">餐點明細</string>
     <string name="textBill">結帳</string>
     <string name="textNoName">請輸入名字</string>
