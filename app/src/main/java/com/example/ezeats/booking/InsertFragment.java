@@ -3,14 +3,12 @@ package com.example.ezeats.booking;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.Printer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +18,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,8 +44,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 
 
 public class InsertFragment extends Fragment{
@@ -112,7 +107,7 @@ public class InsertFragment extends Fragment{
             }
         });
 
-        spTime = view.findViewById(R.id.spTime);
+        spTime = view.findViewById(R.id.spMou);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_dropdown_item_1line,timeArray);
         bkDate = null;

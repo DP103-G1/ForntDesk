@@ -28,6 +28,7 @@
     <string name="textMealsSelect">請選餐點t</string>
 
     <string-array name="textMounth">
+        <item>月</item>
         <item>01</item>
         <item>02</item>
         <item>03</item>
@@ -70,6 +71,7 @@
         <item>4</item>
     </string-array>
     <string-array name="textDay">
+        <item>日</item>
         <item>01</item>
         <item>02</item>
         <item>03</item>
@@ -189,5 +191,11 @@
     <string name="textNoOrder">沒有訂單</string>
     <string name="textSeclectMenuDetail">餐點明細</string>
     <string name="textBill">結帳</string>
+    <string name="textNoName">請輸入名字</string>
+    <string name="textNoNumber">請輸入正確卡號</string>
+    <string name="textNoLast">請輸入正確數字</string>
+    <string name="textMonthDay">請選擇日期</string>
+    <string name="textNoBill">結帳失敗</string>
+    <string name="textBillOK">付費成功</string>
 
 </resources>
