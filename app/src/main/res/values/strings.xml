@@ -27,6 +27,21 @@
     <string name="textBookingSelect">訂位選取</string>
     <string name="textMealsSelect">請選餐點t</string>
 
+    <string-array name="textMounth">
+        <item>月</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
     <string-array name="textTimeArray">
         <item>請選取</item>
         <item>0900</item>
@@ -54,6 +69,40 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
+    </string-array>
+    <string-array name="textDay">
+        <item>日</item>
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
     </string-array>
 
     <string name="textNoNetwork">網路連線無效</string>
@@ -99,7 +148,7 @@
     <string name="btBox">意見箱</string>
     <string name="tvIntroduce">簡介</string>
     <string name="tvQA"><![CDATA[Q&A]]></string>
-    <string name="tvNumber">Q1.</string>
+    <string name="tvNumber">1</string>
     <string name="tvMainTitle">標題</string>
     <string name="tvHowTo">操作導引</string>
     <string name="tvContact">聯絡我們</string>
@@ -113,7 +162,7 @@
     <string name="etPurpose">輸入用餐目的</string>
     <string name="etSource">請輸入得知來源</string>
     <string name="etContent">請輸入意見</string>
-    <string name="tvheadline">我是標題</string>
+    <string name="tvheadline">意見</string>
     <string name="btDatePicker" translatable="false">請選擇用餐日期</string>
     <string name="tvShowDate">選擇的時間</string>
     <string name="tvRating">喜歡EZeat嗎？</string>
@@ -140,6 +189,16 @@
     <string name="textRegister">註冊</string>
     <string name="textSelectOrder">訂單查詢</string>
     <string name="textNoOrder">沒有訂單</string>
+    <string name="tvIsReply">回覆狀態</string>
+    <string name="tvReplyContent">回覆</string>
+    <string name="tvNo">No.</string>
     <string name="textSeclectMenuDetail">餐點明細</string>
+    <string name="textBill">結帳</string>
+    <string name="textNoName">請輸入名字</string>
+    <string name="textNoNumber">請輸入正確卡號</string>
+    <string name="textNoLast">請輸入正確數字</string>
+    <string name="textMonthDay">請選擇日期</string>
+    <string name="textNoBill">結帳失敗</string>
+    <string name="textBillOK">付費成功</string>
 
 </resources>

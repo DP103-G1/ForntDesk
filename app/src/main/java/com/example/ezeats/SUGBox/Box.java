@@ -9,6 +9,7 @@ public class Box {
     private String date;
     private float satisfied;
     private String feed_back;
+    private String reply;
     private boolean expanded;
 
     public Box(int member, String topic, String purpose, String info, String date, float satisfied, String feed_back) {
@@ -21,7 +22,8 @@ public class Box {
         this.feed_back = feed_back;
     }
 
-    public Box(int id, int member, String purpose, String info, String date, float satisfied, String feed_back) {
+
+    public Box(int id, int member, String purpose, String info, String date, float satisfied, String feed_back, String reply) {
         this.id = id;
         this.member = member;
         this.purpose = purpose;
@@ -29,16 +31,18 @@ public class Box {
         this.date = date;
         this.satisfied = satisfied;
         this.feed_back = feed_back;
+        this.reply = reply;
         this.expanded = false;
     }
 
-    public Box(String topic, String purpose, String info, String dateTime, float satisfied, String feed_back) {
+    public Box(String topic, String purpose, String info, String dateTime, float satisfied, String feed_back,String reply) {
         this.topic = topic;
         this.purpose = purpose;
         this.info = info;
         this.date = dateTime;
         this.satisfied = satisfied;
         this.feed_back = feed_back;
+        this.reply = reply;
         this.expanded = false;
     }
 
@@ -106,6 +110,10 @@ public class Box {
         this.feed_back = feed_back;
     }
 
+    public String getReply() { return reply; }
+
+    public void setReply(String reply) { this.reply = reply; }
+
     public void  setExpanded(boolean expanded){this.expanded = expanded;}
 
     public boolean isExpanded(){return expanded;}
@@ -121,6 +129,7 @@ public class Box {
                 ", date='" + date + '\'' +
                 ", satisfied='" + satisfied + '\'' +
                 ", feed_back='" + feed_back + '\'' +
+                ", reply='" + reply + '\'' +
                 ", expanded='"+expanded + '\'' +
                 '}';
     }

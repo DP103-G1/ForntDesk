@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -153,6 +154,12 @@ public class SelectMenuDetailFragment extends Fragment {
             } else {
                 holder.tvStatus.setText("未送達");
             }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Navigation.findNavController(v).navigate(R.id.action_selectMenuDetailFragment_to_menuDetailFragment);
+                }
+            });
         }
     }
 

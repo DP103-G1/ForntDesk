@@ -57,7 +57,6 @@ public class OrderFragment extends Fragment {
     private CommonTask menuGetAllTask;
     private CommonTask bookingGetAllTask;
     private ImageTask menuImageTask;
-    private ImageTask bookingImageTask;
     private List<Menu> menus;
     private List<Booking> bookings;
     private int totalPrice;
@@ -305,9 +304,9 @@ public class OrderFragment extends Fragment {
                 this.id = id;
             }
 
-            public void setBookingId(int bkId) {
-                this.bkid = bkId;
-            }
+//            public void setBookingId(int bkId) {
+//                this.bkid = bkId;
+//            }
         }
 
         @Override
@@ -333,12 +332,6 @@ public class OrderFragment extends Fragment {
                 holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
                 holder.setPrice(menu.getFOOD_PRICE());
                 holder.setId(menu.getMENU_ID());
-//            final Booking booking = bookings.get(position);
-//            String url2 = Url.URL + "/BookingServlet";
-//            int id2 = booking.getBkId();
-//            bookingImageTask = new ImageTask(url2, String.valueOf(id2));
-//            bookingImageTask.execute();
-//                holder.setBookingId(booking.getBkId());
             }
         }
 
