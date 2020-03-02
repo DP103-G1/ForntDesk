@@ -120,6 +120,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:entries="@array/textTimeArray"
+                android:popupBackground="#494B49"
                 android:textColor="@color/colortext"
                 android:theme="@style/MyEditText" />
 
@@ -140,6 +141,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
+                android:popupBackground="#494B49"
                 android:textColor="@color/colortext"
                 android:theme="@style/MyEditText" />
 
@@ -161,6 +163,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:entries="@array/textAdultArray"
+                android:popupBackground="#494B49"
                 android:textColor="@color/colortext"
                 android:theme="@style/MyEditText" />
 
@@ -182,8 +185,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/colortext"
                 android:entries="@array/textChildArray"
+                android:popupBackground="#494B49"
                 android:theme="@style/MyEditText" />
 
 

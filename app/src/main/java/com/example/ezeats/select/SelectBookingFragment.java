@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +45,7 @@ public class SelectBookingFragment extends Fragment {
     private int memId;
 
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public class SelectBookingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         memId = Common.getMemId(activity);
         swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
         rvSelectBooking = view.findViewById(R.id.rvSO);
@@ -114,6 +117,7 @@ public class SelectBookingFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull SelectBookingHolder holder, int position) {
+
             Booking booking = selectBooking.get(position);
             String url = Url.URL + "/BookingServlet";
             int memberId = booking.getMemberId();
@@ -127,10 +131,7 @@ public class SelectBookingFragment extends Fragment {
                 bundle.putSerializable("booking" ,booking);
                 Navigation.findNavController(v).navigate(R.id.action_selectBookingFragment_to_selectBookingDetailFragment,bundle);
             });
-
-
         }
-
     }
 
     private List<Booking> getSelectBooking() {
