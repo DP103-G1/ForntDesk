@@ -143,5 +143,6 @@
     <string name="tvIsReply">回覆狀態</string>
     <string name="tvReplyContent">回覆</string>
     <string name="tvNo">No.</string>
+    <string name="textSeclectMenuDetail">餐點明細</string>
 
 </resources>
