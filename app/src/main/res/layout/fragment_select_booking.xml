@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".select.SelectBookingFragment">
-
+<!--
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarOrder"
         android:layout_width="match_parent"
@@ -38,7 +38,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
-
+-->
+<!--
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
@@ -48,16 +49,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarOrder">
-
+-->
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="399dp"
+            android:layout_height="550dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvSO"
+                android:id="@+id/rvSelectBooking"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+ <!--  </LinearLayout> -->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -106,7 +106,7 @@ public class InsertFragment extends Fragment {
             }
         });
 
-        spTime = view.findViewById(R.id.spMou);
+        spTime = view.findViewById(R.id.spTime);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.myspinner, timeArray);
         arrayAdapter.setDropDownViewResource(R.layout.myspinner);

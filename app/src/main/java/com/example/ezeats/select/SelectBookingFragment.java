@@ -64,7 +64,7 @@ public class SelectBookingFragment extends Fragment {
 
         memId = Common.getMemId(activity);
         swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
-        rvSelectBooking = view.findViewById(R.id.rvSO);
+        rvSelectBooking = view.findViewById(R.id.rvSelectBooking);
         rvSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
         selectBooking = getSelectBooking();
         showSelectBooking(selectBooking);
@@ -129,7 +129,7 @@ public class SelectBookingFragment extends Fragment {
             holder.itemView.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("booking" ,booking);
-                Navigation.findNavController(v).navigate(R.id.action_selectBookingFragment_to_selectBookingDetailFragment,bundle);
+                Navigation.findNavController(v).navigate(R.id.selectBookingDetailFragment,bundle);
             });
         }
     }

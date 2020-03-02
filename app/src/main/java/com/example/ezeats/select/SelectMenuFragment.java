@@ -17,16 +17,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.ezeats.R;
 import com.example.ezeats.order.OrderFragment;
+import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 
-public class SelectMenuFragment extends Fragment implements ViewPager.OnPageChangeListener,TabLayout.OnTabSelectedListener{
+public class SelectMenuFragment extends Fragment {
     private static final String TAG = "TAG_SelectFragment";
     private Activity activity;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private SelectBookingFragment selectBookingFragment = new SelectBookingFragment();
-    private SelectOrderFragment selectOrderFragment = new SelectOrderFragment();
+    private MySelectAdapter pagerAdapter;
+
+
 
 //    private ImageView ivBooking,ivOrderMenu;
 
@@ -35,7 +37,7 @@ public class SelectMenuFragment extends Fragment implements ViewPager.OnPageChan
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-
+        activity.setTitle("查詢");
 
 
     }
@@ -50,30 +52,14 @@ public class SelectMenuFragment extends Fragment implements ViewPager.OnPageChan
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewPager = view.findViewById(R.id.viewPager);
+        pagerAdapter = new MySelectAdapter(activity,getChildFragmentManager());
         tabLayout = view.findViewById(R.id.tabLayout);
+        viewPager = view.findViewById(R.id.viewPager);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
-        viewPager.addOnPageChangeListener(this);
-        tabLayout.addOnTabSelectedListener(this);
-        viewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
-            @Override
-            public int getCount() {
-                return 2;
-            }
 
-            @NonNull
-            @Override
-            public Fragment getItem(int position) {
-                switch (position){
-                    case 0:
-                        return selectBookingFragment;
-                    case 1:
-                        return selectOrderFragment;
-                }
-                return null;
-            }
 
-        });
     }
 
 
@@ -87,35 +73,6 @@ public class SelectMenuFragment extends Fragment implements ViewPager.OnPageChan
 
 
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        tabLayout.getTabAt(position);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
 
 
 }

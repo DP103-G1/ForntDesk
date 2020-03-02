@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -62,10 +63,18 @@ public class BillFragment extends Fragment {
         btBillCheck = view.findViewById(R.id.btBillCheck);
 
         spMou = view.findViewById(R.id.spMou);
+        String[] mounthArray = getResources().getStringArray(R.array.textMounth);
+        ArrayAdapter<String> mounthAdapter = new ArrayAdapter<>(activity,R.layout.myspinner,mounthArray);
+        mounthAdapter.setDropDownViewResource(R.layout.myspinner);
+        spMou.setAdapter(mounthAdapter);
         spMou.setSelection(0, true);
         spMou.setOnItemSelectedListener(listener);
 
         spDay = view.findViewById(R.id.spDay);
+        String[] dayArray = getResources().getStringArray(R.array.textDay);
+        ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(activity,R.layout.myspinner,dayArray);
+        dayAdapter.setDropDownViewResource(R.layout.myspinner);
+        spDay.setAdapter(dayAdapter);
         spDay.setSelection(0, true);
         spDay.setOnItemSelectedListener(listener);
 
