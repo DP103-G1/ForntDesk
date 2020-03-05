@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 
 public class Common {
     public static final String MEMBER_PREFRENCE = "member";
+    public static final String NUMBER = "discount";
     public static final String REGEX_EMAIL = "^\\w+((-\\w+)|(.\\w+))*@[A-Za-z0-9]+((\\.|\\-)[A-Za-z0-9]+)*\\.[A-Za-z]+$";
     public static final String REGEX_PHONE = "^09[0-9]{8}$";
     public static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -27,6 +28,11 @@ public class Common {
     public static int getMemId(Context context) {
         SharedPreferences pref = context.getSharedPreferences(MEMBER_PREFRENCE, Context.MODE_PRIVATE);
         return pref.getInt("memId",0);
+    }
+
+    public static String getDis(Context context){
+        SharedPreferences pref = context.getSharedPreferences(NUMBER, Context.MODE_PRIVATE);
+        return pref.getString("number",null);
     }
 
     public static void showToast(Context context, int messageResId) {

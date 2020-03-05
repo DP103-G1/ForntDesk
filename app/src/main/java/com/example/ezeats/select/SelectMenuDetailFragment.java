@@ -22,7 +22,6 @@ import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.order.Order;
 import com.example.ezeats.task.CommonTask;
-import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -39,7 +38,6 @@ public class SelectMenuDetailFragment extends Fragment {
     private RecyclerView rvSmd;
     private Activity activity;
     private CommonTask DetailGetAllTask;
-    private ImageTask DetailImageTask;
     private List<Order> selectMenuDetails;
     private int memId;
     private int ordId;
@@ -99,13 +97,12 @@ public class SelectMenuDetailFragment extends Fragment {
     private class SelectMenuDetailAdapter extends RecyclerView.Adapter<SelectMenuDetailAdapter.MyViewHolder> {
         private LayoutInflater layoutInflater;
         private List<Order> selectMenuDetails;
-
         SelectMenuDetailAdapter(Context context, List<Order> selectMenuDetails) {
             layoutInflater = LayoutInflater.from(context);
             this.selectMenuDetails = selectMenuDetails;
         }
 
-        public void setSelectMenuDetails(List<Order> selectMenuDetails) {
+        void setSelectMenuDetails(List<Order> selectMenuDetails) {
             this.selectMenuDetails = selectMenuDetails;
         }
 
@@ -121,7 +118,7 @@ public class SelectMenuDetailFragment extends Fragment {
                 tvStatus = itemView.findViewById(R.id.tvStatus);
             }
 
-            public void setStatus(boolean foodArrival) {
+            void setStatus(boolean foodArrival) {
                 this.foodArrival = foodArrival;
             }
         }
@@ -141,10 +138,6 @@ public class SelectMenuDetailFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull SelectMenuDetailAdapter.MyViewHolder holder, int position) {
             final Order selectMenuDetail = selectMenuDetails.get(position);
-            String url = Url.URL + "/MenuDetailServlet";
-            int ordId = selectMenuDetail.getORD_ID();
-            DetailGetAllTask = new CommonTask(url, String.valueOf(ordId));
-            DetailGetAllTask.execute();
             holder.tvName.setText(selectMenuDetail.getFOOD_NAME());
             holder.tvAmount.setText(String.valueOf(selectMenuDetail.getFOOD_AMOUNT()));
             holder.tvPrice.setText(String.valueOf(selectMenuDetail.getTOTAL()));
@@ -154,12 +147,9 @@ public class SelectMenuDetailFragment extends Fragment {
             } else {
                 holder.tvStatus.setText("未送達");
             }
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            holder.itemView.setOnClickListener(v -> {
                     if(!selectMenuDetail.isFOOD_ARRIVAL() || !selectMenuDetail.isORD_BILL())
-                        Navigation.findNavController(v).navigate(R.id.action_selectMenuDetailFragment_to_menuDetailFragment);
-                }
+                    Navigation.findNavController(v).navigate(R.id.action_selectMenuDetailFragment_to_menuDetailFragment);
             });
         }
     }
@@ -183,10 +173,6 @@ public class SelectMenuDetailFragment extends Fragment {
         if (DetailGetAllTask != null) {
             DetailGetAllTask.cancel(true);
             DetailGetAllTask = null;
-        }
-        if (DetailImageTask != null) {
-            DetailImageTask.cancel(true);
-            DetailImageTask = null;
         }
     }
 }

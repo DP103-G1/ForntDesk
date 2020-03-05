@@ -13,7 +13,9 @@ public class MenuDetail implements Serializable{
 	private int FOOD_AMOUNT;
 	private boolean FOOD_ARRIVAL;
 	private int TOTAL;
+	private int ORD_TOTAL;
 	private boolean FOOD_STATUS;
+	private boolean ORD_BILL;
 
 	public MenuDetail(int ORD_ID, String MENU_ID, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL,
 					  boolean FOOD_STATUS) {
@@ -53,6 +55,19 @@ public class MenuDetail implements Serializable{
 		this.FOOD_ARRIVAL = FOOD_ARRIVAL;
 		this.TOTAL = TOTAL;
 		this.FOOD_STATUS = FOOD_STATUS;
+	}
+
+	public MenuDetail(int ORD_ID, String MENU_ID, int TABLE_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, int ORD_TOTAL, boolean FOOD_STATUS, boolean ORD_BILL) {
+		this.ORD_ID = ORD_ID;
+		this.MENU_ID = MENU_ID;
+		this.TABLE_ID = TABLE_ID;
+		this.FOOD_NAME = FOOD_NAME;
+		this.FOOD_AMOUNT = FOOD_AMOUNT;
+		this.FOOD_ARRIVAL = FOOD_ARRIVAL;
+		this.TOTAL = TOTAL;
+		this.ORD_TOTAL = ORD_TOTAL;
+		this.FOOD_STATUS = FOOD_STATUS;
+		this.ORD_BILL = ORD_BILL;
 	}
 
 
@@ -155,5 +170,21 @@ public class MenuDetail implements Serializable{
 
 	public void setMEMBER_ID(int MEMBER_ID) {
 		this.MEMBER_ID = MEMBER_ID;
+	}
+
+	public int getORD_TOTAL() {
+		return ORD_TOTAL;
+	}
+
+	public void setORD_TOTAL(int ORD_TOTAL) {
+		this.ORD_TOTAL = ORD_TOTAL;
+	}
+
+	public boolean isORD_BILL() {
+		return ORD_BILL;
+	}
+
+	public void setORD_BILL(boolean ORD_BILL) {
+		this.ORD_BILL = ORD_BILL;
 	}
 }

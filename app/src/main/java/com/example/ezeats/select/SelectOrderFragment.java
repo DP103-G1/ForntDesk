@@ -24,7 +24,6 @@ import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.order.Order;
 import com.example.ezeats.task.CommonTask;
-import com.example.ezeats.task.ImageTask;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,7 +38,6 @@ public class SelectOrderFragment extends Fragment {
     private RecyclerView rvSO;
     private List<Order> orders;
     private CommonTask OrderGetAllTask;
-    private ImageTask OrderTask;
     private int memId;
 
     @Override
@@ -159,10 +157,6 @@ public class SelectOrderFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
             Order order = orders.get(position);
-            String url = Url.URL + "/OrderServlet";
-            int memberId = order.getMEMBER_ID();
-//            OrderTask = new ImageTask(url, String.valueOf(memberId));
-//            OrderTask.execute();
             holder.tvOrdid.setText(String.valueOf(order.getORD_ID()));
             holder.tvTabid.setText(String.valueOf(order.getBK_ID()));
             holder.tvTotal.setText(String.valueOf(order.getORD_TOTAL()));
@@ -172,13 +166,10 @@ public class SelectOrderFragment extends Fragment {
             } else {
                 holder.tvBill.setText("尚未結帳");
             }
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("order",order.getORD_ID());
-                    Navigation.findNavController(v).navigate(R.id.selectMenuDetailFragment,bundle);
-                }
+            holder.itemView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putInt("order",order.getORD_ID());
+                Navigation.findNavController(v).navigate(R.id.selectMenuDetailFragment,bundle);
             });
         }
 
@@ -190,10 +181,6 @@ public class SelectOrderFragment extends Fragment {
         if (OrderGetAllTask != null) {
             OrderGetAllTask.cancel(true);
             OrderGetAllTask = null;
-        }
-        if (OrderTask != null) {
-            OrderTask.cancel(true);
-            OrderTask = null;
         }
     }
 }
