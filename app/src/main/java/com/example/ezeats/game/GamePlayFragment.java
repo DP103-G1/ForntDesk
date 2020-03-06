@@ -3,17 +3,16 @@ package com.example.ezeats.game;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,87 +21,84 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-
 import com.example.ezeats.R;
-import com.google.android.gms.dynamic.IFragmentWrapper;
+import com.example.ezeats.main.Common;
 
 import java.util.HashMap;
 import java.util.Random;
 
 
 public class GamePlayFragment extends Fragment {
-        private final static  String TAG = "TAG_GamePlayFragment";
-        private Activity activity;
-        private final int cardColor = Color.argb(255,235,203,95);
-        private final int[] imageId = {R.drawable.banana,R.drawable.buger,R.drawable.drink,R.drawable.pizza};
-        private ImageButton cards[] = new ImageButton[8];
-        private ImageButton pressCard;
-        private ImageButton tempPhoto;
-        private TextView tvTimer;
+    private final static String TAG = "TAG_GamePlayFragment";
+    private final static String PREFERENCES_NAME = "preferences";
+    private Activity activity;
+    private final int cardColor = Color.argb(255, 235, 203, 95);
+    private final int[] imageId = {R.drawable.banana, R.drawable.buger, R.drawable.drink, R.drawable.pizza};
+    private ImageButton cards[] = new ImageButton[8];
+    private ImageButton pressCard;
+    private ImageButton tempPhoto;
+    private TextView tvTimer;
+    private HashMap<Integer, Integer> location = new HashMap<>();
+    private int[] randomArray;
+    private boolean pressed;
+    private boolean timerSleeping;
+    private boolean timesOut;
+    private long startTime;
+    private long startTime2;
+    private int timeTaken;
+    private int cardsDone;
+    private NavController navController;
 
-        private HashMap<Integer,Integer> location = new HashMap<>();
+    private final Handler timerHandler = new Handler();
 
-        private int[] randomArray;
+    private Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int) (millis / 1000);
+            int minutes = seconds / 60;
+            seconds = seconds % 60;
 
-        private boolean pressed;
-        private boolean timerSleeping;
-        private boolean timesOut;
-        private long startTime;
-        private long startTime2;
-        private int timeTaken;
-        private int cardsDone;
-        private NavController navController;
+            tvTimer.setText(String.format("%d:%02d", minutes, seconds));
 
-        private final Handler timerHandler = new Handler();
+            if (!timerSleeping) {
+                long millis2 = System.currentTimeMillis() - startTime2;
+                int seconds2 = (int) (millis2 / 1000);
+                seconds2 = seconds2 % 60;
+                timeTaken = seconds2;
 
-        private Runnable timerRunnable = new Runnable() {
-            @Override
-            public void run() {
-                long millis = System.currentTimeMillis() - startTime;
-                int seconds = (int) (millis / 1000);
-                int minutes = seconds / 60;
-                seconds = seconds % 60;
+                if (timeTaken >= 1) {
+                    timerSleeping = true;
+                    timeTaken = 0;
 
-                tvTimer.setText(String.format("%d:%02d", minutes, seconds));
-
-                if (!timerSleeping) {
-                    long millis2 = System.currentTimeMillis() - startTime2;
-                    int seconds2 = (int) (millis2 / 1000);
-                    seconds2 = seconds2 % 60;
-                    timeTaken = seconds2;
-
-                    if (timeTaken >= 1) {
-                        timerSleeping = true;
-                        timeTaken = 0;
-
-                        for (ImageButton Cards : cards) {
-                            Cards.setClickable(true);
-                        }
-                        pressCard.setColorFilter(cardColor);
-                        tempPhoto.setColorFilter(cardColor);
+                    for (ImageButton Cards : cards) {
+                        Cards.setClickable(true);
                     }
+                    pressCard.setColorFilter(cardColor);
+                    tempPhoto.setColorFilter(cardColor);
                 }
-                timerHandler.postDelayed(this, 500);
             }
-        };
-
-        public void OnCreatHelper () {
-            cardsDone = 0;
-            startTime = System.currentTimeMillis();
-            timerSleeping = true;
-            pressCard = null;
-            tempPhoto = null;
-            pressed = false;
-            timeTaken = 0;
-            randomArray = getRandomNumbers();
-
-            for (int i = 0; i < 8; i++) {
-                cards[randomArray[i]].setImageResource(imageId[i / 2]);
-                location.put(cards[randomArray[i]].getId(), i / 2);
-                cards[randomArray[i]].setColorFilter(cardColor);
-                cards[randomArray[i]].setClickable(true);
-            }
+            timerHandler.postDelayed(this, 500);
         }
+    };
+
+    public void OnCreatHelper() {
+        cardsDone = 0;
+        startTime = System.currentTimeMillis();
+        timerSleeping = true;
+        pressCard = null;
+        tempPhoto = null;
+        pressed = false;
+        timeTaken = 0;
+        randomArray = getRandomNumbers();
+
+        for (int i = 0; i < 8; i++) {
+            cards[randomArray[i]].setImageResource(imageId[i / 2]);
+            location.put(cards[randomArray[i]].getId(), i / 2);
+            cards[randomArray[i]].setColorFilter(cardColor);
+            cards[randomArray[i]].setClickable(true);
+        }
+    }
 
     private void openDialog() {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
@@ -117,6 +113,12 @@ public class GamePlayFragment extends Fragment {
 //                homeIntent.addCategory(Intent.CATEGORY_HOME);
 //                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //                startActivity(homeIntent);
+                SharedPreferences pref = activity.getSharedPreferences(Common.NUMBER, Context.MODE_PRIVATE);
+                String number = "AA123b";
+                pref.edit()
+                        .putString("number", number)
+                        .apply();
+                Common.showToast(activity, R.string.textsave);
                 navController.popBackStack(R.id.linkFragment, false);
             }
         });
@@ -158,7 +160,7 @@ public class GamePlayFragment extends Fragment {
 //    }
 
 
-        public static int[] getRandomNumbers(){
+    public static int[] getRandomNumbers() {
         Random random = new Random();
         int[] ar = {0, 1, 2, 3, 4, 5, 6, 7};
         for (int i = 7; i > 0; i--) {
@@ -174,11 +176,11 @@ public class GamePlayFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-}
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_game_play,container,false);
+        return inflater.inflate(R.layout.fragment_game_play, container, false);
     }
 
     @Override
@@ -200,10 +202,10 @@ public class GamePlayFragment extends Fragment {
             cards[randomArray[i]].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    for (ImageButton Cards: cards) {
+                    for (ImageButton Cards : cards) {
                         Cards.setClickable(false);
                     }
-                    tempPhoto = (ImageButton)v;
+                    tempPhoto = (ImageButton) v;
                     if (tempPhoto.getColorFilter() != null) {
                         if (pressed) {
                             tempPhoto.clearColorFilter();
@@ -213,7 +215,8 @@ public class GamePlayFragment extends Fragment {
                                     openDialog();
                                 }
                             } else {
-                                tempPhoto.clearColorFilter();;
+                                tempPhoto.clearColorFilter();
+                                ;
                                 startTime2 = System.currentTimeMillis();
                                 timerSleeping = false;
                             }
@@ -228,13 +231,13 @@ public class GamePlayFragment extends Fragment {
                         }
                     }
                     if (timerSleeping)
-                        for (ImageButton Card: cards) {
+                        for (ImageButton Card : cards) {
                             Card.setClickable(true);
                         }
                 }
             });
             startTime = System.currentTimeMillis();
-            timerHandler.postDelayed(timerRunnable,0);
+            timerHandler.postDelayed(timerRunnable, 0);
         }
 
     }

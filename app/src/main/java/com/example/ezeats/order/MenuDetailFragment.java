@@ -3,6 +3,7 @@ package com.example.ezeats.order;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,12 +20,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
-import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -36,15 +37,20 @@ import java.util.List;
 
 public class MenuDetailFragment extends Fragment {
     private static final String TAG = "TAG_MenuDetailFragment";
+    //    private final static String NUMBER = "image";
+//    private SharedPreferences preferences;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private SharedPreferences preferences;
     private RecyclerView rvMd;
     private Button btBill;
     private TextView tvTotal;
     private EditText edDiscount;
     private Activity activity;
     private CommonTask DetailGetAllTask;
-    private ImageTask DetailImageTask;
     private List<MenuDetail> menuDetails;
-    private int memId;
+    private List<Order> orders;
+    private int memId, distotal;
+    private String dis;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,31 +69,82 @@ public class MenuDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         final NavController navigation = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         memId = Common.getMemId(activity);
+        dis = Common.getDis(activity);
         tvTotal = view.findViewById(R.id.tvTotal);
         edDiscount = view.findViewById(R.id.edDiscount);
+        edDiscount.setText(dis);
 
         rvMd = view.findViewById(R.id.rvMd);
         btBill = view.findViewById(R.id.btBill);
 
-
-        btBill.setOnClickListener(v -> {
-            String dis = edDiscount.getText().toString().trim();
-            if (dis.equals("AA123b")){
-                Common.showToast(getActivity(),R.string.textdisok);
-            } else if(dis.length() != 0){
-                edDiscount.setError(getString(R.string.textdiserror));
-                return;
-            }
-                Navigation.findNavController(v).navigate(R.id.action_menuDetailFragment_to_billFragment);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            menuDetails = getMenuDetail();
+            showMenuDetail(menuDetails);
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         rvMd.setLayoutManager(new LinearLayoutManager(activity));
 
 
         menuDetails = getMenuDetail();
+        int ordid = menuDetails.get(0).getORD_ID();
+        int total = menuDetails.get(0).getORD_TOTAL();
+        final boolean[] bill = {menuDetails.get(0).isORD_BILL()};
+        if (menuDetails != null && !menuDetails.isEmpty()) {
+            tvTotal.setText(String.valueOf(total));
+        }
         showMenuDetail(menuDetails);
+
+        btBill.setOnClickListener(v -> {
+            for (MenuDetail menuDetail : menuDetails) {
+                if (!menuDetail.isFOOD_ARRIVAL()) {
+                    Common.showToast(activity, R.string.textNoArrival);
+                    return;
+                }
+            }
+            String dis = edDiscount.getText().toString().trim();
+            if (dis.equals("AA123b")) {
+                Common.showToast(getActivity(), R.string.textdisok);
+                distotal = (int) (total * 0.9);
+
+            } else if (dis.length() != 0) {
+                edDiscount.setError(getString(R.string.textdiserror));
+                return;
+            } else if (dis.length() == 0) {
+                distotal = total;
+            }
+            if (!bill[0]) {
+                bill[0] = true;
+                if (Common.networkConnected(activity)) {
+                    String url = Url.URL + "/OrderServlet";
+                    Order order = new Order(ordid, memId, total, bill[0]);
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("action", "update");
+                    jsonObject.addProperty("order", new Gson().toJson(order));
+                    int count = 0;
+                    try {
+                        String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                        count = Integer.valueOf(result);
+                    } catch (Exception e) {
+                        Log.e(TAG, e.toString());
+                    }
+                    if (count != 0) {
+                        Log.d(TAG, String.valueOf(distotal));
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("menudetail", distotal);
+                        Navigation.findNavController(v).navigate(R.id.action_menuDetailFragment_to_billFragment, bundle);
+                    } else {
+                        Common.showToast(activity, R.string.textNoBill);
+                    }
+                }
+            }
+        });
+
     }
+
 
     private List<MenuDetail> getMenuDetail() {
         List<MenuDetail> menuDetails = null;
@@ -155,6 +212,7 @@ public class MenuDetailFragment extends Fragment {
             public void setStatus(boolean food_arrival) {
                 this.foodarrival = food_arrival;
             }
+
         }
 
         @Override
@@ -172,18 +230,13 @@ public class MenuDetailFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MenuDetailAdapter.MyviewHolder holder, int position) {
             final MenuDetail menuDetail = menuDetails.get(position);
-            String url = Url.URL + "/MenuDetailServlet";
-            int memId = menuDetail.getMEMBER_ID();
-            String id = menuDetail.getMENU_ID();
-            DetailImageTask = new ImageTask(url, id);
-            DetailImageTask.execute();
             holder.tvName.setText(menuDetail.getFOOD_NAME());
             holder.tvAmount.setText(String.valueOf(menuDetail.getFOOD_AMOUNT()));
             holder.tvPrice.setText(String.valueOf(menuDetail.getTOTAL()));
             holder.setStatus(menuDetail.isFOOD_ARRIVAL());
             if (menuDetail.isFOOD_ARRIVAL() && menuDetail.isFOOD_STATUS()) {
                 holder.tvStatus.setText("已送達");
-            } else if(!menuDetail.isFOOD_ARRIVAL() && menuDetail.isFOOD_STATUS()){
+            } else if (!menuDetail.isFOOD_ARRIVAL() && menuDetail.isFOOD_STATUS()) {
                 holder.tvStatus.setText("未送達");
             } else {
                 holder.tvStatus.setText("製作中");
@@ -199,10 +252,6 @@ public class MenuDetailFragment extends Fragment {
         if (DetailGetAllTask != null) {
             DetailGetAllTask.cancel(true);
             DetailGetAllTask = null;
-        }
-        if (DetailImageTask != null) {
-            DetailImageTask.cancel(true);
-            DetailImageTask = null;
         }
     }
 }

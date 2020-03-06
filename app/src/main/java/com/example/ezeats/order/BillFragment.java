@@ -35,6 +35,7 @@ public class BillFragment extends Fragment {
     private Button btBillCheck;
     private Spinner spMou, spDay;
     private int mem_id;
+    private int total;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +55,11 @@ public class BillFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final NavController navigation = Navigation.findNavController(view);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            total = bundle.getInt("menudetail", 0);
+            Log.d(TAG, String.valueOf(total));
+        }
 
         edName = view.findViewById(R.id.edName);
         edNumber = view.findViewById(R.id.edNumber);
@@ -62,7 +68,7 @@ public class BillFragment extends Fragment {
 
         spMou = view.findViewById(R.id.spMou);
         String[] mounthArray = getResources().getStringArray(R.array.textMounth);
-        ArrayAdapter<String> mounthAdapter = new ArrayAdapter<>(activity,R.layout.myspinner,mounthArray);
+        ArrayAdapter<String> mounthAdapter = new ArrayAdapter<>(activity, R.layout.myspinner, mounthArray);
         mounthAdapter.setDropDownViewResource(R.layout.myspinner);
         spMou.setAdapter(mounthAdapter);
         spMou.setSelection(0, true);
@@ -70,11 +76,12 @@ public class BillFragment extends Fragment {
 
         spDay = view.findViewById(R.id.spDay);
         String[] dayArray = getResources().getStringArray(R.array.textDay);
-        ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(activity,R.layout.myspinner,dayArray);
+        ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(activity, R.layout.myspinner, dayArray);
         dayAdapter.setDropDownViewResource(R.layout.myspinner);
         spDay.setAdapter(dayAdapter);
         spDay.setSelection(0, true);
         spDay.setOnItemSelectedListener(listener);
+
 
         btBillCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,12 +94,14 @@ public class BillFragment extends Fragment {
                 String number = edNumber.getText().toString().trim();
                 if (number.length() != 16) {
                     edNumber.setError(getString(R.string.textNoNumber));
+                    return;
                 }
 
 
                 String last = edLast.getText().toString().trim();
                 if (last.length() != 3) {
                     edLast.setError(getString(R.string.textNoLast));
+                    return;
                 }
 
                 int cardlast = Integer.parseInt(edLast.getText().toString().trim());
@@ -133,11 +142,11 @@ public class BillFragment extends Fragment {
                     } else {
                         new AlertDialog.Builder(activity)
                                 .setTitle(R.string.textBillOK)
-                                .setMessage("總金額" + " " + "0")
+                                .setMessage("總金額" + " " + total)
                                 .setPositiveButton(R.string.textYes, (dialog, which) -> navigation.navigate(R.id.action_billFragment_to_homeFragment))
                                 .show();
                     }
-                }else {
+                } else {
                     Common.showToast(getActivity(), R.string.textNoNetWork);
                 }
             }

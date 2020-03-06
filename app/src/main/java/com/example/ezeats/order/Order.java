@@ -46,6 +46,13 @@ public class Order implements Serializable {
 		this.menuDetails = menuDetails;
 	}
 
+	public Order(int ORD_ID, int MEMBER_ID, int ORD_TOTAL, boolean ORD_BILL) {
+		this.ORD_ID = ORD_ID;
+		this.MEMBER_ID = MEMBER_ID;
+		this.ORD_TOTAL = ORD_TOTAL;
+		this.ORD_BILL = ORD_BILL;
+	}
+
 	public Order(String menuId, String foodName, int foodAmount, boolean foodArrival, int total ) {
 		this.MENU_ID = menuId;
 		this.FOOD_NAME = foodName;

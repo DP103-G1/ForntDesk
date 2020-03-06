@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -50,7 +49,6 @@ public class OrderFragment extends Fragment {
     private LocalBroadcastManager broadcastManager;
     private RecyclerView rvMenu;
     private TextView edTotal;
-    private EditText edNote;
     private ImageView btBell;
     private Button btChect;
     private Activity activity;
@@ -91,13 +89,12 @@ public class OrderFragment extends Fragment {
         totalPrice = 0;
         edTotal = view.findViewById(R.id.edTotal);
         edTotal.setText(String.valueOf(totalPrice));
-        edNote = view.findViewById(R.id.edNote);
         rvMenu = view.findViewById(R.id.rvMenu);
         btBell = view.findViewById(R.id.btbell);
         btChect = view.findViewById(R.id.btChect);
         rvMenu.setLayoutManager(new LinearLayoutManager(activity));
         menus = getMenu();
-        bookings = getBooking();
+//        bookings = getBooking();
         showMenu(menus);
 
         btBell.setOnClickListener(v -> v.setBackgroundColor(Color.RED));
@@ -185,28 +182,28 @@ public class OrderFragment extends Fragment {
         return menus;
     }
 
-    private List<Booking> getBooking() {
-        List<Booking> booking = null;
-        if (Common.networkConnected(activity)) {
-            String url2 = Url.URL + "/BookingServlet";
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action","getAll");
-            String jsonOut = jsonObject.toString();
-            bookingGetAllTask = new CommonTask(url2, jsonOut);
-            try {
-                String jsonIn = bookingGetAllTask.execute().get();
-                Type ListbookingType = new TypeToken<List<Booking>>() {
-                }.getType();
-                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                booking = gson.fromJson(jsonIn, ListbookingType);
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
-            }
-        } else {
-            Common.showToast(activity, R.string.textNoNetwork);
-        }
-        return booking;
-    }
+//    private List<Booking> getBooking() {
+//        List<Booking> booking = null;
+//        if (Common.networkConnected(activity)) {
+//            String url2 = Url.URL + "/BookingServlet";
+//            JsonObject jsonObject = new JsonObject();
+//            jsonObject.addProperty("action","getAll");
+//            String jsonOut = jsonObject.toString();
+//            bookingGetAllTask = new CommonTask(url2, jsonOut);
+//            try {
+//                String jsonIn = bookingGetAllTask.execute().get();
+//                Type ListbookingType = new TypeToken<List<Booking>>() {
+//                }.getType();
+//                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+//                booking = gson.fromJson(jsonIn, ListbookingType);
+//            } catch (Exception e) {
+//                Log.e(TAG, e.toString());
+//            }
+//        } else {
+//            Common.showToast(activity, R.string.textNoNetwork);
+//        }
+//        return booking;
+//    }
 
 
     private void showMenu(List<Menu> menus) {
