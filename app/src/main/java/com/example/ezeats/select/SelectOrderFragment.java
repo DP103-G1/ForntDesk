@@ -168,8 +168,8 @@ public class SelectOrderFragment extends Fragment {
             }
             holder.itemView.setOnClickListener(v -> {
                 Bundle bundle = new Bundle();
-                bundle.putInt("order",order.getORD_ID());
-                Navigation.findNavController(v).navigate(R.id.selectMenuDetailFragment,bundle);
+                bundle.putInt("order", order.getORD_ID());
+                Navigation.findNavController(v).navigate(R.id.selectMenuDetailFragment, bundle);
             });
         }
 

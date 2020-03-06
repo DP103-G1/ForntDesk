@@ -3,6 +3,7 @@ package com.example.ezeats.order;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ public class MenuDetailFragment extends Fragment {
     //    private final static String NUMBER = "image";
 //    private SharedPreferences preferences;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SharedPreferences preferences;
     private RecyclerView rvMd;
     private Button btBill;
     private TextView tvTotal;
@@ -107,6 +109,7 @@ public class MenuDetailFragment extends Fragment {
             if (dis.equals("AA123b")) {
                 Common.showToast(getActivity(), R.string.textdisok);
                 distotal = (int) (total * 0.9);
+
             } else if (dis.length() != 0) {
                 edDiscount.setError(getString(R.string.textdiserror));
                 return;
@@ -141,6 +144,7 @@ public class MenuDetailFragment extends Fragment {
         });
 
     }
+
 
     private List<MenuDetail> getMenuDetail() {
         List<MenuDetail> menuDetails = null;
