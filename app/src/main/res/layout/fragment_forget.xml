@@ -85,18 +85,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btok"
+        android:id="@+id/btOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:background="@color/colortitle"
         android:text="確定"
         android:textColor="@color/colortext"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btno"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btNo"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btno"
+        android:id="@+id/btNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"

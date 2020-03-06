@@ -61,12 +61,12 @@ public class SelectBookingDetailFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null){
             selectBookingDetail = (Booking)bundle.getSerializable("booking");
-            showSelectBookinDetail();
+            showSelectBookingDetail();
         }
 
     }
 
-    private void showSelectBookinDetail() {
+    private void showSelectBookingDetail() {
         String url = Url.URL + "/BookingServlet";
         int memId = selectBookingDetail.getMemberId();
         Bitmap bitmap = null;

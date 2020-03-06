@@ -5,9 +5,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +28,8 @@ import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
@@ -40,7 +45,7 @@ public class SelectBookingFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView rvSelectBooking;
     private List<Booking> selectBooking;
-    private CommonTask selecetBookingGetAllTask;
+    private CommonTask selectBookingGetAllTask;
     private ImageTask selectBookingTask;
     private int memId;
 
@@ -85,7 +90,6 @@ public class SelectBookingFragment extends Fragment {
         SelectBookingAdapter(Context context,List<Booking> selectBooking){
             layoutInflater = LayoutInflater.from(context);
             this.selectBooking = selectBooking;
-
         }
 
         void setSelectBooking(List<Booking> selectBooking){
@@ -117,7 +121,6 @@ public class SelectBookingFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull SelectBookingHolder holder, int position) {
-
             Booking booking = selectBooking.get(position);
             String url = Url.URL + "/BookingServlet";
             int memberId = booking.getMemberId();
@@ -131,6 +134,48 @@ public class SelectBookingFragment extends Fragment {
                 bundle.putSerializable("booking" ,booking);
                 Navigation.findNavController(v).navigate(R.id.selectBookingDetailFragment,bundle);
             });
+
+            holder.itemView.setOnLongClickListener(v -> {
+                PopupMenu popupMenu = new PopupMenu(activity,v, Gravity.END);
+                popupMenu.inflate(R.menu.select_menu);
+                popupMenu.setOnMenuItemClickListener(item -> {
+                    switch (item.getItemId()){
+                        case R.id.selectDelete:
+                            if (Common.networkConnected(activity)){
+                                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                                String url1 = Url.URL + "/BookingServlet";
+                                JsonObject jsonObject = new JsonObject();
+                                jsonObject.addProperty("action","update");
+                                jsonObject.addProperty("bk_id",booking.getBkId());
+                                jsonObject.addProperty("member_id",memId);
+
+                                int count = 0;
+
+                                try {
+                                    selectBookingGetAllTask = new CommonTask(url1,jsonObject.toString());
+                                    String result = selectBookingGetAllTask.execute().get();
+                                    count = Integer.valueOf(result);
+                                }catch (Exception e){
+                                    Log.e(TAG,e.toString());
+                                }
+                                if (count == 0){
+
+                                    Common.showToast(activity,R.string.textDeleteFail);
+                                }else {
+                                    selectBooking.remove(booking);
+                                    SelectBookingAdapter.this.notifyDataSetChanged();
+                                    SelectBookingFragment.this.selectBooking.remove(booking);
+                                    Common.showToast(activity,R.string.textDeleteSuccess);
+                                }
+                            }else {
+                                Common.showToast(activity,R.string.textNoNetWork);
+                            }
+                    }
+                    return true;
+                });
+                popupMenu.show();
+                return true;
+            });
         }
     }
 
@@ -142,9 +187,9 @@ public class SelectBookingFragment extends Fragment {
             jsonObject.addProperty("action","getAllByMemberId");
             jsonObject.addProperty("memberId", memId);
             String jsonOut = jsonObject.toString();
-            selecetBookingGetAllTask = new CommonTask(url,jsonOut);
+            selectBookingGetAllTask = new CommonTask(url,jsonOut);
             try {
-                String jsonIn = selecetBookingGetAllTask.execute().get();
+                String jsonIn = selectBookingGetAllTask.execute().get();
                 Type listType = new TypeToken<List<Booking>>(){
                 }.getType();
                 selectBooking = Common.gson.fromJson(jsonIn,listType);
@@ -174,9 +219,9 @@ public class SelectBookingFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (selecetBookingGetAllTask != null){
-            selecetBookingGetAllTask.cancel(true);
-            selecetBookingGetAllTask = null;
+        if (selectBookingGetAllTask != null){
+            selectBookingGetAllTask.cancel(true);
+            selectBookingGetAllTask = null;
         }
         if (selectBookingTask != null){
             selectBookingTask.cancel(true);

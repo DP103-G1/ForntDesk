@@ -1,5 +1,7 @@
 package com.example.ezeats.member;
 
+import java.io.Serializable;
+
 public class Member {
 
 	private int member_Id;
@@ -17,8 +19,24 @@ public class Member {
 		this.phone = phone;
 	}
 	
+	public Member(String account, String password) {
+		this.account = account;
+		this.password = password;
+
+	}
+	
 	public Member(String account, String password, String name, String phone) {
-		this(0, account, password, name, phone);
+		this.account = account;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		}
+
+	public Member(int member_Id, String password, String name, String phone) {
+		this.member_Id = member_Id;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
 	}
 
 	public int getmember_Id() {
