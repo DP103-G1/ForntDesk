@@ -75,6 +75,7 @@ public class SelectBookingFragment extends Fragment {
         showSelectBooking(selectBooking);
         swipeRefreshLayout.setOnRefreshListener(() -> {
             swipeRefreshLayout.setRefreshing(true);
+            selectBooking = getSelectBooking();
             showSelectBooking(selectBooking);
             swipeRefreshLayout.setRefreshing(false);
         });
