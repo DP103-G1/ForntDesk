@@ -153,7 +153,11 @@
         android:id="@+id/forgetFragment"
         android:name="com.example.ezeats.member.ForgetFragment"
         android:label="fragment_forget"
-        tools:layout="@layout/fragment_forget" />
+        tools:layout="@layout/fragment_forget" >
+        <action
+            android:id="@+id/action_forgetFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/memberFragment"
         android:name="com.example.ezeats.member.MemberFragment"
@@ -198,6 +202,36 @@
         tools:layout="@layout/fragment_bill" >
         <action
             android:id="@+id/action_billFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.ezeats.member.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberRegionFragment"
+        android:name="com.example.ezeats.member.MemberRegionFragment"
+        android:label="fragment_member_region"
+        tools:layout="@layout/fragment_member_region" >
+        <action
+            android:id="@+id/action_memberRegionFragment_to_memberDataUpdateFragment"
+            app:destination="@id/memberDataUpdateFragment" />
+        <action
+            android:id="@+id/action_memberRegionFragment_to_memberFragment"
+            app:destination="@id/memberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberDataUpdateFragment"
+        android:name="com.example.ezeats.member.MemberDataUpdateFragment"
+        android:label="fragment_member_data_update"
+        tools:layout="@layout/fragment_member_data_update" >
+        <action
+            android:id="@+id/action_memberDataUpdateFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

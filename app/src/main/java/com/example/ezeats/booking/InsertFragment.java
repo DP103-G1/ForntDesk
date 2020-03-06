@@ -226,9 +226,10 @@ public class InsertFragment extends Fragment {
                     Common.showToast(getActivity(), R.string.textPhoneInvaild);
                     return;
                 }
+                int bkStatus = 1;
                 if (Common.networkConnected(activity)) {
                     String url = Url.URL + "/BookingServlet";
-                    Booking booking = new Booking(mem_id, bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone);
+                    Booking booking = new Booking(mem_id, bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone,bkStatus);
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "bookingInsert");
@@ -246,12 +247,8 @@ public class InsertFragment extends Fragment {
                         new AlertDialog.Builder(activity)
                                 .setTitle(R.string.textBookingSuccess)
                                 .setMessage(R.string.textMassage)
-                                .setPositiveButton(R.string.textYes, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-
-                                    }
+                                .setPositiveButton(R.string.textYes, (dialog, which) -> {
+                                    navController.navigate(R.id.action_insertFragment_to_homeFragment);
                                 })
                                 .show();
 
@@ -259,13 +256,9 @@ public class InsertFragment extends Fragment {
                 } else {
                     Common.showToast(getActivity(), R.string.textNoNetWork);
                 }
-
-                navController.navigate(R.id.action_insertFragment_to_homeFragment);
+//                navController.navigate(R.id.action_insertFragment_to_homeFragment);
             }
-
         });
-
-
     }
 
 

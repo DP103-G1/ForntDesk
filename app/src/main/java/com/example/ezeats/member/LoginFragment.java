@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -52,6 +53,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         handledViews(view);
+
         navController = Navigation.findNavController(view);
         bottomNavigationView.setVisibility(View.GONE);
         edAcc.setOnFocusChangeListener((v, hasFocus) -> {
@@ -105,7 +107,9 @@ public class LoginFragment extends Fragment {
                 SharedPreferences pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
                 pref.edit().putString("account", textAccount).putString("password", textPassword).putInt("memId", memId).apply();
                 navController.popBackStack(R.id.homeFragment, false);
+
                 Common.showToast(activity, getString(R.string.textLoginSuccess));
+
             }
         } catch (Exception e) {
             Log.e(TAG, e.toString());
