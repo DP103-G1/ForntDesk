@@ -67,7 +67,7 @@ public class SelectBookingDetailFragment extends Fragment {
 
     private void showSelectBookingDetail() {
         String url = Url.URL + "/BookingServlet";
-        int memId = selectBookingDetail.getMemberId();
+        int memId = selectBookingDetail.getMember().getmember_Id();
         Bitmap bitmap = null;
         try {
             bitmap = new ImageTask(url,String.valueOf(memId)).execute().get();
