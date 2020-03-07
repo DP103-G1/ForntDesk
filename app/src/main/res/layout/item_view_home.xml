@@ -47,9 +47,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:textColor="@color/cardText"
+            android:textColor="@color/colorSecondary"
             android:text="餐點名稱"
-            android:textSize="24sp"
+            android:textSize="20sp"
             card_view:layout_constraintStart_toEndOf="@+id/ivMenu"
             card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +61,7 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/normalText"
             android:text="餐點內容"
-            android:textSize="16sp"
+            android:textSize="14sp"
             card_view:layout_constraintStart_toEndOf="@+id/ivMenu"
             card_view:layout_constraintTop_toBottomOf="@+id/tvName" />
 

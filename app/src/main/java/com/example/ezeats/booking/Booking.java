@@ -1,7 +1,5 @@
 package com.example.ezeats.booking;
 
-import androidx.annotation.NonNull;
-
 import com.example.ezeats.member.Member;
 
 import java.io.Serializable;

@@ -167,7 +167,7 @@ public class SelectBookingFragment extends Fragment {
                                     Common.showToast(activity,R.string.textDeleteSuccess);
                                 }
                             }else {
-                                Common.showToast(activity,R.string.textNoNetWork);
+                                Common.showToast(activity,R.string.textNoNetwork);
                             }
                     }
                     return true;
@@ -196,7 +196,7 @@ public class SelectBookingFragment extends Fragment {
                Log.e(TAG,e.toString());
             }
         }else {
-            Common.showToast(activity,R.string.textNoNetWork);
+            Common.showToast(activity,R.string.textNoNetwork);
         }
         return selectBooking;
     }

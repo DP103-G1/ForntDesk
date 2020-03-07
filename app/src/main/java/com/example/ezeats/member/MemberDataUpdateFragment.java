@@ -3,23 +3,20 @@ package com.example.ezeats.member;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
@@ -30,7 +27,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 
 public class MemberDataUpdateFragment extends Fragment {
@@ -142,7 +138,7 @@ public class MemberDataUpdateFragment extends Fragment {
                         Log.e(TAG, e.toString());
                     }
                 } else {
-                    Common.showToast(activity, R.string.textNoNetWork);
+                    Common.showToast(activity, R.string.textNoNetwork);
                 }
             new AlertDialog.Builder(activity)
                     .setTitle(R.string.textUpdate)
@@ -170,7 +166,7 @@ public class MemberDataUpdateFragment extends Fragment {
                 Log.e(TAG, e.toString());
             }
         } else {
-            Common.showToast(activity, R.string.textNoNetWork);
+            Common.showToast(activity, R.string.textNoNetwork);
         }
         return memberData;
     }

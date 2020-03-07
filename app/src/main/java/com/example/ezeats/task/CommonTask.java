@@ -1,11 +1,8 @@
 package com.example.ezeats.task;
 //
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.AsyncTask;
 import android.util.Log;
-
-import com.example.ezeats.order.OrderWebSocketClient;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,34 +10,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 
 public class CommonTask extends AsyncTask<String, Integer, String> {
     private final static String TAG = "TAG_CommonTask";
-    public static final String SERVER_URI = "ws://10.0.2.2:8080/Thematic_G1/WSChatBasic/";
-    public static OrderWebSocketClient orderWebSocketClient;
     private String url, outStr;
-
-    public static void connectServer(Context context, String roles) {
-        URI uri = null;
-        try {
-            uri = new URI(SERVER_URI + roles);
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-        }
-        if (orderWebSocketClient == null) {
-            orderWebSocketClient = new OrderWebSocketClient(uri, context);
-            orderWebSocketClient.connect();
-        }
-    }
-
-    public static void disconnectServer() {
-        if (orderWebSocketClient != null) {
-            orderWebSocketClient.close();
-            orderWebSocketClient = null;
-        }
-    }
 
     public CommonTask(String url, String outStr) {
         this.url = url;

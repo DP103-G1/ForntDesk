@@ -17,7 +17,6 @@ import androidx.fragment.app.Fragment;
 import com.example.ezeats.R;
 import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Url;
-import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
 
 import java.text.SimpleDateFormat;
