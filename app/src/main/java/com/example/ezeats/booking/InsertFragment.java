@@ -33,6 +33,7 @@ import com.example.ezeats.main.Common;
 import com.example.ezeats.R;
 import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
+import com.example.ezeats.member.Member;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
@@ -66,6 +67,7 @@ public class InsertFragment extends Fragment {
     private List<Booking> bookings;
     private List<Integer> tableIds;
     private String textPhone;
+
 
 
     @Override
@@ -237,7 +239,8 @@ public class InsertFragment extends Fragment {
                 int bkStatus = 1;
                 if (Common.networkConnected(activity)) {
                     String url = Url.URL + "/BookingServlet";
-                    Booking booking = new Booking(mem_id, bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone,bkStatus);
+                    Booking booking = new Booking(new Member(mem_id,null,null,null),
+                            bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone,bkStatus);
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "bookingInsert");
