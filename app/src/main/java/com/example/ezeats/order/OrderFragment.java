@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ezeats.R;
-import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
@@ -48,10 +47,8 @@ public class OrderFragment extends Fragment {
     private Button btChect;
     private Activity activity;
     private CommonTask menuGetAllTask;
-    private CommonTask bookingGetAllTask;
     private ImageTask menuImageTask;
     private List<Menu> menus;
-    private List<Booking> bookings;
     private int totalPrice;
     private Set<MenuDetail> menuDetails;
 
@@ -100,9 +97,6 @@ public class OrderFragment extends Fragment {
                String url = Url.URL + "/OrderServlet";
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("action","add");
-//                Order order = new Order(Common.getMemId(activity), tableId,
-//                        Integer.parseInt(edTotal.getText().toString()),
-//                        menuDetails.stream().collect(Collectors.toList()));
                 Order order = new Order(Common.getMemId(activity),
                         Integer.parseInt(edTotal.getText().toString()),
                         menuDetails.stream().collect(Collectors.toList()));
@@ -173,29 +167,6 @@ public class OrderFragment extends Fragment {
         }
         return menus;
     }
-
-//    private List<Booking> getBooking() {
-//        List<Booking> booking = null;
-//        if (Common.networkConnected(activity)) {
-//            String url2 = Url.URL + "/BookingServlet";
-//            JsonObject jsonObject = new JsonObject();
-//            jsonObject.addProperty("action","getAll");
-//            String jsonOut = jsonObject.toString();
-//            bookingGetAllTask = new CommonTask(url2, jsonOut);
-//            try {
-//                String jsonIn = bookingGetAllTask.execute().get();
-//                Type ListbookingType = new TypeToken<List<Booking>>() {
-//                }.getType();
-//                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-//                booking = gson.fromJson(jsonIn, ListbookingType);
-//            } catch (Exception e) {
-//                Log.e(TAG, e.toString());
-//            }
-//        } else {
-//            Common.showToast(activity, R.string.textNoNetwork);
-//        }
-//        return booking;
-//    }
 
 
     private void showMenu(List<Menu> menus) {
@@ -279,9 +250,6 @@ public class OrderFragment extends Fragment {
                 this.id = id;
             }
 
-//            public void setBookingId(int bkId) {
-//                this.bkid = bkId;
-//            }
         }
 
         @Override
@@ -327,6 +295,5 @@ public class OrderFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        broadcastManager.registerReceiver(ChatReceiver);
     }
 }
