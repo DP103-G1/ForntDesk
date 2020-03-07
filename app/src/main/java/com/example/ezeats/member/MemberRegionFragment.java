@@ -1,33 +1,38 @@
 package com.example.ezeats.member;
 
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
 import com.example.ezeats.R;
+import com.example.ezeats.main.Common;
+import com.example.ezeats.main.MainActivity;
 
 
 public class MemberRegionFragment extends Fragment {
+    private TextView tvTitle;
     private ListView listView;
-    private Activity activity;
+    private MainActivity activity;
     private String[] str = {"會員修改","登出"};
+    private NavController navController;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        activity = (MainActivity) getActivity();
 
     }
 
@@ -41,6 +46,9 @@ public class MemberRegionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textMember);
 
         listView = view.findViewById(R.id.listView);
         ArrayAdapter arrayAdapter = new ArrayAdapter(activity,R.layout.item_view_listviewitem,str);
@@ -51,10 +59,17 @@ public class MemberRegionFragment extends Fragment {
                     Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_memberDataUpdateFragment);
                     break;
                 case 1:
-                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_memberFragment);
+                    logout(activity);
                     break;
             }
         });
+    }
 
+    private void logout(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
+        pref.edit().putString("account", null).putString("password", null).putInt("memId", 0).apply();
+        activity.onResume();
+        navController.popBackStack(R.id.homeFragment, false);
+        navController.navigate(R.id.loginFragment);
     }
 }

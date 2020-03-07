@@ -159,11 +159,6 @@
             app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
-        android:id="@+id/memberFragment"
-        android:name="com.example.ezeats.member.MemberFragment"
-        android:label="fragment_member"
-        tools:layout="@layout/fragment_member" />
-    <fragment
         android:id="@+id/selectBookingDetailFragment"
         android:name="com.example.ezeats.select.SelectBookingDetailFragment"
         android:label="fragment_select_booking_detail"
@@ -221,9 +216,6 @@
         <action
             android:id="@+id/action_memberRegionFragment_to_memberDataUpdateFragment"
             app:destination="@id/memberDataUpdateFragment" />
-        <action
-            android:id="@+id/action_memberRegionFragment_to_memberFragment"
-            app:destination="@id/memberFragment" />
     </fragment>
     <fragment
         android:id="@+id/memberDataUpdateFragment"

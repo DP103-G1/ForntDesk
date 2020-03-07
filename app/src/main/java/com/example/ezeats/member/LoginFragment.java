@@ -1,7 +1,5 @@
 package com.example.ezeats.member;
 
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,9 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,16 +19,16 @@ import androidx.navigation.Navigation;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonObject;
 
-
-
 public class LoginFragment extends Fragment {
     private static final String TAG = "TAG_LoginFragment";
-    private Activity activity;
+    private MainActivity activity;
+    private TextView tvTitle;
     private NavController navController;
     private BottomNavigationView bottomNavigationView;
     private EditText edAcc, edPass;
@@ -41,7 +39,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        activity = (MainActivity) getActivity();
     }
 
     @Override
@@ -53,7 +51,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         handledViews(view);
-
+        tvTitle.setText(R.string.textLogin);
         navController = Navigation.findNavController(view);
         bottomNavigationView.setVisibility(View.GONE);
         edAcc.setOnFocusChangeListener((v, hasFocus) -> {
@@ -83,6 +81,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void handledViews(View view) {
+        tvTitle = activity.findViewById(R.id.tvTitle);
         bottomNavigationView = activity.findViewById(R.id.bv);
         edAcc = view.findViewById(R.id.edAcc);
         edPass = view.findViewById(R.id.edPass);
@@ -107,9 +106,8 @@ public class LoginFragment extends Fragment {
                 SharedPreferences pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
                 pref.edit().putString("account", textAccount).putString("password", textPassword).putInt("memId", memId).apply();
                 navController.popBackStack(R.id.homeFragment, false);
-
+                activity.onResume();
                 Common.showToast(activity, getString(R.string.textLoginSuccess));
-
             }
         } catch (Exception e) {
             Log.e(TAG, e.toString());
