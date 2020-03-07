@@ -4,36 +4,33 @@ package com.example.ezeats.select;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.ezeats.R;
 import com.example.ezeats.booking.Booking;
-import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 
 public class SelectBookingDetailFragment extends Fragment {
         private final static String TAG = "TAG_SelectBookingDetailFragment";
         private Activity activity;
+        private CommonTask commonTask;
         private TextView tvBkIdGet,tvTableGet,tvTimeGet,
                 tvDateGet,tvChildGet,tvAdultGet,tvPhoneGet;
         private Booking selectBookingDetail;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +55,8 @@ public class SelectBookingDetailFragment extends Fragment {
         tvChildGet = view.findViewById(R.id.tvChildGet);
         tvAdultGet = view.findViewById(R.id.tvAdultGet);
         tvPhoneGet = view.findViewById(R.id.tvPhoneGet);
+
+
         Bundle bundle = getArguments();
         if (bundle != null){
             selectBookingDetail = (Booking)bundle.getSerializable("booking");
