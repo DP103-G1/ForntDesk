@@ -13,6 +13,7 @@ import com.example.ezeats.R;
 public class MySelectAdapter extends FragmentStatePagerAdapter {
     private static final int[] TAB_TITLES = new int[]{R.string.textSelectBooking,R.string.textSelectOrder};
     private Context mContext;
+
     public MySelectAdapter(@NonNull Context context, FragmentManager fm) {
         super(fm);
         mContext = context;

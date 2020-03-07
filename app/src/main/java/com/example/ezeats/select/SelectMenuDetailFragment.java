@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
@@ -36,6 +37,7 @@ public class SelectMenuDetailFragment extends Fragment {
 
     private static final String TAG = "TAG_SelectMenuDetailFragment";
     private RecyclerView rvSmd;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private Activity activity;
     private CommonTask DetailGetAllTask;
     private List<Order> selectMenuDetails;
@@ -60,12 +62,22 @@ public class SelectMenuDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvSmd = view.findViewById(R.id.rvSmd);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         Bundle bundle = getArguments();
         if (bundle != null) {
             ordId = bundle.getInt("order");
-//            selectMenuDetails = (List<Order>) bundle.getSerializable("order");
         }
         rvSmd.setLayoutManager(new LinearLayoutManager(activity));
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                selectMenuDetails = getSelectMenuDetail();
+                showSelectMenuDetail(selectMenuDetails);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         selectMenuDetails = getSelectMenuDetail();
         showSelectMenuDetail(selectMenuDetails);
     }

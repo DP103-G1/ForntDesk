@@ -51,12 +51,12 @@ import java.util.stream.Stream;
 
 
 
-public class InsertFragment extends Fragment{
-    private final  static String TAG = "TAG_InsertFragment";
+public class InsertFragment extends Fragment {
+    private final static String TAG = "TAG_InsertFragment";
     private FragmentActivity activity;
-    private EditText etPhone,etDate;
-    private Spinner spTime,spAdult,spChild,spTable;
-    private CommonTask bookingGetAllTask,getTableTask;
+    private EditText etPhone, etDate;
+    private Spinner spTime, spAdult, spChild, spTable;
+    private CommonTask bookingGetAllTask, getTableTask;
     private ImageTask bookingImageTask;
     private SimpleDateFormat simpleDateFormat;
     private Date bkDate;
@@ -114,30 +114,38 @@ public class InsertFragment extends Fragment{
 
         spTime = view.findViewById(R.id.spTime);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_dropdown_item_1line,timeArray);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, R.layout.myspinner, timeArray);
+        arrayAdapter.setDropDownViewResource(R.layout.myspinner);
         bkDate = null;
         bkTime = null;
         spTime.setAdapter(arrayAdapter);
-        spTime.setSelection(0,true);
+        spTime.setSelection(0, true);
         spTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bkTime = timeArray[position];
-                spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, comparison()));
+                spTable.setAdapter(new ArrayAdapter<>(activity, R.layout.myspinner, comparison()));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
         spAdult = view.findViewById(R.id.spAdult);
-        spAdult.setSelection(0,true);
+        String[] adultArray = getResources().getStringArray(R.array.textAdultArray);
+        ArrayAdapter<String> adultAdapter = new ArrayAdapter<>(activity, R.layout.myspinner, adultArray);
+        adultAdapter.setDropDownViewResource(R.layout.myspinner);
+        spAdult.setAdapter(adultAdapter);
+        spAdult.setSelection(0, true);
         spAdult.setOnItemSelectedListener(listener);
 
         spChild = view.findViewById(R.id.spChild);
-        spChild.setSelection(0,true);
+        String[] childArray = getResources().getStringArray(R.array.textChildArray);
+        ArrayAdapter<String> childAdapter = new ArrayAdapter<>(activity, R.layout.myspinner, childArray);
+        childAdapter.setDropDownViewResource(R.layout.myspinner);
+        spChild.setAdapter(childAdapter);
+        spChild.setSelection(0, true);
         spChild.setOnItemSelectedListener(listener);
 
 
@@ -150,15 +158,16 @@ public class InsertFragment extends Fragment{
                 datePickerDialog.show();
                 datePickerDialog.setOnDateSetListener((view1, year, month, dayOfMonth) -> {
                     updateDisplay(year, month, dayOfMonth);
-                spTable.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_dropdown_item_1line, comparison()));
+                    spTable.setAdapter(new ArrayAdapter<>(activity, R.layout.myspinner, comparison()));
 
                 });
             }
         });
         spTable = view.findViewById(R.id.spTable);
-        ArrayAdapter<String> tableArrayAdapter = new ArrayAdapter<>(activity,android.R.layout.simple_dropdown_item_1line, comparison());
+        ArrayAdapter<String> tableArrayAdapter = new ArrayAdapter<>(activity, R.layout.myspinner, comparison());
+        tableArrayAdapter.setDropDownViewResource(R.layout.myspinner);
         spTable.setAdapter(tableArrayAdapter);
-        spTable.setSelection(0,true);
+        spTable.setSelection(0, true);
         spTable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -220,101 +229,91 @@ public class InsertFragment extends Fragment{
                         return;
                     }
 
-                    String bkPhone = etPhone.getText().toString().trim();
-                    if (bkPhone.length() <= 0) {
-                        Common.showToast(getActivity(), R.string.textPhoneInvaild);
-                        return;
+                String bkPhone = etPhone.getText().toString().trim();
+                if (bkPhone.length() <= 0) {
+                    Common.showToast(getActivity(), R.string.textPhoneInvaild);
+                    return;
+                }
+                int bkStatus = 1;
+                if (Common.networkConnected(activity)) {
+                    String url = Url.URL + "/BookingServlet";
+                    Booking booking = new Booking(mem_id, bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone,bkStatus);
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("action", "bookingInsert");
+                    jsonObject.addProperty("booking", gson.toJson(booking));
+                    int count = 0;
+                    try {
+                        String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                        count = Integer.valueOf(result);
+                    } catch (Exception e) {
+                        Log.e(TAG, toString());
                     }
-                   if(Common.networkConnected(activity)){
-                       String url = Url.URL + "/BookingServlet";
-                       Booking booking = new Booking(mem_id, bkTable, bkTime, bkDate, bkChild, bkAdult, bkPhone);
-                       Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                       JsonObject jsonObject = new JsonObject();
-                       jsonObject.addProperty("action","/bookingInsert");
-                       jsonObject.addProperty("booking",gson.toJson(booking));
-                       int count = 0;
-                       try {
-                           String result = new CommonTask(url,jsonObject.toString()).execute().get();
-                           count = Integer.valueOf(result);
-                       }catch (Exception e){
-                           Log.e(TAG,toString());
-                       }
-                       if (count == 0){
-                           Common.showToast(getActivity(),R.string.textInsertFail);
-                       }else {
-                          new AlertDialog.Builder(activity)
-                                  .setTitle(R.string.textBookingSuccess)
-                                  .setMessage(R.string.textMassage)
-                                  .setPositiveButton(R.string.textYes, new DialogInterface.OnClickListener() {
-                                      @Override
-                                      public void onClick(DialogInterface dialog, int which) {
-
-
-                                    }
+                    if (count == 0) {
+                        Common.showToast(getActivity(), R.string.textInsertFail);
+                    } else {
+                        new AlertDialog.Builder(activity)
+                                .setTitle(R.string.textBookingSuccess)
+                                .setMessage(R.string.textMassage)
+                                .setPositiveButton(R.string.textYes, (dialog, which) -> {
+                                    navController.navigate(R.id.action_insertFragment_to_homeFragment);
                                 })
                                 .show();
 
-                       }
-                   }else {
-                       Common.showToast(getActivity(),R.string.textNoNetWork);
-                   }
-
-                   navController.navigate(R.id.action_insertFragment_to_homeFragment);
+                    }
+                } else {
+                    Common.showToast(getActivity(), R.string.textNoNetWork);
                 }
-
-            });
-
-
+//                navController.navigate(R.id.action_insertFragment_to_homeFragment);
+            }
+        });
     }
 
 
     Spinner.OnItemSelectedListener listener = new Spinner.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
 
+        }
 
-    }
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-};
-
+        }
+    };
 
 
-    private String pad(int number){
-        if(number>=10){
+    private String pad(int number) {
+        if (number >= 10) {
             return String.valueOf(number);
-        }else {
-            return  "0" + number;
+        } else {
+            return "0" + number;
         }
     }
 
     private void updateDisplay(int year, int month, int day) {
         etDate.setText(new StringBuffer().append(year).append("-")
-        .append(pad(month+1)).append("-")
-        .append(pad(day)));
+                .append(pad(month + 1)).append("-")
+                .append(pad(day)));
     }
 
 
     @Override
     public void onStop() {
         super.onStop();
-        if (bookingGetAllTask !=null){
-           bookingGetAllTask.cancel(true);
+        if (bookingGetAllTask != null) {
+            bookingGetAllTask.cancel(true);
             bookingGetAllTask = null;
         }
-        if (bookingImageTask!=null){
+        if (bookingImageTask != null) {
             bookingImageTask.cancel(true);
             bookingImageTask = null;
         }
     }
 
 
-
-    private List<String> comparison(){
+    private List<String> comparison() {
         List<Integer> tablesAvalible = tableIds.stream().collect(Collectors.toList());
 //        tablesAvalible.add(0, "請選取");
         if (!etDate.getText().toString().isEmpty()) {
@@ -358,8 +357,8 @@ public class InsertFragment extends Fragment{
             } catch (Exception e) {
                 Log.e(TAG, toString());
             }
-        }else {
-            Common.showToast(getActivity(),R.string.textNoNetWork);
+        } else {
+            Common.showToast(getActivity(), R.string.textNoNetWork);
         }
 //        List<String> tableIds = new ArrayList<>();
 //        for (Table table : tables) {
@@ -388,8 +387,8 @@ public class InsertFragment extends Fragment{
             } catch (Exception e) {
                 Log.e(TAG, toString());
             }
-        }else {
-            Common.showToast(getActivity(),R.string.textNoNetWork);
+        } else {
+            Common.showToast(getActivity(), R.string.textNoNetWork);
         }
         return bookings;
     }
