@@ -147,7 +147,7 @@ public class BillFragment extends Fragment {
                                 .show();
                     }
                 } else {
-                    Common.showToast(getActivity(), R.string.textNoNetWork);
+                    Common.showToast(getActivity(), R.string.textNoNetwork);
                 }
             }
         });

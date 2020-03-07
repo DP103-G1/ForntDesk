@@ -3,14 +3,11 @@ package com.example.ezeats.booking;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.Printer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +17,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,8 +25,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.ezeats.main.Common;
 import com.example.ezeats.R;
+import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.member.Member;
@@ -48,7 +44,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 
@@ -265,7 +260,7 @@ public class InsertFragment extends Fragment {
 
                     }
                 } else {
-                    Common.showToast(getActivity(), R.string.textNoNetWork);
+                    Common.showToast(getActivity(), R.string.textNoNetwork);
                 }
 //                navController.navigate(R.id.action_insertFragment_to_homeFragment);
             }
@@ -361,7 +356,7 @@ public class InsertFragment extends Fragment {
                 Log.e(TAG, toString());
             }
         } else {
-            Common.showToast(getActivity(), R.string.textNoNetWork);
+            Common.showToast(getActivity(), R.string.textNoNetwork);
         }
 //        List<String> tableIds = new ArrayList<>();
 //        for (Table table : tables) {
@@ -391,7 +386,7 @@ public class InsertFragment extends Fragment {
                 Log.e(TAG, toString());
             }
         } else {
-            Common.showToast(getActivity(), R.string.textNoNetWork);
+            Common.showToast(getActivity(), R.string.textNoNetwork);
         }
         return bookings;
     }

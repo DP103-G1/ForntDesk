@@ -4,28 +4,22 @@ package com.example.ezeats.select;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.ezeats.R;
 import com.example.ezeats.booking.Booking;
-import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
-import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 
 public class SelectBookingDetailFragment extends Fragment {
@@ -68,7 +62,7 @@ public class SelectBookingDetailFragment extends Fragment {
 
     private void showSelectBookingDetail() {
         String url = Url.URL + "/BookingServlet";
-        int memId = selectBookingDetail.getMemberId();
+        int memId = selectBookingDetail.getMember().getmember_Id();
         Bitmap bitmap = null;
         try {
             bitmap = new ImageTask(url,String.valueOf(memId)).execute().get();

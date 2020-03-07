@@ -16,7 +16,6 @@
     <string name="textNotselected">未選取</string>
     <string name="textInsertFail">新增失敗</string>
     <string name="textInsertSuccess">新增成功</string>
-    <string name="textNoNetWork">沒網路</string>
     <string name="textBookingfail">錯誤</string>
     <string name="textBookingSuccess">訂位成功</string>
     <string name="textMassage">謝謝</string>
