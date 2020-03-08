@@ -1,21 +1,35 @@
 package com.example.ezeats.SUGBox;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.ezeats.R;
+import com.google.android.material.tabs.TabLayout;
 
 
 public class CheckFragment extends Fragment {
+    private static final String TAG = "TAG_SUGFragment";
+    private Activity activity;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private MySugBoxAdapter pagerAdapter;
+    private TextView tvTitle;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activity = getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,19 +40,12 @@ public class CheckFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button btLeave = view.findViewById(R.id.btLeave);
-        btLeave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_checkFragment_to_SUGBoxFragment);
-            }
-        });
-        Button btCheck = view.findViewById(R.id.btCheck);
-        btCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_checkFragment_to_listBoxFragment);
-            }
-        });
+//        tvTitle = activity.findViewById(R.id.tvTitle);
+//        tvTitle.setText(R.string.textMessageBoard);
+        pagerAdapter = new MySugBoxAdapter(activity,getChildFragmentManager());
+        tabLayout = view.findViewById(R.id.tabLayout);
+        viewPager = view.findViewById(R.id.viewPager);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 }

@@ -229,6 +229,11 @@
     <string name="textUpdateFail">更新失敗</string>
     <string name="textUpdateSuccess">更新成功</string>
     <string name="textForgetPassword">忘記密碼</string>
+    <string name="textOrderDetail">點餐明細</string>
+    <string name="textLeaveAMassage">我要留言</string>
+    <string name="textViewMassage">查看留言</string>
+    <string name="textMessageBoard">留言板</string>
+    <string name="textMassageBoard">留言板</string>
 
 
 </resources>

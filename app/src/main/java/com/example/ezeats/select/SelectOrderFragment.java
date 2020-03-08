@@ -5,18 +5,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.SupportActionModeWrapper;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -44,6 +39,7 @@ public class SelectOrderFragment extends Fragment {
     private List<Order> orders;
     private CommonTask OrderGetAllTask;
     private int memId;
+    private TextView tvTitle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,7 +57,9 @@ public class SelectOrderFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NavController navController = Navigation.findNavController(view);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textSelectOrder);
+
         memId = Common.getMemId(activity);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvSO = view.findViewById(R.id.rvSO);
@@ -74,13 +72,6 @@ public class SelectOrderFragment extends Fragment {
             swipeRefreshLayout.setRefreshing(true);
             showorders(orders);
             swipeRefreshLayout.setRefreshing(false);
-        });
-        Button btBack = view.findViewById(R.id.btBack);
-        btBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navController.navigate(R.id.action_selectOrderFragment_to_memberRegionFragment);
-            }
         });
     }
 

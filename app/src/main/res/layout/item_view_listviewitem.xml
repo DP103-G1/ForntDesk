@@ -5,5 +5,5 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingStart="5sp"
-    android:textColor="@color/colortext"
+    android:textColor="@color/colorText"
     android:textSize="30dp"></TextView>

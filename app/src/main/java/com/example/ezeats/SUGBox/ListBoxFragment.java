@@ -55,7 +55,7 @@ public class ListBoxFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvTitle = activity.findViewById(R.id.tvTitle);
-        tvTitle.setText(R.string.textconnection);
+        tvTitle.setText(R.string.textMassageBoard);
         rvBoxList = view.findViewById(R.id.rvBoxList);
         rvBoxList.setLayoutManager(new LinearLayoutManager(activity));
         boxes = getBoxes();

@@ -34,7 +34,7 @@ public class MemberRegionFragment extends Fragment {
     private ListView listView;
     private MainActivity activity;
     private NavController navController;
-    private String[] str = {"會員修改","訂位查詢","訂單查詢","登出"};
+    private String[] str = {"會員修改","訂位查詢","訂單查詢","Q&A","操作導覽","意見箱","登出"};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +71,15 @@ public class MemberRegionFragment extends Fragment {
                     Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_selectOrderFragment);
                     break;
                 case 3:
+                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_QAFragment);
+                    break;
+                case 4:
+                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_howToFragment);
+                    break;
+                case 5:
+                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_checkFragment);
+                    break;
+                case 6:
                    logout(activity);
             }
         });
