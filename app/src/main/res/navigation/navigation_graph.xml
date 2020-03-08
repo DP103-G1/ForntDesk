@@ -142,7 +142,7 @@
     </fragment>
     <fragment
         android:id="@+id/selectMenuFragment"
-        android:name="com.example.ezeats.select.SelectMenuFragment"
+        android:name="com.example.ezeats.order.SelectMenuFragment"
         android:label="fragment_select_menu"
         tools:layout="@layout/fragment_select_menu" />
     <fragment
@@ -248,7 +248,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
-        android:name="com.example.ezeats.OrderDetailFragment"
+        android:name="com.example.ezeats.order.OrderDetailFragment"
         android:label="fragment_order_detail"
         tools:layout="@layout/fragment_order_detail" />
 </navigation>

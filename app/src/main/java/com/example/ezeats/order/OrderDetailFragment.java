@@ -1,31 +1,29 @@
-package com.example.ezeats;
+package com.example.ezeats.order;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.ezeats.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class OrderDetailFragment extends Fragment {
-
-
-    public OrderDetailFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_order_detail, container, false);
     }
+
 
 }
