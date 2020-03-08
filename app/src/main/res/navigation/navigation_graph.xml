@@ -136,19 +136,15 @@
         <action
             android:id="@+id/action_selectBookingFragment_to_selectBookingDetailFragment"
             app:destination="@id/selectBookingDetailFragment" />
+        <action
+            android:id="@+id/action_selectBookingFragment_to_memberRegionFragment"
+            app:destination="@id/memberRegionFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectMenuFragment"
         android:name="com.example.ezeats.select.SelectMenuFragment"
         android:label="fragment_select_menu"
-        tools:layout="@layout/fragment_select_menu" >
-        <action
-            android:id="@+id/action_selectMenuFragment_to_selectBookingFragment"
-            app:destination="@id/selectBookingFragment" />
-        <action
-            android:id="@+id/action_selectMenuFragment_to_selectOrderFragment"
-            app:destination="@id/selectOrderFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_select_menu" />
     <fragment
         android:id="@+id/forgetFragment"
         android:name="com.example.ezeats.member.ForgetFragment"
@@ -167,7 +163,11 @@
         android:id="@+id/selectBookingDetailFragment"
         android:name="com.example.ezeats.select.SelectBookingDetailFragment"
         android:label="fragment_select_booking_detail"
-        tools:layout="@layout/fragment_select_booking_detail" />
+        tools:layout="@layout/fragment_select_booking_detail" >
+        <action
+            android:id="@+id/action_selectBookingDetailFragment_to_selectBookingFragment"
+            app:destination="@id/selectBookingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/menuDetailFragment"
         android:name="com.example.ezeats.order.MenuDetailFragment"
@@ -185,6 +185,9 @@
         <action
             android:id="@+id/action_selectOrderFragment_to_selectMenuDetailFragment"
             app:destination="@id/selectMenuDetailFragment" />
+        <action
+            android:id="@+id/action_selectOrderFragment_to_memberRegionFragment"
+            app:destination="@id/memberRegionFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectMenuDetailFragment"
@@ -224,6 +227,12 @@
         <action
             android:id="@+id/action_memberRegionFragment_to_memberFragment"
             app:destination="@id/memberFragment" />
+        <action
+            android:id="@+id/action_memberRegionFragment_to_selectBookingFragment"
+            app:destination="@id/selectBookingFragment" />
+        <action
+            android:id="@+id/action_memberRegionFragment_to_selectOrderFragment"
+            app:destination="@id/selectOrderFragment" />
     </fragment>
     <fragment
         android:id="@+id/memberDataUpdateFragment"
@@ -233,5 +242,8 @@
         <action
             android:id="@+id/action_memberDataUpdateFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_memberDataUpdateFragment_to_memberRegionFragment"
+            app:destination="@id/memberRegionFragment" />
     </fragment>
 </navigation>

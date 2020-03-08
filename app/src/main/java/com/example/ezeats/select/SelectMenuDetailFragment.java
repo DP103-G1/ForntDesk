@@ -69,14 +69,11 @@ public class SelectMenuDetailFragment extends Fragment {
         }
         rvSmd.setLayoutManager(new LinearLayoutManager(activity));
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                selectMenuDetails = getSelectMenuDetail();
-                showSelectMenuDetail(selectMenuDetails);
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            selectMenuDetails = getSelectMenuDetail();
+            showSelectMenuDetail(selectMenuDetails);
+            swipeRefreshLayout.setRefreshing(false);
         });
         selectMenuDetails = getSelectMenuDetail();
         showSelectMenuDetail(selectMenuDetails);

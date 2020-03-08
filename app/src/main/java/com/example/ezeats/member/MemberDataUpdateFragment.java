@@ -1,9 +1,12 @@
 package com.example.ezeats.member;
 
 
+import android.accounts.Account;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -78,29 +81,24 @@ public class MemberDataUpdateFragment extends Fragment {
                     textPassword = edPasswordGet.getText().toString().trim();
                     if (textPassword.isEmpty()) {
                         edPasswordGet.setError(getString(R.string.textInputPassword));
+
                     }
                 }
             }
         });
-        edNameGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    textName = edNameGet.getText().toString().trim();
-                    if (textName.isEmpty()) {
-                        edNameGet.setError(getString(R.string.textInputName));
-                    }
+        edNameGet.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                textName = edNameGet.getText().toString().trim();
+                if (textName.isEmpty()) {
+                    edNameGet.setError(getString(R.string.textInputName));
                 }
             }
         });
-        edPhoneGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    textPhone = edNameGet.getText().toString().trim();
-                    if (textName.isEmpty()) {
-                        edPhoneGet.setError(getString(R.string.textInputPhone));
-                    }
+        edPhoneGet.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                textPhone = edNameGet.getText().toString().trim();
+                if (textName.isEmpty()) {
+                    edPhoneGet.setError(getString(R.string.textInputPhone));
                 }
             }
         });
@@ -124,32 +122,39 @@ public class MemberDataUpdateFragment extends Fragment {
                 Common.showToast(activity, R.string.textPhoneInvaild);
                 return;
             }
-
-                Member member = new Member(memId, password, name, phone);
                 if (Common.networkConnected(activity)) {
                     String url = Url.URL + "/MembersServlet";
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "memberUpdate");
+                    member.Member(password, name, phone, 0);
                     jsonObject.addProperty("member", new Gson().toJson(member));
-                    String jsonOut = jsonObject.toString();
-                    memberTask = new CommonTask(url, jsonOut);
+                    int count = 0;
                     try {
-                        String jsonIn = memberTask.execute().get();
-                        Type listType = new TypeToken<Member>() {
-                        }.getType();
-                        member = Common.gson.fromJson(jsonIn, listType);
+                        String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                        count = Integer.valueOf(result);
+
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
+                    }
+                    if (count == 0) {
+                        Common.showToast(getActivity(), R.string.textUpdateFail);
+                    } else if (count == 1 ) {
+                        SharedPreferences pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
+                        pref.edit().putString("password", password).putString("name",name).putString("phone",phone).apply();
+                        new AlertDialog.Builder(activity)
+                                .setTitle(R.string.textUpdate)
+                                .setMessage(R.string.textMemberSuccess)
+                                .setPositiveButton(R.string.textYes, (dialog, which) -> navController.navigate(R.id.action_memberDataUpdateFragment_to_homeFragment))
+                                .show();
                     }
                 } else {
                     Common.showToast(activity, R.string.textNoNetWork);
                 }
-            new AlertDialog.Builder(activity)
-                    .setTitle(R.string.textUpdate)
-                    .setMessage(R.string.textMemberSuccess)
-                    .setPositiveButton(R.string.textYes, (dialog, which) -> navController.navigate(R.id.action_memberDataUpdateFragment_to_homeFragment))
-                    .show();
+
         });
+
+        Button btCancel = view.findViewById(R.id.btCancel);
+        btCancel.setOnClickListener(v -> navController.navigate(R.id.action_memberDataUpdateFragment_to_memberRegionFragment));
     }
 
     private Member getMemberData() {
@@ -174,4 +179,6 @@ public class MemberDataUpdateFragment extends Fragment {
         }
         return memberData;
     }
+
+
 }

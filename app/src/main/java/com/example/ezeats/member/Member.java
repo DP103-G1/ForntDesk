@@ -2,14 +2,21 @@ package com.example.ezeats.member;
 
 import java.io.Serializable;
 
-public class Member {
+public class Member implements Serializable{
 
 	private int member_Id;
 	private String account;
 	private String password;
 	private String name;
 	private String phone;
-	
+	private int state;
+
+	public void Member( String password, String name, String phone, int state) {
+		this.state = state;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+	}
 
 	public Member(int member_Id, String account, String password, String name, String phone) {
 		this.member_Id = member_Id;
@@ -78,5 +85,12 @@ public class Member {
 	public void setphone(String phone) {
 		this.phone = phone;
 	}
-	
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
 }

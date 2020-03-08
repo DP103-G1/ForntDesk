@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -73,6 +74,13 @@ public class SelectOrderFragment extends Fragment {
             swipeRefreshLayout.setRefreshing(true);
             showorders(orders);
             swipeRefreshLayout.setRefreshing(false);
+        });
+        Button btBack = view.findViewById(R.id.btBack);
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_selectOrderFragment_to_memberRegionFragment);
+            }
         });
     }
 

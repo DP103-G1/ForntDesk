@@ -38,6 +38,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:18.3.0'
     implementation 'com.youth.banner:banner:2.0.0-alpha'
     implementation 'com.bigkoo:convenientbanner:2.0.5'
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
 
 
 }

@@ -227,5 +227,8 @@
     <string name="textDeleteSuccess">刪除成功</string>
     <string name="textNoArrival">餐點尚未送達完畢</string>
     <string name="textsave">優惠碼儲存</string>
+    <string name="textUpdateFail">更新失敗</string>
+    <string name="textUpdateSuccess">更新成功</string>
+
 
 </resources>

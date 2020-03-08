@@ -22,7 +22,7 @@ import com.example.ezeats.R;
 public class MemberRegionFragment extends Fragment {
     private ListView listView;
     private Activity activity;
-    private String[] str = {"會員修改","登出"};
+    private String[] str = {"會員修改","訂位查詢","訂單查詢","登出"};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,8 +51,13 @@ public class MemberRegionFragment extends Fragment {
                     Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_memberDataUpdateFragment);
                     break;
                 case 1:
-                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_memberFragment);
+                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_selectBookingFragment);
                     break;
+                case 2:
+                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_selectOrderFragment);
+                    break;
+                case 3:
+                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_memberFragment);
             }
         });
 
