@@ -1,28 +1,22 @@
-package com.example.ezeats.order;
+package com.example.ezeats.SUGBox;
 
-import android.app.Activity;
 import android.content.Context;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.ezeats.R;
-import com.example.ezeats.main.MainActivity;
-import com.example.ezeats.select.SelectBookingFragment;
-import com.example.ezeats.select.SelectOrderFragment;
+import com.example.ezeats.order.OrderDetailFragment;
+import com.example.ezeats.order.OrderFragment;
 
-public class MySelectAdapter extends FragmentStatePagerAdapter {
-    private static final int[] TAB_TITLES = new int[]{R.string.textMenu,R.string.textOrderDetail};
+public class MySugBoxAdapter extends FragmentStatePagerAdapter {
+    private static final int[] TAB_TITLES = new int[]{R.string.textLeaveAMassage,R.string.textViewMassage};
     private Context mContext;
 
-
-
-    public MySelectAdapter(@NonNull Context context, FragmentManager fm) {
+    public MySugBoxAdapter(@NonNull Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
     }
@@ -32,14 +26,13 @@ public class MySelectAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new OrderFragment();
+                return new SUGBoxFragment();
             case 1:
 
-                return new OrderDetailFragment();
+                return new ListBoxFragment();
             default:
                 return null;
         }
-
     }
 
     @Nullable
