@@ -91,13 +91,13 @@ public class MenuDetailFragment extends Fragment {
 
 
         menuDetails = getMenuDetail();
+        showMenuDetail(menuDetails);
         int ordid = menuDetails.get(0).getORD_ID();
         int total = menuDetails.get(0).getORD_TOTAL();
         final boolean[] bill = {menuDetails.get(0).isORD_BILL()};
         if (menuDetails != null && !menuDetails.isEmpty()) {
             tvTotal.setText(String.valueOf(total));
         }
-        showMenuDetail(menuDetails);
 
         btBill.setOnClickListener(v -> {
             for (MenuDetail menuDetail : menuDetails) {

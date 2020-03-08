@@ -7,7 +7,7 @@
     <item
         android:id="@+id/orderFragment"
         android:icon="@drawable/food"
-        android:title="點餐" />
+        android:title="餐點" />
     <item
         android:id="@+id/insertFragment"
         android:icon="@drawable/chair"

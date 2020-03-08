@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bv);
         ibBill = findViewById(R.id.ibBill);
+        ibBill.setOnClickListener(v -> {
+            navController.navigate(R.id.menuDetailFragment);
+        });
         navController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
