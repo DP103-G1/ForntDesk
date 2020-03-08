@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
@@ -34,8 +35,9 @@ public class ChangePasswordFragment extends Fragment {
         private Activity activity;
         private EditText edUpDatePassword,edConfirmPassword;
         private String textUpDatePassword,textedConfirmPassword;
-        private CommonTask changePassworTask;
+        private CommonTask changePasswordTask;
         private String account,password;
+        private TextView tvTitle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class ChangePasswordFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textUpdatePassword);
         edConfirmPassword = view.findViewById(R.id.edConfirmPassword);
         edUpDatePassword = view.findViewById(R.id.edUpDatePassword);
         NavController navController = Navigation.findNavController(view);
@@ -90,9 +94,9 @@ public class ChangePasswordFragment extends Fragment {
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("action","updatePassword");
                 jsonObject.addProperty("account", new Gson().toJson(member));
-                changePassworTask = new CommonTask(url,jsonObject.toString());
+                changePasswordTask = new CommonTask(url,jsonObject.toString());
                 try {
-                    String result = changePassworTask.execute().get();
+                    String result = changePasswordTask.execute().get();
                     int count = Integer.valueOf(result);
                     if (count != 0) {
                         new AlertDialog.Builder(activity)

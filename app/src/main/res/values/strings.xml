@@ -228,6 +228,7 @@
     <string name="textsave">優惠碼儲存</string>
     <string name="textUpdateFail">更新失敗</string>
     <string name="textUpdateSuccess">更新成功</string>
+    <string name="textForgetPassword">忘記密碼</string>
 
 
 </resources>

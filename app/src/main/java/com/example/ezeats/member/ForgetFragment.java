@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
@@ -33,7 +34,7 @@ public class ForgetFragment extends Fragment {
     private String textAccount,textPhone;
     private CommonTask forgetTask;
     private Member member;
-
+    private TextView tvTitle;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,8 @@ public class ForgetFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textForgetPassword);
         NavController navController = Navigation.findNavController(view);
         edAccount = view.findViewById(R.id.edAccount);
         edPhone = view.findViewById(R.id.edPhone);

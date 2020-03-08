@@ -40,7 +40,6 @@ public class MemberRegionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = (MainActivity) getActivity();
-
     }
 
     @Override
@@ -72,7 +71,7 @@ public class MemberRegionFragment extends Fragment {
                     Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_selectOrderFragment);
                     break;
                 case 3:
-                    Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_memberFragment);
+                   logout(activity);
             }
         });
     }

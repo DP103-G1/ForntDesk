@@ -27,6 +27,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.ezeats.R;
 import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
@@ -51,13 +52,13 @@ public class SelectBookingFragment extends Fragment {
     private CommonTask selectBookingGetAllTask;
     private ImageTask selectBookingTask;
     private int memId;
-
+    private TextView tvTitle;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        activity =  getActivity();
     }
 
     @Override
@@ -70,7 +71,8 @@ public class SelectBookingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         NavController navController = Navigation.findNavController(view);
-
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textSelectBooking);
         memId = Common.getMemId(activity);
         swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
         rvSelectBooking = view.findViewById(R.id.rvSelectBooking);
@@ -83,8 +85,9 @@ public class SelectBookingFragment extends Fragment {
             showSelectBooking(selectBooking);
             swipeRefreshLayout.setRefreshing(false);
         });
-        Button btBack = view.findViewById(R.id.btBack);
-        btBack.setOnClickListener(v -> navController.navigate(R.id.action_selectBookingFragment_to_memberRegionFragment));
+
+//        Button btBack = view.findViewById(R.id.btBack);
+//        btBack.setOnClickListener(v -> navController.navigate(R.id.action_selectBookingFragment_to_memberRegionFragment));
 
     }
 
@@ -173,7 +176,7 @@ public class SelectBookingFragment extends Fragment {
                                     Common.showToast(activity,R.string.textDeleteSuccess);
                                 }
                             } else {
-                                Common.showToast(activity, R.string.textNoNetWork);
+                                Common.showToast(activity, R.string.textNoNetwork);
                             }
                     }
                     return true;
@@ -202,7 +205,7 @@ public class SelectBookingFragment extends Fragment {
                Log.e(TAG,e.toString());
             }
         } else {
-            Common.showToast(activity, R.string.textNoNetWork);
+            Common.showToast(activity, R.string.textNoNetwork);
         }
         return selectBooking;
     }

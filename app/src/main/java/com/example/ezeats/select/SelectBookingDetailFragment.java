@@ -42,6 +42,7 @@ public class SelectBookingDetailFragment extends Fragment {
                 tvDateGet,tvChildGet,tvAdultGet,tvPhoneGet;
         private Booking selectBookingDetail;
         private  int memberId;
+        private TextView tvTitle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public class SelectBookingDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textBookingDetail);
         NavController navController = Navigation.findNavController(view);
         tvBkIdGet = view.findViewById(R.id.tvBkIdGet);
         tvTableGet = view.findViewById(R.id.tvTableGet);
@@ -72,13 +75,13 @@ public class SelectBookingDetailFragment extends Fragment {
             selectBookingDetail = (Booking)bundle.getSerializable("booking");
             showSelectBookingDetail();
         }
-        Button btBack = view.findViewById(R.id.btBack);
-        btBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            navController.navigate(R.id.action_selectBookingDetailFragment_to_selectBookingFragment);
-            }
-        });
+//        Button btBack = view.findViewById(R.id.btBack);
+//        btBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            navController.navigate(R.id.action_selectBookingDetailFragment_to_selectBookingFragment);
+//            }
+//        });
 
     }
 

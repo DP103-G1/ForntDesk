@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,9 +28,6 @@ import com.example.ezeats.task.CommonTask;
 import com.google.gson.JsonObject;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class RegisteredFragment extends Fragment {
     private static final String TAG = "TAG_RegisteredFragment";
     private Activity activity;
@@ -38,7 +36,7 @@ public class RegisteredFragment extends Fragment {
     private String textAccount, textAgain, textPassword, textName, textPhone;
     private CommonTask memberInsertTask;
     private NavController navController;
-
+    private TextView tvTitle;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +51,8 @@ public class RegisteredFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textRegister);
         navController = Navigation.findNavController(view);
         handledViews(view);
         edaccs.setOnFocusChangeListener((v, hasFocus) -> {

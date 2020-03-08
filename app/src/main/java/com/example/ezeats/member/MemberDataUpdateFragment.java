@@ -32,6 +32,7 @@ import androidx.navigation.Navigation;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.google.gson.Gson;
@@ -51,6 +52,8 @@ public class MemberDataUpdateFragment extends Fragment {
     private Member member;
     private String textPassword, textName, textPhone;
     private int memId;
+    private TextView tvTitle;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +71,8 @@ public class MemberDataUpdateFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textMemberDataUpdate);
         NavController navController = Navigation.findNavController(view);
         tvMemberIdGet = view.findViewById(R.id.tvMemberIdGet);
         tvAccountGet = view.findViewById(R.id.tvAccountGet);
@@ -109,6 +114,18 @@ public class MemberDataUpdateFragment extends Fragment {
                 if (!hasFocus) {
                     textPhone = edNameGet.getText().toString().trim();
                     if (textName.isEmpty()) {
+                        edPhoneGet.setError(getString(R.string.textInputPhone));
+                    }
+                }
+            }
+        });
+
+        edPhoneGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    textPhone = edPhoneGet.getText().toString().trim();
+                    if (textPhone.isEmpty()){
                         edPhoneGet.setError(getString(R.string.textInputPhone));
                     }
                 }
@@ -162,7 +179,7 @@ public class MemberDataUpdateFragment extends Fragment {
                                 .show();
                     }
                 } else {
-                    Common.showToast(activity, R.string.textNoNetWork);
+                    Common.showToast(activity, R.string.textNoNetwork);
                 }
 
         });
@@ -189,7 +206,7 @@ public class MemberDataUpdateFragment extends Fragment {
                 Log.e(TAG, e.toString());
             }
         } else {
-            Common.showToast(activity, R.string.textNoNetWork);
+            Common.showToast(activity, R.string.textNoNetwork);
         }
         return memberData;
     }

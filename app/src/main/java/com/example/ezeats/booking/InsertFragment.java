@@ -1,6 +1,7 @@
 package com.example.ezeats.booking;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +29,7 @@ import androidx.navigation.Navigation;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.member.Member;
@@ -49,7 +52,7 @@ import java.util.stream.Collectors;
 
 public class InsertFragment extends Fragment {
     private final static String TAG = "TAG_InsertFragment";
-    private FragmentActivity activity;
+    private Activity activity;
     private EditText etPhone, etDate;
     private Spinner spTime, spAdult, spChild, spTable;
     private CommonTask bookingGetAllTask, getTableTask;
@@ -62,13 +65,14 @@ public class InsertFragment extends Fragment {
     private List<Booking> bookings;
     private List<Integer> tableIds;
     private String textPhone;
+    private TextView tvTitle;
 
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        activity =  getActivity();
         mem_id = Common.getMemId(activity);
         Log.d(TAG, String.valueOf(mem_id));
     }
@@ -82,6 +86,8 @@ public class InsertFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textBooking);
         bookings = getBookings();
         tableIds = getTableIds();
         final NavController navController = Navigation.findNavController(view);
