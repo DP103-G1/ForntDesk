@@ -58,7 +58,6 @@ public class BillFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final NavController navigation = Navigation.findNavController(view);
         Bundle bundle = getArguments();
-        tvTitle.setText(R.string.textBill);
         if (bundle != null) {
             total = bundle.getInt("menudetail", 0);
             Log.d(TAG, String.valueOf(total));
@@ -68,6 +67,8 @@ public class BillFragment extends Fragment {
         edNumber = view.findViewById(R.id.edNumber);
         edLast = view.findViewById(R.id.edLast);
         btBillCheck = view.findViewById(R.id.btBillCheck);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textBill);
 
         spMou = view.findViewById(R.id.spMou);
         String[] mounthArray = getResources().getStringArray(R.array.textMounth);

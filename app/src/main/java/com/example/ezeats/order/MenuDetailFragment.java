@@ -37,8 +37,7 @@ import java.util.List;
 
 public class MenuDetailFragment extends Fragment {
     private static final String TAG = "TAG_MenuDetailFragment";
-    //    private final static String NUMBER = "image";
-//    private SharedPreferences preferences;
+    private TextView tvTitle;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SharedPreferences preferences;
     private RecyclerView rvMd;
@@ -69,6 +68,8 @@ public class MenuDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         final NavController navigation = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textMenuDetail);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         memId = Common.getMemId(activity);
         dis = Common.getDis(activity);

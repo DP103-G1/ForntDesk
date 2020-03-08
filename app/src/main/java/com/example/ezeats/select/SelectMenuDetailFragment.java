@@ -37,6 +37,7 @@ public class SelectMenuDetailFragment extends Fragment {
 
     private static final String TAG = "TAG_SelectMenuDetailFragment";
     private RecyclerView rvSmd;
+    private TextView tvTitle;
     private SwipeRefreshLayout swipeRefreshLayout;
     private Activity activity;
     private CommonTask DetailGetAllTask;
@@ -63,6 +64,8 @@ public class SelectMenuDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvSmd = view.findViewById(R.id.rvSmd);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textSeclectMenuDetail);
         Bundle bundle = getArguments();
         if (bundle != null) {
             ordId = bundle.getInt("order");

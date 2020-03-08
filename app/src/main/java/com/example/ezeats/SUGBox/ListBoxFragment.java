@@ -32,6 +32,7 @@ import java.util.List;
 
 public class ListBoxFragment extends Fragment {
     private static final String TAG = "TAG_ListBoxFragment";
+    private TextView tvTitle;
     private RecyclerView rvBoxList;
     private Activity activity;
     private CommonTask boxGetAllTask;
@@ -53,6 +54,8 @@ public class ListBoxFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textconnection);
         rvBoxList = view.findViewById(R.id.rvBoxList);
         rvBoxList.setLayoutManager(new LinearLayoutManager(activity));
         boxes = getBoxes();

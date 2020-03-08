@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import java.util.List;
 
 
 public class HowToFragment extends Fragment {
+    private TextView tvTitle;
     private Activity activity;
     private RecyclerView rvHowTo;
     List<QA> qaList;
@@ -41,7 +43,8 @@ public class HowToFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textcommon);
         rvHowTo = view.findViewById(R.id.rvHowTo);
 
         initData();

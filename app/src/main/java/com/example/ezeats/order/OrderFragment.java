@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
 public class OrderFragment extends Fragment {
     private static final String TAG = "TAG_OrderFragment";
     private RecyclerView rvMenu;
-    private TextView edTotal;
+    private TextView edTotal, tvTitle;
     private ImageView btBell;
     private Button btChect;
     private Activity activity;
@@ -82,6 +82,9 @@ public class OrderFragment extends Fragment {
         rvMenu = view.findViewById(R.id.rvMenu);
         btBell = view.findViewById(R.id.btbell);
         btChect = view.findViewById(R.id.btChect);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textMenu);
+
         rvMenu.setLayoutManager(new LinearLayoutManager(activity));
         menus = getMenu();
         showMenu(menus);

@@ -7,35 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".order.OrderFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:background="@color/colorBackground"
-        android:minHeight="?attr/actionBarSize"
-        app:contentInsetStart="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvTopic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/textMenu"
-                android:textColor="@color/colortext"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.appcompat.widget.Toolbar>
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"

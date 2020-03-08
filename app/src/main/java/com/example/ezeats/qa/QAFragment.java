@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import java.util.List;
 
 
 public class QAFragment extends Fragment {
+    private TextView tvTitle;
     private Activity activity;
     private RecyclerView rvHowTo;
     List<QA> qaList;
@@ -40,6 +42,8 @@ public class QAFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textqa);
         rvHowTo = view.findViewById(R.id.rvHowTo);
 
         initData();
