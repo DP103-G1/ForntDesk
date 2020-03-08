@@ -3,12 +3,12 @@
 
     <item>
     <shape>
-        <solid android:color="@color/colortitle" />
+        <solid android:color="@color/colorTitle" />
     </shape>
 </item>
     <item android:bottom="2dp">
         <shape>
-            <solid android:color="@color/colortext" />
+            <solid android:color="@color/colorText" />
             <padding android:bottom="10dp"
                 android:left="10dp"
                 android:right="10dp"

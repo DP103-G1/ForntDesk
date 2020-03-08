@@ -6,50 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarOrder"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginBottom="3dp"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:contentInsetStart="32dp"
-        app:contentInsetEnd="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="32dp"
-            tools:layout_editor_absoluteY="3dp">
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Hometext"
-                android:textColor="@color/colortext"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/btOpi"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="0dp"
-                android:scaleType="center"
-                android:src="@drawable/box"
-                android:background="#00000000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -61,13 +17,11 @@
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="訂位查詢" />
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="點餐查詢" />
+            android:layout_height="wrap_content" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -84,89 +38,3 @@
 
 
 
-
-    <!--  <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".select.SelectMenuFragment" >
-
-
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="120dp"
-            android:background="@color/colortitle"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:contentInsetStart="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/textSelecttitle"
-                    android:textColor="@color/colortext"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.Toolbar>
-
-        <ImageView
-            android:id="@+id/ivBooking"
-            android:layout_width="143dp"
-            android:layout_height="152dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="244dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/a"
-            tools:src="@tools:sample/avatars" />
-
-        <ImageView
-            android:id="@+id/ivOrderMenu"
-            android:layout_width="132dp"
-            android:layout_height="146dp"
-            android:layout_marginTop="244dp"
-            android:layout_marginEnd="64dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/a"
-            tools:src="@tools:sample/avatars[15]" />
-
-        <TextView
-            android:id="@+id/tvOrderMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/textOrder"
-            android:textColor="@color/colortext"
-            app:layout_constraintEnd_toEndOf="@+id/ivOrderMenu"
-            app:layout_constraintStart_toStartOf="@+id/ivOrderMenu"
-            app:layout_constraintTop_toBottomOf="@+id/ivOrderMenu" />
-
-        <TextView
-            android:id="@+id/tvBooking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colortext"
-            android:text="@string/textBooking"
-            app:layout_constraintEnd_toEndOf="@+id/ivBooking"
-            app:layout_constraintStart_toStartOf="@+id/ivBooking"
-            app:layout_constraintTop_toBottomOf="@+id/ivBooking" />
-    </androidx.constraintlayout.widget.ConstraintLayout> -->

@@ -39,6 +39,7 @@ public class SelectOrderFragment extends Fragment {
     private List<Order> orders;
     private CommonTask OrderGetAllTask;
     private int memId;
+    private TextView tvTitle;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,7 +57,9 @@ public class SelectOrderFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NavController navController = Navigation.findNavController(view);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textSelectOrder);
+
         memId = Common.getMemId(activity);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvSO = view.findViewById(R.id.rvSO);

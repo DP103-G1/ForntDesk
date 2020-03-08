@@ -52,7 +52,6 @@ public class OrderFragment extends Fragment {
     private int totalPrice;
     private Set<MenuDetail> menuDetails;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

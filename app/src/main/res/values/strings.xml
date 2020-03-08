@@ -229,7 +229,7 @@
     <string name="textUpdateFail">更新失敗</string>
     <string name="textUpdateSuccess">更新成功</string>
     <string name="textForgetPassword">忘記密碼</string>
-    <string name="textMenuStatus">餐點狀態</string>
+    <string name="textOrderDetail">點餐明細</string>
 
 
 </resources>

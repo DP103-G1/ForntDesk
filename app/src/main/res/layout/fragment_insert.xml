@@ -28,7 +28,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:text="@string/textPhone"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:textSize="14sp" />
 
             <EditText
@@ -40,7 +40,7 @@
                 android:layout_marginEnd="40dp"
                 android:ems="10"
                 android:inputType="phone"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:textSize="14sp"
                 android:theme="@style/MyEditText" />
 
@@ -52,7 +52,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="40dp"
                 android:text="@string/textDate"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:textSize="14sp" />
 
             <EditText
@@ -64,7 +64,7 @@
                 android:layout_marginEnd="40dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:textSize="14sp"
                 android:theme="@style/MyEditText" />
 
@@ -76,7 +76,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="40dp"
                 android:text="@string/textTime"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
 
             <Spinner
                 android:id="@+id/spTime"
@@ -87,7 +87,7 @@
                 android:layout_marginEnd="40dp"
                 android:entries="@array/textTimeArray"
                 android:popupBackground="#494B49"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:theme="@style/MyEditText" />
 
             <TextView
@@ -98,7 +98,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="40dp"
                 android:text="@string/textTable"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
 
             <Spinner
                 android:id="@+id/spTable"
@@ -108,7 +108,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="40dp"
                 android:popupBackground="#494B49"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:theme="@style/MyEditText" />
 
             <TextView
@@ -119,7 +119,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="40dp"
                 android:text="@string/textAdult"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
 
             <Spinner
                 android:id="@+id/spAdult"
@@ -130,7 +130,7 @@
                 android:layout_marginEnd="40dp"
                 android:entries="@array/textAdultArray"
                 android:popupBackground="#494B49"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:theme="@style/MyEditText" />
 
             <TextView
@@ -141,7 +141,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="40dp"
                 android:text="@string/textChild"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
 
             <Spinner
                 android:id="@+id/spChild"
@@ -170,9 +170,9 @@
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
                     android:layout_weight="0.5"
-                    android:background="@color/colortitle"
+                    android:background="@color/colorPrimary"
                     android:text="@string/textInsert"
-                    android:textColor="@color/colortext" />
+                    android:textColor="@color/colorSecondary" />
 
             </LinearLayout>
         </LinearLayout>

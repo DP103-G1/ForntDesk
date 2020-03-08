@@ -5,7 +5,7 @@
         android:icon="@drawable/house"
         android:title="首頁" />
     <item
-        android:id="@+id/orderFragment"
+        android:id="@+id/selectMenuFragment"
         android:icon="@drawable/food"
         android:title="餐點" />
     <item

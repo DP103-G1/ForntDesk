@@ -36,7 +36,7 @@
                 android:layout_width="339dp"
                 android:layout_height="match_parent"
                 android:iconifiedByDefault="false"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:theme="@style/MyEditText">
 
             </SearchView>
@@ -62,7 +62,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="總金額"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:textSize="24sp" />
 
             <TextView
@@ -75,7 +75,7 @@
                 android:gravity="center"
                 android:inputType="phone"
                 android:text="0"
-                android:textColor="@color/colortext"
+                android:textColor="@color/colorText"
                 android:textSize="24sp" />
         </LinearLayout>
 
@@ -87,7 +87,7 @@
             android:background="@drawable/buttomstyle"
             android:padding="2px"
             android:text="確定"
-            android:textColor="@color/colortext"
+            android:textColor="@color/colorText"
             android:textSize="24sp" />
 
     </LinearLayout>
