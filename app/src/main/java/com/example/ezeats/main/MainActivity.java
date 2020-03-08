@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "TAG_MainActivity";
     private BottomNavigationView bottomNavigationView;
     private NavController navController;
-    private ImageButton ibBill;
+    private ImageButton ibBill, ibGame;
 
 
     @Override
@@ -34,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         ibBill = findViewById(R.id.ibBill);
         ibBill.setOnClickListener(v -> {
             navController.navigate(R.id.menuDetailFragment);
+        });
+        ibGame = findViewById(R.id.ibGame);
+        ibGame.setOnClickListener(v -> {
+            navController.navigate(R.id.gameFragment);
         });
         navController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);

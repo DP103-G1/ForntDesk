@@ -53,16 +53,4 @@ public class SelectMenuFragment extends Fragment {
     }
 
 
-
-//        ivBooking = view.findViewById(R.id.ivBooking);
-//        ivOrderMenu = view.findViewById(R.id.ivOrderMenu);
-//
-//
-//        ivBooking.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_selectMenuFragment_to_selectBookingFragment));
-//        ivOrderMenu.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_selectMenuFragment_to_selectOrderFragment));
-
-
-
-
-
 }

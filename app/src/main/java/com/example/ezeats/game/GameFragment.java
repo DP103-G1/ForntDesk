@@ -21,6 +21,11 @@ public class GameFragment extends Fragment {
     private TextView tvTitle;
     private Activity activity;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        activity = getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
