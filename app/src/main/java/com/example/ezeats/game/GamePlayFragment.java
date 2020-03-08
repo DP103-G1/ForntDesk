@@ -37,7 +37,7 @@ public class GamePlayFragment extends Fragment {
     private ImageButton cards[] = new ImageButton[8];
     private ImageButton pressCard;
     private ImageButton tempPhoto;
-    private TextView tvTimer;
+    private TextView tvTimer, tvTitle;
     private HashMap<Integer, Integer> location = new HashMap<>();
     private int[] randomArray;
     private boolean pressed;
@@ -186,6 +186,8 @@ public class GamePlayFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         navController = Navigation.findNavController(view);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textLianliankan);
         tvTimer = view.findViewById(R.id.tvTimer);
         cards[0] = view.findViewById(R.id.ibMatch1);
         cards[1] = view.findViewById(R.id.ibMatch2);

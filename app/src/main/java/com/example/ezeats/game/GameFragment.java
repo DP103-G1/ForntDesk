@@ -1,11 +1,13 @@
 package com.example.ezeats.game;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +18,9 @@ import com.example.ezeats.R;
 
 
 public class GameFragment extends Fragment {
+    private TextView tvTitle;
+    private Activity activity;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,6 +31,8 @@ public class GameFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textLianliankan);
         Button btPlay = view.findViewById(R.id.btPlay);
         btPlay.setOnClickListener(new View.OnClickListener() {
             @Override

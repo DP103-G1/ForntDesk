@@ -3,9 +3,7 @@ package com.example.ezeats.SUGBox;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,14 +33,13 @@ import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.SimpleFormatter;
 
 
 public class SUGBoxFragment extends Fragment
     implements DatePickerDialog.OnDateSetListener{
     private final static String TAG = "TAG_SUGBoxFragment";
     private FragmentActivity activity;
-    private TextView tvShowDate;
+    private TextView tvShowDate, tvTitle;
     private static int year,month,day;
     private SimpleDateFormat simpleDateFormat;
     private EditText etTopicKeyIn,etPurpose,etSource,etMessage;
@@ -70,6 +67,8 @@ public class SUGBoxFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final NavController navController = Navigation.findNavController(view);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textconnection);
         etTopicKeyIn = view.findViewById(R.id.etTopicKeyIn);
         etPurpose = view.findViewById(R.id.etPurpose);
         etSource = view.findViewById(R.id.etSource);

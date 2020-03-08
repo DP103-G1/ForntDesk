@@ -39,6 +39,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "TAG_HomeFragment";
+    private TextView tvTitle;
     private Activity activity;
     private NavController navController;
     private RecyclerView rvHome;
@@ -66,6 +67,8 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvHome = view.findViewById(R.id.rvHome);
         flipperImage = view.findViewById(R.id.flipperImage);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.Hometext);
         flipperImages(getMenuImages());
         rvHome.setLayoutManager(new LinearLayoutManager(activity));
         menus = getMenu();
