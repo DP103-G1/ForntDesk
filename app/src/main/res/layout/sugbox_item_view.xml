@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/howto_item_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +22,7 @@
                 android:gravity="center"
                 android:padding="16dp"
                 android:text="@string/tvNumber"
-                android:textColor="@color/cardText"
+                android:textColor="@color/colorSecondary"
                 app:layout_constraintStart_toEndOf="@+id/tvNo"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,7 +81,7 @@
                             android:layout_height="wrap_content"
                             android:padding="12dp"
                             android:text="@string/tvIsReply"
-                            android:textColor="@color/cardText"
+                            android:textColor="@color/colorSecondary"
                             android:textSize="16sp" />
 
                         <TextView
@@ -91,7 +90,7 @@
                             android:layout_height="wrap_content"
                             android:padding="12dp"
                             android:text="@string/tvReplyContent"
-                            android:textColor="@color/cardText"
+                            android:textColor="@color/colorSecondary"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -105,7 +104,7 @@
                 android:layout_height="44dp"
                 android:gravity="center"
                 android:text="@string/tvNo"
-                android:textColor="@color/cardText"
+                android:textColor="@color/colorSecondary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

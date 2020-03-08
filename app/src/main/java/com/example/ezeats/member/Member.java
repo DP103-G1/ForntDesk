@@ -1,8 +1,6 @@
 package com.example.ezeats.member;
 
-import java.io.Serializable;
-
-public class Member implements Serializable{
+public class Member {
 
 	private int member_Id;
 	private String account;
@@ -24,6 +22,7 @@ public class Member implements Serializable{
 		this.password = password;
 		this.name = name;
 		this.phone = phone;
+		this.state = state;
 	}
 	
 	public Member(String account, String password) {

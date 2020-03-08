@@ -12,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:background="@color/colortitle"
+        android:background="@color/colorBackground"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
         app:contentInsetStart="32dp"
         app:layout_constraintBottom_toTopOf="@+id/tvTopic"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +38,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="392dp"
-        android:layout_height="580dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="2dp"
         android:orientation="vertical"
         android:padding="3px"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +62,8 @@
 
             <SearchView
                 android:id="@+id/searchView"
-                android:layout_width="338dp"
-                android:layout_height="33dp"
+                android:layout_width="339dp"
+                android:layout_height="match_parent"
                 android:iconifiedByDefault="false"
                 android:textColor="@color/colortext"
                 android:theme="@style/MyEditText">
@@ -73,8 +74,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMenu"
-            android:layout_width="392dp"
-            android:layout_height="410dp">
+            android:layout_width="405dp"
+            android:layout_height="409dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -91,7 +92,7 @@
                 android:gravity="center"
                 android:text="總金額"
                 android:textColor="@color/colortext"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/edTotal"

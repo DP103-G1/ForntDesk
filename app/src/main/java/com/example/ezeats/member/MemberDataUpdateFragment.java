@@ -24,6 +24,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
@@ -86,19 +92,25 @@ public class MemberDataUpdateFragment extends Fragment {
                 }
             }
         });
-        edNameGet.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                textName = edNameGet.getText().toString().trim();
-                if (textName.isEmpty()) {
-                    edNameGet.setError(getString(R.string.textInputName));
+        edNameGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    textName = edNameGet.getText().toString().trim();
+                    if (textName.isEmpty()) {
+                        edNameGet.setError(getString(R.string.textInputName));
+                    }
                 }
             }
         });
-        edPhoneGet.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!hasFocus) {
-                textPhone = edNameGet.getText().toString().trim();
-                if (textName.isEmpty()) {
-                    edPhoneGet.setError(getString(R.string.textInputPhone));
+        edPhoneGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    textPhone = edNameGet.getText().toString().trim();
+                    if (textName.isEmpty()) {
+                        edPhoneGet.setError(getString(R.string.textInputPhone));
+                    }
                 }
             }
         });
@@ -122,6 +134,8 @@ public class MemberDataUpdateFragment extends Fragment {
                 Common.showToast(activity, R.string.textPhoneInvaild);
                 return;
             }
+
+                Member member = new Member(memId, password, name, phone);
                 if (Common.networkConnected(activity)) {
                     String url = Url.URL + "/MembersServlet";
                     JsonObject jsonObject = new JsonObject();
@@ -179,6 +193,4 @@ public class MemberDataUpdateFragment extends Fragment {
         }
         return memberData;
     }
-
-
 }

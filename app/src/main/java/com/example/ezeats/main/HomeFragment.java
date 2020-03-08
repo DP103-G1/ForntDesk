@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -72,25 +71,10 @@ public class HomeFragment extends Fragment {
         menus = getMenu();
         showMenu(menus);
         navController = Navigation.findNavController(view);
-        if (Common.getMemId(activity) == 0) {
-            navController.navigate(R.id.action_homeFragment_to_loginFragment);
-        }
         handledViews();
         bottomNavigationView.setVisibility(View.VISIBLE);
-        flipperImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment);
-            }
-        });
-
-        Button btOpi = view.findViewById(R.id.btOpi);
-        btOpi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_linkFragment);
-            }
-        });
+        flipperImage.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment));
     }
 
     private List<Menu> getMenu() {
@@ -179,12 +163,8 @@ public class HomeFragment extends Fragment {
             homeImageTask.execute();
             holder.tvName.setText(menu.getFOOD_NAME());
             holder.tvContent.setText(menu.getFOOD_CONTENT());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment);
-                }
-            });
+            holder.itemView.setOnClickListener(v ->
+                    Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment));
         }
     }
 
@@ -222,7 +202,7 @@ public class HomeFragment extends Fragment {
                 Log.e(TAG, e.toString());
             }
         } else {
-            Common.showToast(activity, R.string.textNoNetWork);
+            Common.showToast(activity, R.string.textNoNetwork);
         }
         return getImages(base64Images);
     }

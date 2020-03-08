@@ -3,7 +3,6 @@ package com.example.ezeats.booking;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,8 +25,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.ezeats.main.Common;
 import com.example.ezeats.R;
+import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.member.Member;
@@ -45,6 +44,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 
 public class InsertFragment extends Fragment {
     private final static String TAG = "TAG_InsertFragment";
@@ -177,51 +178,53 @@ public class InsertFragment extends Fragment {
         });
 
 
-        Button btInsert = view.findViewById(R.id.btInsert);
-        btInsert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Date bkDate = null;
-                try {
-                    bkDate = simpleDateFormat.parse(etDate.getText().toString().trim());
-                } catch (ParseException e) {
-                    Log.e(TAG, e.toString());
-                }
-                String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
-                String bkTime = timeArray[spTime.getSelectedItemPosition()];
-                Log.d(TAG, bkTime);
-                if (bkTime.equals("Select")) {
-                    Common.showToast(getActivity(), R.string.textTimeNoSelect);
-                    return;
-                }
-                int bkTable;
-                String bkTableStr = comparison().get(spTable.getSelectedItemPosition());
-                Log.d(TAG, bkTableStr);
-                if (bkTableStr.equals("Select")) {
-                    Common.showToast(getActivity(), R.string.textTableNoSelect);
-                    return;
-                } else {
-                    bkTable = Integer.parseInt(bkTableStr);
-                }
+            Button btInsert = view.findViewById(R.id.btInsert);
+            btInsert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-
-                String[] childArray = getResources().getStringArray(R.array.textChildArray);
-                String bkChild = String.valueOf(childArray[spChild.getSelectedItemPosition()]);
-                Log.d(TAG, bkChild);
-                if (bkChild.equals("Select")) {
-                    Common.showToast(getActivity(), R.string.textChildNoSelect);
-                    return;
-                }
+                    Date bkDate = null;
+                    try {
+                        bkDate = simpleDateFormat.parse(etDate.getText().toString().trim());
+                    } catch (ParseException e) {
+                        Log.e(TAG, e.toString());
+                    }
+                    String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
+                    String bkTime = timeArray[spTime.getSelectedItemPosition()];
+                    Log.d(TAG, bkTime);
+                    if(bkTime.equals("Select")){
+                        Common.showToast(getActivity(),R.string.textTimeNoSelect);
+                        return;
+                    }
+                    int bkTable;
+                    String bkTableStr = comparison().get(spTable.getSelectedItemPosition());
+                    Log.d(TAG, bkTableStr);
+                    if (bkTableStr.equals("Select")){
+                        Common.showToast(getActivity(),R.string.textTableNoSelect);
+                        return;
+                    } else {
+                        bkTable = Integer.parseInt(bkTableStr);
+                    }
 
 
-                String[] adultArray = getResources().getStringArray(R.array.textAdultArray);
-                String bkAdult = adultArray[spAdult.getSelectedItemPosition()];
-                Log.d(TAG, bkAdult);
-                if (bkAdult.equals("Select")) {
-                    Common.showToast(getActivity(), R.string.textNoSelect);
-                    return;
-                }
+
+                    String[] childArray = getResources().getStringArray(R.array.textChildArray);
+                    String bkChild = String.valueOf(childArray[spChild.getSelectedItemPosition()]);
+                    Log.d(TAG, bkChild);
+                    if(bkChild.equals("Select")){
+                        Common.showToast(getActivity(),R.string.textChildNoSelect);
+                        return;
+                    }
+
+
+                    String[] adultArray = getResources().getStringArray(R.array.textAdultArray);
+                    String bkAdult = adultArray[spAdult.getSelectedItemPosition()];
+                    Log.d(TAG, bkAdult);
+                    if(bkAdult.equals("Select")){
+                        Common.showToast(getActivity(),R.string.textNoSelect);
+                        return;
+                    }
 
                 String bkPhone = etPhone.getText().toString().trim();
                 if (bkPhone.length() <= 0) {
@@ -257,7 +260,7 @@ public class InsertFragment extends Fragment {
 
                     }
                 } else {
-                    Common.showToast(getActivity(), R.string.textNoNetWork);
+                    Common.showToast(getActivity(), R.string.textNoNetwork);
                 }
 //                navController.navigate(R.id.action_insertFragment_to_homeFragment);
             }
@@ -345,8 +348,7 @@ public class InsertFragment extends Fragment {
             getTableTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = getTableTask.execute().get();
-                Type listType = new TypeToken<List<Table>>() {
-                }.getType();
+                Type listType = new TypeToken<List<Table>>() {}.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                 List<Table> tables = gson.fromJson(jsonIn, listType);
                 tableIds = tables.stream().map(v -> v.getTableId()).collect(Collectors.toList());
@@ -354,7 +356,7 @@ public class InsertFragment extends Fragment {
                 Log.e(TAG, toString());
             }
         } else {
-            Common.showToast(getActivity(), R.string.textNoNetWork);
+            Common.showToast(getActivity(), R.string.textNoNetwork);
         }
 //        List<String> tableIds = new ArrayList<>();
 //        for (Table table : tables) {
@@ -377,15 +379,14 @@ public class InsertFragment extends Fragment {
             getTableTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = getTableTask.execute().get();
-                Type listType = new TypeToken<List<Booking>>() {
-                }.getType();
+                Type listType = new TypeToken<List<Booking>>() {}.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                 bookings = gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, toString());
             }
         } else {
-            Common.showToast(getActivity(), R.string.textNoNetWork);
+            Common.showToast(getActivity(), R.string.textNoNetwork);
         }
         return bookings;
     }

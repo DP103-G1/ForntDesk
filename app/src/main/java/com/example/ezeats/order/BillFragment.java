@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.google.gson.JsonObject;
 
 public class BillFragment extends Fragment {
     private final static String TAG = "TAG_BillFragment";
+    private TextView tvTitle;
     private Activity activity;
     private EditText edName, edNumber, edLast;
     private Button btBillCheck;
@@ -56,6 +58,7 @@ public class BillFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final NavController navigation = Navigation.findNavController(view);
         Bundle bundle = getArguments();
+        tvTitle.setText(R.string.textBill);
         if (bundle != null) {
             total = bundle.getInt("menudetail", 0);
             Log.d(TAG, String.valueOf(total));
@@ -147,7 +150,7 @@ public class BillFragment extends Fragment {
                                 .show();
                     }
                 } else {
-                    Common.showToast(getActivity(), R.string.textNoNetWork);
+                    Common.showToast(getActivity(), R.string.textNoNetwork);
                 }
             }
         });

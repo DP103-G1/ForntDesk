@@ -1,7 +1,8 @@
 package com.example.ezeats.member;
 
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,19 +16,30 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.ezeats.R;
+import com.example.ezeats.main.Common;
+import com.example.ezeats.main.MainActivity;
 
 
 public class MemberRegionFragment extends Fragment {
+    private TextView tvTitle;
     private ListView listView;
-    private Activity activity;
+    private MainActivity activity;
+    private NavController navController;
     private String[] str = {"會員修改","訂位查詢","訂單查詢","登出"};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        activity = (MainActivity) getActivity();
 
     }
 
@@ -41,6 +53,9 @@ public class MemberRegionFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
+        tvTitle = activity.findViewById(R.id.tvTitle);
+        tvTitle.setText(R.string.textMember);
 
         listView = view.findViewById(R.id.listView);
         ArrayAdapter arrayAdapter = new ArrayAdapter(activity,R.layout.item_view_listviewitem,str);
@@ -60,6 +75,13 @@ public class MemberRegionFragment extends Fragment {
                     Navigation.findNavController(view1).navigate(R.id.action_memberRegionFragment_to_memberFragment);
             }
         });
+    }
 
+    private void logout(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
+        pref.edit().putString("account", null).putString("password", null).putInt("memId", 0).apply();
+        activity.onResume();
+        navController.popBackStack(R.id.homeFragment, false);
+        navController.navigate(R.id.loginFragment);
     }
 }

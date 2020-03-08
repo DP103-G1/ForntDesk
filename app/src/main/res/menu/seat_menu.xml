@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/house"
         android:title="首頁" />
     <item
-        android:id="@+id/selectMenuFragment"
-        android:icon="@drawable/search"
-        android:title="查詢" />
+        android:id="@+id/orderFragment"
+        android:icon="@drawable/food"
+        android:title="點餐" />
     <item
         android:id="@+id/insertFragment"
         android:icon="@drawable/chair"
         android:title="訂位" />
-    <item
-        android:id="@+id/orderFragment"
-        android:icon="@drawable/food"
-        android:title="點餐" />
     <item
         android:id="@+id/memberRegionFragment"
         android:icon="@drawable/people"

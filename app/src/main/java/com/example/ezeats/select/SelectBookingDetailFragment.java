@@ -18,6 +18,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.ezeats.R;
 import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Common;
@@ -33,6 +37,7 @@ import java.util.List;
 public class SelectBookingDetailFragment extends Fragment {
         private final static String TAG = "TAG_SelectBookingDetailFragment";
         private Activity activity;
+        private CommonTask commonTask;
         private TextView tvBkIdGet,tvTableGet,tvTimeGet,
                 tvDateGet,tvChildGet,tvAdultGet,tvPhoneGet;
         private Booking selectBookingDetail;
