@@ -3,6 +3,6 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@color/colortext"
+    android:textColor="@color/colorText"
     android:textSize="16sp">
 </TextView>
