@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,6 +47,7 @@ public class SUGBoxFragment extends Fragment
     private EditText etTopicKeyIn,etPurpose,etSource,etMessage;
     private RatingBar ratingBar;
     private int mem_id;
+    private String textMessage;
 
 
     @Override
@@ -154,6 +157,27 @@ public class SUGBoxFragment extends Fragment
                 }
             }
 
+        });
+
+        etMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 200) {
+                    textMessage = s.subSequence(0, 200).toString();
+                    etMessage.setText(textMessage);
+                    etMessage.setSelection(textMessage.length());
+                }
+            }
         });
 
     }

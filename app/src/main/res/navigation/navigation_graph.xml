@@ -233,6 +233,15 @@
         <action
             android:id="@+id/action_memberRegionFragment_to_selectOrderFragment"
             app:destination="@id/selectOrderFragment" />
+        <action
+            android:id="@+id/action_memberRegionFragment_to_QAFragment"
+            app:destination="@id/QAFragment" />
+        <action
+            android:id="@+id/action_memberRegionFragment_to_howToFragment"
+            app:destination="@id/howToFragment" />
+        <action
+            android:id="@+id/action_memberRegionFragment_to_checkFragment"
+            app:destination="@id/checkFragment" />
     </fragment>
     <fragment
         android:id="@+id/memberDataUpdateFragment"
