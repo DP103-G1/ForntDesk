@@ -29,6 +29,7 @@ import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Common;
 import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Url;
+import com.example.ezeats.member.Member;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
@@ -36,7 +37,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Member;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -85,9 +85,6 @@ public class SelectBookingFragment extends Fragment {
             showSelectBooking(selectBooking);
             swipeRefreshLayout.setRefreshing(false);
         });
-
-//        Button btBack = view.findViewById(R.id.btBack);
-//        btBack.setOnClickListener(v -> navController.navigate(R.id.action_selectBookingFragment_to_memberRegionFragment));
 
     }
 
@@ -150,15 +147,16 @@ public class SelectBookingFragment extends Fragment {
                     switch (item.getItemId()){
                         case R.id.selectDelete:
                             if (Common.networkConnected(activity)){
-                                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+//                                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:MM:dd").create();
                                 String url1 = Url.URL + "/BookingServlet";
                                 JsonObject jsonObject = new JsonObject();
-                                jsonObject.addProperty("action","update");
-                                jsonObject.addProperty("bk_id",booking.getBkId());
-                                jsonObject.addProperty("member_id",memId);
+                                jsonObject.addProperty("action","deleteByStatus");
+                                jsonObject.addProperty("bkId",booking.getBkId());
 
+//                                jsonObject.addProperty("member_id",memId);
+//                                jsonObject.addProperty("status",0);
+//                                jsonObject.addProperty("booking",gson.toJson(booking));
                                 int count = 0;
-
                                 try {
                                     selectBookingGetAllTask = new CommonTask(url1,jsonObject.toString());
                                     String result = selectBookingGetAllTask.execute().get();

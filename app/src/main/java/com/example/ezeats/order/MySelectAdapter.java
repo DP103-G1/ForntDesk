@@ -34,12 +34,10 @@ public class MySelectAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new OrderFragment();
             case 1:
-
                 return new OrderDetailFragment();
             default:
                 return null;
         }
-
     }
 
     @Nullable
