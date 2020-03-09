@@ -49,12 +49,12 @@
         android:id="@+id/ibMatch2"
         android:layout_width="150dp"
         android:layout_height="132dp"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="37dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ibMatch1"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimer"
         tools:src="@tools:sample/avatars[0]" />
 
     <ImageButton
@@ -107,7 +107,6 @@
         android:id="@+id/tvTimer"
         android:layout_width="68dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textColor="@color/colorWhite"

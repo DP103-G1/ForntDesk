@@ -39,6 +39,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
+                android:id="@+id/ibGame"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#00000000"
+                android:scaleType="center"
+                android:src="@drawable/game"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ibBill"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
                 android:id="@+id/ibBill"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"

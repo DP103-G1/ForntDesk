@@ -143,7 +143,7 @@ public class SelectMenuDetailFragment extends Fragment {
         @NonNull
         @Override
         public SelectMenuDetailAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = layoutInflater.inflate(R.layout.item_view_menudetails, parent, false);
+            View itemView = layoutInflater.inflate(R.layout.item_view_menudetail, parent, false);
             return new MyViewHolder(itemView);
         }
 

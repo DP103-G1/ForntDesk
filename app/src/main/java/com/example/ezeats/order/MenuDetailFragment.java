@@ -24,7 +24,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
+import com.example.ezeats.socket.SocketMessage;
 import com.example.ezeats.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -68,6 +70,7 @@ public class MenuDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         final NavController navigation = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
+        Table table = getTable(Common.getMemId(activity));
         tvTitle = activity.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.textMenuDetail);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
@@ -91,13 +94,13 @@ public class MenuDetailFragment extends Fragment {
 
 
         menuDetails = getMenuDetail();
+        showMenuDetail(menuDetails);
         int ordid = menuDetails.get(0).getORD_ID();
         int total = menuDetails.get(0).getORD_TOTAL();
         final boolean[] bill = {menuDetails.get(0).isORD_BILL()};
         if (menuDetails != null && !menuDetails.isEmpty()) {
             tvTotal.setText(String.valueOf(total));
         }
-        showMenuDetail(menuDetails);
 
         btBill.setOnClickListener(v -> {
             for (MenuDetail menuDetail : menuDetails) {
@@ -133,6 +136,9 @@ public class MenuDetailFragment extends Fragment {
                         Log.e(TAG, e.toString());
                     }
                     if (count != 0) {
+                        table.setORD_ID(0);
+                        SocketMessage socketMessage = new SocketMessage("seat", "waiter", Common.gson.toJson(table));
+                        Common.eZeatsWebSocketClient.send(Common.gson.toJson(socketMessage));
                         Log.d(TAG, String.valueOf(distotal));
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("menudetail", distotal);
@@ -242,9 +248,22 @@ public class MenuDetailFragment extends Fragment {
             } else {
                 holder.tvStatus.setText("製作中");
             }
-
-
         }
+    }
+
+    private Table getTable(int memId) {
+        Table table = null;
+        String url = Url.URL + "/TableServlet";
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("action", "getUsingTableByMemberId");
+        jsonObject.addProperty("memberId", memId);
+        try {
+            String result = new CommonTask(url, jsonObject.toString()).execute().get();
+            table = Common.gson.fromJson(result, Table.class);
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        return table;
     }
 
     @Override

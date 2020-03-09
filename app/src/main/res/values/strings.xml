@@ -164,7 +164,7 @@
     <string name="navFront">mainGraph</string>
     <string name="etPurpose">輸入用餐目的</string>
     <string name="etSource">請輸入得知來源</string>
-    <string name="etContent">請輸入意見</string>
+    <string name="etContent">輸入字數限制200內</string>
     <string name="tvheadline">意見</string>
     <string name="btDatePicker" translatable="false">請選擇用餐日期</string>
     <string name="tvShowDate">選擇的時間</string>
@@ -234,6 +234,7 @@
     <string name="textViewMassage">查看留言</string>
     <string name="textMessageBoard">留言板</string>
     <string name="textMassageBoard">留言板</string>
+    <string name="textServerFail">請稍後再試</string>
 
 
 </resources>

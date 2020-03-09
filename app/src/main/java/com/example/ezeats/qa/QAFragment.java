@@ -58,15 +58,15 @@ public class QAFragment extends Fragment {
 
     private void initData() {
         qaList = new ArrayList<>();
-        qaList.add(new QA("NO.1", "訂位人數最多幾人？", "最多四位成人"));
-        qaList.add(new QA("No.2", "如果訂錯日期怎麼辦？", "請取消訂位重新訂位"));
+        qaList.add(new QA("NO.1", "訂位人數有限制嗎？", "坐位最多容納4位成人，幼兒提供兒童座椅"));
+        qaList.add(new QA("No.2", "消費方式及規範為何？", "每人需各點一份餐，不可共食"));
         qaList.add(new QA("No.3", "候位時間多久？", "平日約5~10分，假日20~40分"));
         qaList.add(new QA("No.4", "用餐時間多久？", "用餐時間為90分鐘"));
-        qaList.add(new QA("No.5", "餐點有哪些？", "本餐廳提供牛肉套餐、豬肉套餐與蔬食套餐"));
+        qaList.add(new QA("No.5", "餐點有哪些？", "本餐廳提供各式牛排供給您選擇"));
         qaList.add(new QA("No.6", "如果訂錯日期怎麼辦？", "請取消訂位重新訂位"));
         qaList.add(new QA("No.7", "肉品來源？", "牛肉使用澳洲進口牛，豬肉使用台灣國產豬"));
-        qaList.add(new QA("No.8", "訂位可預訂多久以前的時間？", "訂位最早可於三週前訂位"));
-        qaList.add(new QA("No.9", "優惠碼怎麼用？", "小遊戲過關使獲得優惠碼並可在結帳時使用"));
-        qaList.add(new QA("NO.10", "素食者可選的餐點？", "素食者可選擇蔬食套餐"));
+        qaList.add(new QA("No.8", "餐廳是否提供WI-FI無線上網？", "有的，本餐廳有提供免費WI-FI"));
+        qaList.add(new QA("No.9", "優惠碼怎麼用？", "小遊戲過關使獲得優惠碼並可於用餐當日結帳時使用"));
+        qaList.add(new QA("No.10", "可不可以帶寵物進餐廳？", "可以攜帶寵物，但須將寵物安置於寵物籃內，全程不能放出逗玩"));
     }
 }

@@ -2,34 +2,39 @@ package com.example.ezeats.order;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
+import com.example.ezeats.socket.SocketMessage;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -54,6 +59,15 @@ public class OrderFragment extends Fragment {
     private List<Menu> menus;
     private int totalPrice;
     private Set<MenuDetail> menuDetails;
+    private SharedPreferences pref;
+    private Table table;
+    private LocalBroadcastManager broadcastManager;
+    private int memberId;
+    private TabLayout tabLayout;
+
+    public OrderFragment(TabLayout tabLayout) {
+        this.tabLayout = tabLayout;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,7 +89,12 @@ public class OrderFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerSocketReceiver();
+        pref = activity.getSharedPreferences(Common.MEMBER_PREFRENCE, Context.MODE_PRIVATE);
+        memberId = Common.getMemId(activity);
         final NavController navController = Navigation.findNavController(view);
+        table = getTable(memberId);
         menuDetails = new HashSet<>();
         SearchView searchView = view.findViewById(R.id.searchView);
         totalPrice = 0;
@@ -86,11 +105,39 @@ public class OrderFragment extends Fragment {
         btChect = view.findViewById(R.id.btChect);
         tvTitle = activity.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.textMenu);
+
         rvMenu.setLayoutManager(new LinearLayoutManager(activity));
         menus = getMenu();
         showMenu(menus);
 
-        btBell.setOnClickListener(v -> v.setBackgroundColor(Color.RED));
+        if (table.isStatus()) {
+            btBell.setBackgroundColor(Color.RED);
+            btBell.setEnabled(false);
+        } else {
+            btBell.setBackgroundColor(Color.argb(0, 0, 0, 0));
+            btBell.setEnabled(true);
+        }
+        btBell.setOnClickListener(v -> {
+            table.setStatus(true);
+            String url = Url.URL + "/TableServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "updateStatus");
+            jsonObject.addProperty("table", Common.gson.toJson(table));
+            int count = 0;
+            try {
+                String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                count = Integer.parseInt(result);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+            if (count != 0) {
+                SocketMessage socketMessage = new SocketMessage("service", "waiter", Common.gson.toJson(table));
+                Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
+                v.setBackgroundColor(Color.RED);
+            } else {
+                Common.showToast(activity, R.string.textServerFail);
+            }
+        });
 
         btChect.setOnClickListener(v -> {
             if (totalPrice <= 0){
@@ -101,9 +148,9 @@ public class OrderFragment extends Fragment {
                String url = Url.URL + "/OrderServlet";
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("action","add");
-                Order order = new Order(Common.getMemId(activity),
+                Order order = new Order(memberId,
                         Integer.parseInt(edTotal.getText().toString()),
-                        menuDetails.stream().collect(Collectors.toList()));
+                        new ArrayList<>(menuDetails));
                 jsonObject.addProperty("order", Common.gson.toJson(order));
                 int count = 0;
                 try {
@@ -115,12 +162,19 @@ public class OrderFragment extends Fragment {
                 if (count == 0) {
                     Common.showToast(getActivity(), R.string.textInsertFail);
                 } else {
+                    final int ordId = count;
                     Common.showToast(getActivity(), R.string.textInsertSuccess);
+                    menuDetails.forEach(menuDetail -> menuDetail.setORD_ID(ordId));
+                    SocketMessage socketMessage = new SocketMessage("menuDetail", "kitchen", Common.gson.toJson(menuDetails));
+                    Common.eZeatsWebSocketClient.send(Common.gson.toJson(socketMessage));
+                    socketMessage.setReceiver("waiter");
+                    Common.eZeatsWebSocketClient.send(Common.gson.toJson(socketMessage));
                 }
             } else {
                 Common.showToast(getActivity(), R.string.textNoNetwork);
             }
-
+            tabLayout.setScrollX(tabLayout.getWidth());
+            tabLayout.getTabAt(1).select();
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -146,7 +200,37 @@ public class OrderFragment extends Fragment {
                 return false;
             }
         });
+    }
 
+    private void registerSocketReceiver() {
+        IntentFilter filter = new IntentFilter("service");
+        broadcastManager.registerReceiver(receiver, filter);
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SocketMessage socketMessage = (SocketMessage) intent.getSerializableExtra("socketMessage");
+            if (socketMessage.getReceiver().equals("member" + memberId)) {
+                btBell.setBackgroundColor(Color.argb(0, 0, 0, 0));
+                btBell.setEnabled(true);
+            }
+        }
+    };
+
+    private Table getTable(int memId) {
+        Table table = null;
+        String url = Url.URL + "/TableServlet";
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("action", "getUsingTableByMemberId");
+        jsonObject.addProperty("memberId", memId);
+        try {
+            String result = new CommonTask(url, jsonObject.toString()).execute().get();
+            table = Common.gson.fromJson(result, Table.class);
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        return table;
     }
 
     private List<Menu> getMenu() {
@@ -225,7 +309,9 @@ public class OrderFragment extends Fragment {
                     tvAmount.setText(String.valueOf(amount));
                     totalPrice += price;
                     edTotal.setText(String.valueOf(totalPrice));
-                    MenuDetail menuDetail = new MenuDetail(id, amount, price * amount);
+                    MenuDetail menuDetail = new MenuDetail(0, id, table.getTableId(),
+                            tvName.getText().toString(), amount, false,
+                            price * amount, false);
                     menuDetails.remove(menuDetail);
                     menuDetails.add(menuDetail);
                 });
@@ -236,7 +322,9 @@ public class OrderFragment extends Fragment {
                         tvAmount.setText(String.valueOf(amount));
                         totalPrice -= price;
                         edTotal.setText(String.valueOf(totalPrice));
-                        MenuDetail menuDetail = new MenuDetail(id, amount, price * amount);
+                        MenuDetail menuDetail = new MenuDetail(0, id, table.getTableId(),
+                                tvName.getText().toString(), amount, false,
+                                price * amount, false);
                         menuDetails.remove(menuDetail);
                         if (amount != 0) {
                             menuDetails.add(menuDetail);
