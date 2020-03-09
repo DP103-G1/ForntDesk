@@ -119,7 +119,7 @@ public class GamePlayFragment extends Fragment {
                         .putString("number", number)
                         .apply();
                 Common.showToast(activity, R.string.textsave);
-                navController.popBackStack(R.id.linkFragment, false);
+                navController.popBackStack(R.id.homeFragment, false);
             }
         });
 

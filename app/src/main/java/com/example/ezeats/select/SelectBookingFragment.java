@@ -7,13 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +24,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.ezeats.R;
 import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Common;
-import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
@@ -36,7 +32,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Member;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -154,8 +149,8 @@ public class SelectBookingFragment extends Fragment {
                                 String url1 = Url.URL + "/BookingServlet";
                                 JsonObject jsonObject = new JsonObject();
                                 jsonObject.addProperty("action","update");
-                                jsonObject.addProperty("bk_id",booking.getBkId());
-                                jsonObject.addProperty("member_id",memId);
+                                booking.setStatus(0);
+                                jsonObject.addProperty("booking", Common.gson.toJson(booking));
 
                                 int count = 0;
 

@@ -147,7 +147,7 @@ public class SUGBoxFragment extends Fragment
                                 .setPositiveButton(R.string.textConfirm, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        navController.navigate(R.id.action_SUGBoxFragment_to_listBoxFragment);
+                                        navController.navigate(R.id.listBoxFragment);
                                     }
                                 })
                                 .show();

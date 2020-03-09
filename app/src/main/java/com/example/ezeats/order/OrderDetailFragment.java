@@ -65,8 +65,6 @@ public class OrderDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        broadcastManager = LocalBroadcastManager.getInstance(activity);
-        registerSocketReceiver();
         tvTitle = activity.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.textOrderDetail);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
@@ -82,6 +80,14 @@ public class OrderDetailFragment extends Fragment {
         rvOd.setLayoutManager(new LinearLayoutManager(activity));
         menuDetails = getMenuDetail();
         showMenuDetail(menuDetails);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("1", "1");
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerSocketReceiver();
     }
 
     private void registerSocketReceiver() {
@@ -128,9 +134,6 @@ public class OrderDetailFragment extends Fragment {
     }
 
     private void showMenuDetail(List<MenuDetail> menuDetails) {
-        if (menuDetails == null || menuDetails.isEmpty()) {
-            Common.showToast(activity, R.string.textNOMenu);
-        }
         OrderDetailAdapter orderDetailAdapter = (OrderDetailAdapter) rvOd.getAdapter();
 
         if (orderDetailAdapter == null) {

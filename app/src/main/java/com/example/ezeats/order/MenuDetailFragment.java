@@ -95,6 +95,7 @@ public class MenuDetailFragment extends Fragment {
 
         menuDetails = getMenuDetail();
         showMenuDetail(menuDetails);
+        int bkid = table.getORD_ID();
         int ordid = menuDetails.get(0).getORD_ID();
         int total = menuDetails.get(0).getORD_TOTAL();
         final boolean[] bill = {menuDetails.get(0).isORD_BILL()};
