@@ -41,6 +41,7 @@ public class BillFragment extends Fragment {
     private int total;
     private Table table;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,6 +152,7 @@ public class BillFragment extends Fragment {
                                 .setMessage("總金額" + " " + total)
                                 .setPositiveButton(R.string.textYes, (dialog, which) -> navigation.navigate(R.id.action_billFragment_to_homeFragment))
                                 .show();
+
                     }
                 } else {
                     Common.showToast(getActivity(), R.string.textNoNetwork);

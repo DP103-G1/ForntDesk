@@ -103,6 +103,7 @@ public class MenuDetailFragment extends Fragment {
         }
 
         btBill.setOnClickListener(v -> {
+
             for (MenuDetail menuDetail : menuDetails) {
                 if (!menuDetail.isFOOD_ARRIVAL()) {
                     Common.showToast(activity, R.string.textNoArrival);
@@ -148,6 +149,7 @@ public class MenuDetailFragment extends Fragment {
                     }
                 }
             }
+
         });
 
     }
