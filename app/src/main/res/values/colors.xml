@@ -13,4 +13,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="cardBackground">#1F1F1F</color>
     <color name="normalText">#707070</color>
+    <color name="colorStar">#B4E239</color>
+    <color name="colorStarBackground">#828078</color>
+    <color name="colorLightGray">#F2EDEB</color>
 </resources>
