@@ -31,12 +31,12 @@ import com.google.gson.JsonObject;
 public class RegisteredFragment extends Fragment {
     private static final String TAG = "TAG_RegisteredFragment";
     private Activity activity;
+    private TextView tvTitle;
     private EditText edaccs, edpassword, edagain, edname, edphone;
     private Button btCheck, btBack;
     private String textAccount, textAgain, textPassword, textName, textPhone;
     private CommonTask memberInsertTask;
     private NavController navController;
-    private TextView tvTitle;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +55,7 @@ public class RegisteredFragment extends Fragment {
         tvTitle.setText(R.string.textRegister);
         navController = Navigation.findNavController(view);
         handledViews(view);
+        tvTitle.setText(R.string.textRegister);
         edaccs.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 textAccount = edaccs.getText().toString().trim().toLowerCase();
@@ -129,6 +130,7 @@ public class RegisteredFragment extends Fragment {
     }
 
     private void handledViews(View view) {
+        tvTitle = activity.findViewById(R.id.tvTitle);
         edaccs = view.findViewById(R.id.edaccs);
         edpassword = view.findViewById(R.id.edpassword);
         edagain = view.findViewById(R.id.edagain);

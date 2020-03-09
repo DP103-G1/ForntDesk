@@ -23,6 +23,7 @@ import androidx.navigation.Navigation;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.google.gson.Gson;
@@ -38,6 +39,7 @@ public class BillFragment extends Fragment {
     private Spinner spMou, spDay;
     private int mem_id;
     private int total;
+    private Table table;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

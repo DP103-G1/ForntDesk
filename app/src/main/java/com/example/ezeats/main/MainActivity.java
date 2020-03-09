@@ -1,5 +1,9 @@
 package com.example.ezeats.main;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -8,12 +12,14 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.ezeats.R;
 import com.example.ezeats.member.Member;
+import com.example.ezeats.socket.SocketMessage;
 import com.example.ezeats.task.CommonTask;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
@@ -23,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "TAG_MainActivity";
     private BottomNavigationView bottomNavigationView;
     private NavController navController;
-    private ImageButton ibBill;
+    private ImageButton ibBill, ibGame;
+    private LocalBroadcastManager broadcastManager;
 
 
     @Override
@@ -32,9 +39,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bv);
         ibBill = findViewById(R.id.ibBill);
+        ibBill.setOnClickListener(v -> {
+            navController.navigate(R.id.menuDetailFragment);
+        });
+        ibGame = findViewById(R.id.ibGame);
+        ibGame.setOnClickListener(v -> {
+            navController.navigate(R.id.gameFragment);
+        });
         navController = Navigation.findNavController(this, R.id.fragment);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-
     }
 
     @Override
@@ -43,21 +56,49 @@ public class MainActivity extends AppCompatActivity {
         int memId;
         if ((memId = Common.getMemId(this)) == 0) {
             ibBill.setVisibility(View.GONE);
+            ibGame.setVisibility(View.GONE);
             bottomNavigationView.getMenu().clear();
             bottomNavigationView.inflateMenu(R.menu.normal_menu);
             navController.navigate(R.id.loginFragment);
             return;
         }
         Member member = getMember(memId);
+        Common.connectSocketServer(this, "member" + memId);
+        broadcastManager = LocalBroadcastManager.getInstance(this);
+        registerSocketReceiver();
         if (member.getState() == 0) {
             ibBill.setVisibility(View.GONE);
+            ibGame.setVisibility(View.GONE);
             bottomNavigationView.getMenu().clear();
             bottomNavigationView.inflateMenu(R.menu.normal_menu);
         } else {
             ibBill.setVisibility(View.VISIBLE);
+            ibGame.setVisibility(View.VISIBLE);
             bottomNavigationView.getMenu().clear();
             bottomNavigationView.inflateMenu(R.menu.seat_menu);
         }
+    }
+
+    private void registerSocketReceiver() {
+        IntentFilter filter = new IntentFilter("seat");
+        broadcastManager.registerReceiver(receiver, filter);
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SocketMessage socketMessage = (SocketMessage) intent.getSerializableExtra("socketMessage");
+            if (socketMessage.getReceiver().equals("member" + Common.getMemId(MainActivity.this))) {
+                onResume();
+            }
+        }
+    };
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        broadcastManager.unregisterReceiver(receiver);
+        Common.disconnectSocketServer();
     }
 
     private Member getMember(int memId) {
