@@ -136,6 +136,7 @@ public class ListBoxFragment extends Fragment {
             }
         }
 
+
         @Override
         public int getItemCount() {
             return boxes.size();
@@ -160,7 +161,7 @@ public class ListBoxFragment extends Fragment {
                 holder.tvReplyContent.setText(box.getReply());
             }else {
                 holder.reMessageLinearlayout.setVisibility(View.GONE);
-            }
+        }
 
             boolean isExpanded = boxes.get(position).isExpanded();
             holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
