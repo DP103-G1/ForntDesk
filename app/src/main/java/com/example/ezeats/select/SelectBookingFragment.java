@@ -37,6 +37,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -85,6 +86,9 @@ public class SelectBookingFragment extends Fragment {
             showSelectBooking(selectBooking);
             swipeRefreshLayout.setRefreshing(false);
         });
+
+//        Button btBack = view.findViewById(R.id.btBack);
+//        btBack.setOnClickListener(v -> navController.navigate(R.id.action_selectBookingFragment_to_memberRegionFragment));
 
     }
 
@@ -157,6 +161,7 @@ public class SelectBookingFragment extends Fragment {
 //                                jsonObject.addProperty("status",0);
 //                                jsonObject.addProperty("booking",gson.toJson(booking));
                                 int count = 0;
+
                                 try {
                                     selectBookingGetAllTask = new CommonTask(url1,jsonObject.toString());
                                     String result = selectBookingGetAllTask.execute().get();

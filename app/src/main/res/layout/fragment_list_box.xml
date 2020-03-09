@@ -10,7 +10,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBoxList"
         android:layout_width="match_parent"
-        android:layout_height="561dp"
+        android:layout_height="431dp"
         android:layout_marginTop="16dp" />
 
 </LinearLayout>

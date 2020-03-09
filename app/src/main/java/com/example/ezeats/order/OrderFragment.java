@@ -148,7 +148,7 @@ public class OrderFragment extends Fragment {
                String url = Url.URL + "/OrderServlet";
                 JsonObject jsonObject = new JsonObject();
                 jsonObject.addProperty("action","add");
-                Order order = new Order(memberId,
+                Order order = new Order(memberId, table.getORD_ID(),
                         Integer.parseInt(edTotal.getText().toString()),
                         new ArrayList<>(menuDetails));
                 jsonObject.addProperty("order", Common.gson.toJson(order));
