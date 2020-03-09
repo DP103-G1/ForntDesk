@@ -2,7 +2,10 @@ package com.example.ezeats.order;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -20,6 +24,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
+import com.example.ezeats.socket.SocketMessage;
 import com.example.ezeats.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,7 +32,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class OrderDetailFragment extends Fragment {
@@ -39,6 +46,9 @@ public class OrderDetailFragment extends Fragment {
     private Activity activity;
     private List<MenuDetail> menuDetails;
     private int memId;
+    private Comparator<MenuDetail> cmp =
+            Comparator.comparing(MenuDetail::isFOOD_ARRIVAL).thenComparing(v -> !v.isFOOD_STATUS());
+    private LocalBroadcastManager broadcastManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +65,8 @@ public class OrderDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerSocketReceiver();
         tvTitle = activity.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.textOrderDetail);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
@@ -67,11 +79,28 @@ public class OrderDetailFragment extends Fragment {
             showMenuDetail(menuDetails);
             swipeRefreshLayout.setRefreshing(false);
         });
-
         rvOd.setLayoutManager(new LinearLayoutManager(activity));
         menuDetails = getMenuDetail();
         showMenuDetail(menuDetails);
     }
+
+    private void registerSocketReceiver() {
+        IntentFilter filter = new IntentFilter("menuDetail");
+        broadcastManager.registerReceiver(receiver, filter);
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SocketMessage socketMessage = (SocketMessage) intent.getSerializableExtra("socketMessage");
+            Type listType = new TypeToken<List<MenuDetail>>(){}.getType();
+            List<MenuDetail> socketMenuDetails = Common.gson.fromJson(socketMessage.getMessage(), listType);
+            menuDetails.removeAll(socketMenuDetails);
+            menuDetails.addAll(socketMenuDetails);
+            menuDetails = menuDetails.stream().sorted(cmp).collect(Collectors.toList());
+            showMenuDetail(menuDetails);
+        }
+    };
 
     private List<MenuDetail> getMenuDetail() {
         List<MenuDetail> menuDetails = null;
@@ -88,6 +117,7 @@ public class OrderDetailFragment extends Fragment {
                 }.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 menuDetails = gson.fromJson(jsonIn, listType);
+                menuDetails = menuDetails.stream().sorted(cmp).collect(Collectors.toList());
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
@@ -167,6 +197,7 @@ public class OrderDetailFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        broadcastManager.unregisterReceiver(receiver);
         if (OrderGetAllTask != null){
             OrderGetAllTask.cancel(true);
             OrderGetAllTask = null;

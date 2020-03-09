@@ -234,6 +234,7 @@
     <string name="textViewMassage">查看留言</string>
     <string name="textMessageBoard">留言板</string>
     <string name="textMassageBoard">留言板</string>
+    <string name="textServerFail">請稍後再試</string>
 
 
 </resources>

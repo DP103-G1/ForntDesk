@@ -29,7 +29,7 @@
                 android:id="@+id/btbell"
                 android:layout_width="62dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_bell_1_128px" />
+                android:src="@drawable/service" />
 
             <SearchView
                 android:id="@+id/searchView"
