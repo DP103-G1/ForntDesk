@@ -26,7 +26,6 @@ import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
-import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -45,7 +44,6 @@ public class SelectBookingFragment extends Fragment {
     private RecyclerView rvSelectBooking;
     private List<Booking> selectBooking;
     private CommonTask selectBookingGetAllTask;
-    private ImageTask selectBookingTask;
     private int memId;
     private TextView tvTitle;
 
@@ -125,10 +123,10 @@ public class SelectBookingFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull SelectBookingHolder holder, int position) {
             Booking booking = selectBooking.get(position);
-            String url = Url.URL + "/BookingServlet";
-            int memberId = booking.getMember().getmember_Id();
-            selectBookingTask = new ImageTask(url,String.valueOf(memberId));
-            selectBookingTask.execute();
+//            String url = Url.URL + "/BookingServlet";
+//            int memberId = booking.getMember().getmember_Id();
+//            selectBookingTask = new ImageTask(url,String.valueOf(memberId));
+//            selectBookingTask.execute();
             holder.tvBkId.setText(String.valueOf(booking.getBkId()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
@@ -225,10 +223,6 @@ public class SelectBookingFragment extends Fragment {
         if (selectBookingGetAllTask != null){
             selectBookingGetAllTask.cancel(true);
             selectBookingGetAllTask = null;
-        }
-        if (selectBookingTask != null){
-            selectBookingTask.cancel(true);
-            selectBookingTask = null;
         }
     }
 }

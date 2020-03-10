@@ -133,6 +133,7 @@ public class MenuDetailFragment extends Fragment {
             } else if (dis.length() == 0) {
                 distotal = total;
             }
+
             if (!bill[0]) {
                 bill[0] = true;
                 if (Common.networkConnected(activity)) {

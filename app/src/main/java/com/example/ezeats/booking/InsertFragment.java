@@ -4,10 +4,7 @@ package com.example.ezeats.booking;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +20,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
-import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.member.Member;
@@ -53,7 +48,7 @@ import java.util.stream.Collectors;
 public class InsertFragment extends Fragment {
     private final static String TAG = "TAG_InsertFragment";
     private Activity activity;
-    private EditText etPhone, etDate;
+    private EditText etDate;
     private Spinner spTime, spAdult, spChild, spTable;
     private CommonTask bookingGetAllTask, getTableTask;
     private ImageTask bookingImageTask;
@@ -61,11 +56,11 @@ public class InsertFragment extends Fragment {
     private Date bkDate;
     private String bkTime;
     private int mem_id;
-    private SharedPreferences pref;
     private List<Booking> bookings;
     private List<Integer> tableIds;
     private String textPhone;
-    private TextView tvTitle;
+    private TextView tvTitle, etPhone;
+
 
 
 
@@ -93,27 +88,28 @@ public class InsertFragment extends Fragment {
         final NavController navController = Navigation.findNavController(view);
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         etPhone = view.findViewById(R.id.etPhone);
-        etPhone.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 10) {
-                    textPhone = s.subSequence(0, 10).toString();
-                    etPhone.setText(textPhone);
-                    etPhone.setSelection(textPhone.length());
-                }
-
-            }
-        });
+        etPhone.setText(bookings.get(mem_id).getMember().getphone());
+//        etPhone.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (s.length() > 10) {
+//                    textPhone = s.subSequence(0, 10).toString();
+//                    etPhone.setText(textPhone);
+//                    etPhone.setSelection(textPhone.length());
+//                }
+//
+//            }
+//        });
 
         spTime = view.findViewById(R.id.spTime);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
@@ -374,9 +370,7 @@ public class InsertFragment extends Fragment {
     }
 
     private List<Booking> getBookings() {
-
         List<Booking> bookings = new ArrayList<>();
-
         if (Common.networkConnected(activity)) {
             String url = Url.URL + "/BookingServlet";
             JsonObject jsonObject = new JsonObject();
@@ -396,5 +390,6 @@ public class InsertFragment extends Fragment {
         }
         return bookings;
     }
+
 
 }
