@@ -91,8 +91,6 @@ public class MenuDetailFragment extends Fragment {
         });
 
         rvMd.setLayoutManager(new LinearLayoutManager(activity));
-
-
         menuDetails = getMenuDetail();
         showMenuDetail(menuDetails);
         int bkid = table.getORD_ID();

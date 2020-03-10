@@ -2,6 +2,8 @@ package com.example.ezeats.main;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -76,8 +78,7 @@ public class HomeFragment extends Fragment {
         navController = Navigation.findNavController(view);
         handledViews();
         bottomNavigationView.setVisibility(View.VISIBLE);
-        flipperImage.setOnClickListener(v ->
-                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment));
+        flipperImage.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment));
     }
 
     private List<Menu> getMenu() {
