@@ -59,14 +59,13 @@ public class HowToFragment extends Fragment {
 
     private void initData() {
         qaList = new ArrayList<>();
-        qaList.add(new QA("NO.1", "如何加入會員", "可在首頁點選註冊會員"));
-        qaList.add(new QA("No.2", "忘記帳號密碼", "登入畫面中請點選忘記密碼，經驗證後重新設定您的新的帳號或密碼"));
-        qaList.add(new QA("No.3", "如何訂位", "點選下排功能表椅子圖案開始訂位"));
-        qaList.add(new QA("No.4", "如何查詢訂單", "點選下排功能表放大鏡圖案查詢訂單"));
-        qaList.add(new QA("No.5", "如何訂餐", "點選下排功能表刀叉圖案選擇餐點"));
-        qaList.add(new QA("No.6", "怎麼拿到優惠碼", "經小遊戲過關即可拿到優惠碼"));
+        qaList.add(new QA("NO.1", "如何加入會員", "打開EZeats的APP填入帳號密碼即可註冊會員"));
+        qaList.add(new QA("No.2", "忘記帳號密碼", "於登入選項下請點選忘記密碼，輸入帳號和手機號碼後可更改密碼"));
+        qaList.add(new QA("No.3", "如何訂位", "點選下排功能表“訂位”進入訂位頁面"));
+        qaList.add(new QA("No.4", "如何查詢訂單", "點選下排功能表“會員”後選擇訂單查詢"));
+        qaList.add(new QA("No.5", "如何點餐", "APP首頁點選餐點圖案後開始點餐"));
+        qaList.add(new QA("No.6", "怎麼拿到優惠碼", "小遊戲過關即可拿到優惠碼"));
         qaList.add(new QA("No.7", "營業時間幾點", "營業時間為早上9:00至晚上21:00"));
-        qaList.add(new QA("No.8", "反應用餐體驗", "點選下排功能表表格圖案連結意見箱始反映意見"));
-        qaList.add(new QA("No.9", "付款方式", "目前提供QR code結帳付款"));
+        qaList.add(new QA("No.8", "反應用餐體驗", "點選下排功能表“會員”後選擇意見箱選擇我要留言"));
     }
 }
