@@ -167,8 +167,8 @@ public class HomeFragment extends Fragment {
             homeImageTask.execute();
             holder.tvName.setText(menu.getFOOD_NAME());
             holder.tvContent.setText(menu.getFOOD_CONTENT());
-            holder.itemView.setOnClickListener(v ->
-                    Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment));
+//            holder.itemView.setOnClickListener(v ->
+//                    Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment));
         }
     }
 

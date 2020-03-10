@@ -52,6 +52,8 @@ public class MenuDetailFragment extends Fragment {
     private List<Order> orders;
     private int memId, distotal;
     private String dis;
+    int total = 0;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,18 +93,30 @@ public class MenuDetailFragment extends Fragment {
         });
 
         rvMd.setLayoutManager(new LinearLayoutManager(activity));
+
+
         menuDetails = getMenuDetail();
         showMenuDetail(menuDetails);
         int bkid = table.getORD_ID();
         int ordid = menuDetails.get(0).getORD_ID();
-        int total = menuDetails.get(0).getORD_TOTAL();
+//        int total = menuDetails.get(0).getORD_TOTAL();
+
+        for (MenuDetail menuDetail : menuDetails) {
+            if (!menuDetail.isFOOD_ARRIVAL()) {
+                Common.showToast(activity, R.string.textNoArrival);
+                return;
+            }
+
+            total+= menuDetail.getORD_TOTAL();
+        }
+        Log.d(TAG, "total = " + total);
+
         final boolean[] bill = {menuDetails.get(0).isORD_BILL()};
         if (menuDetails != null && !menuDetails.isEmpty()) {
             tvTotal.setText(String.valueOf(total));
         }
 
         btBill.setOnClickListener(v -> {
-
             for (MenuDetail menuDetail : menuDetails) {
                 if (!menuDetail.isFOOD_ARRIVAL()) {
                     Common.showToast(activity, R.string.textNoArrival);
@@ -148,7 +162,8 @@ public class MenuDetailFragment extends Fragment {
                     }
                 }
             }
-
+            SharedPreferences pref = activity.getSharedPreferences(Common.NUMBER, Context.MODE_PRIVATE);
+            pref.edit().remove("number").apply();
         });
 
     }
