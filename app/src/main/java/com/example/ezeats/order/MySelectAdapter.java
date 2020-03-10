@@ -35,7 +35,6 @@ public class MySelectAdapter extends FragmentStatePagerAdapter {
             default:
                 return null;
         }
-
     }
 
     @Nullable

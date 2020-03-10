@@ -4,6 +4,7 @@ package com.example.ezeats.booking;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,6 +57,7 @@ public class InsertFragment extends Fragment {
     private Date bkDate;
     private String bkTime;
     private int mem_id;
+    private SharedPreferences pref;
     private List<Booking> bookings;
     private List<Integer> tableIds;
     private String textPhone;
@@ -370,7 +372,9 @@ public class InsertFragment extends Fragment {
     }
 
     private List<Booking> getBookings() {
+
         List<Booking> bookings = new ArrayList<>();
+
         if (Common.networkConnected(activity)) {
             String url = Url.URL + "/BookingServlet";
             JsonObject jsonObject = new JsonObject();
@@ -390,6 +394,5 @@ public class InsertFragment extends Fragment {
         }
         return bookings;
     }
-
 
 }

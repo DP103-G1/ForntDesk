@@ -41,6 +41,7 @@ public class MenuDetailFragment extends Fragment {
     private static final String TAG = "TAG_MenuDetailFragment";
     private TextView tvTitle;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SharedPreferences preferences;
     private RecyclerView rvMd;
     private Button btBill;
     private TextView tvTotal;

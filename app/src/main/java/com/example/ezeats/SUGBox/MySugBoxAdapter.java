@@ -9,8 +9,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.ezeats.R;
-import com.example.ezeats.order.OrderDetailFragment;
-import com.example.ezeats.order.OrderFragment;
 
 public class MySugBoxAdapter extends FragmentStatePagerAdapter {
     private static final int[] TAB_TITLES = new int[]{R.string.textLeaveAMassage,R.string.textViewMassage};
@@ -28,7 +26,6 @@ public class MySugBoxAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new SUGBoxFragment();
             case 1:
-
                 return new ListBoxFragment();
             default:
                 return null;

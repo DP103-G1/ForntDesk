@@ -35,11 +35,12 @@ public class BillFragment extends Fragment {
     private TextView tvTitle;
     private Activity activity;
     private EditText edName, edNumber, edLast;
-    private Button btBillCheck;
+    private Button btBillCheck, btIn;
     private Spinner spMou, spDay;
     private int mem_id;
     private int total;
     private Table table;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class BillFragment extends Fragment {
         edNumber = view.findViewById(R.id.edNumber);
         edLast = view.findViewById(R.id.edLast);
         btBillCheck = view.findViewById(R.id.btBillCheck);
+        btIn = view.findViewById(R.id.btIn);
         tvTitle = activity.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.textBill);
 
@@ -87,6 +89,14 @@ public class BillFragment extends Fragment {
         spDay.setAdapter(dayAdapter);
         spDay.setSelection(0, true);
         spDay.setOnItemSelectedListener(listener);
+
+        btIn.setOnClickListener(v -> {
+            edName.setText("王小明");
+            edNumber.setText("5279576950541443");
+            edLast.setText("593");
+            spMou.setSelection(5);
+            spDay.setSelection(10);
+        });
 
 
         btBillCheck.setOnClickListener(new View.OnClickListener() {
@@ -153,6 +163,7 @@ public class BillFragment extends Fragment {
                                 .setMessage("總金額:" + " " + total)
                                 .setPositiveButton(R.string.textYes, (dialog, which) -> navigation.navigate(R.id.action_billFragment_to_homeFragment))
                                 .show();
+
                     }
                 } else {
                     Common.showToast(getActivity(), R.string.textNoNetwork);
