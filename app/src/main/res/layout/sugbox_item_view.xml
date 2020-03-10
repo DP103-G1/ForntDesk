@@ -20,7 +20,7 @@
                 android:id="@+id/tvNumber"
                 android:layout_width="45dp"
                 android:layout_height="49dp"
-                android:gravity="center"
+                android:gravity="center|start"
                 android:padding="16dp"
                 android:text="@string/tvNumber"
                 android:textColor="@color/colorSecondary"
@@ -113,7 +113,7 @@
                 android:gravity="center"
                 android:text="@string/tvNo"
                 android:textColor="@color/colorSecondary"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
