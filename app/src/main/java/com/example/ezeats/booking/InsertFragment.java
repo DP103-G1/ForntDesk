@@ -4,7 +4,6 @@ package com.example.ezeats.booking;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,7 +56,6 @@ public class InsertFragment extends Fragment {
     private Date bkDate;
     private String bkTime;
     private int mem_id;
-    private SharedPreferences pref;
     private List<Booking> bookings;
     private List<Integer> tableIds;
     private String textPhone;
@@ -71,7 +69,7 @@ public class InsertFragment extends Fragment {
         super.onCreate(savedInstanceState);
         activity =  getActivity();
         mem_id = Common.getMemId(activity);
-        Log.d(TAG, String.valueOf(mem_id));
+
     }
 
     @Override
