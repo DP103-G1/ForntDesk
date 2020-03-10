@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ezeats.R;
+import com.example.ezeats.member.Member;
 import com.example.ezeats.order.Menu;
 import com.example.ezeats.task.CommonTask;
 import com.example.ezeats.task.ImageTask;
@@ -50,6 +51,7 @@ public class HomeFragment extends Fragment {
     private List<Menu> menus;
     private BottomNavigationView bottomNavigationView;
     private ViewFlipper flipperImage;
+    private int memid;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        memid = Common.getMemId(activity);
         rvHome = view.findViewById(R.id.rvHome);
         flipperImage = view.findViewById(R.id.flipperImage);
         tvTitle = activity.findViewById(R.id.tvTitle);
@@ -78,7 +81,10 @@ public class HomeFragment extends Fragment {
         navController = Navigation.findNavController(view);
         handledViews();
         bottomNavigationView.setVisibility(View.VISIBLE);
-        flipperImage.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_orderFragment));
+        Member member = getMember(memid);
+        if (member.getState() == 1) {
+            flipperImage.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.selectMenuFragment));
+        }
     }
 
     private List<Menu> getMenu() {
@@ -91,8 +97,7 @@ public class HomeFragment extends Fragment {
             homeGetAllTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = homeGetAllTask.execute().get();
-                Type listType = new TypeToken<List<Menu>>() {
-                }.getType();
+                Type listType = new TypeToken<List<Menu>>() {}.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 menus = gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
@@ -209,6 +214,26 @@ public class HomeFragment extends Fragment {
             Common.showToast(activity, R.string.textNoNetwork);
         }
         return getImages(base64Images);
+    }
+
+    private com.example.ezeats.member.Member getMember(int memId) {
+        com.example.ezeats.member.Member member = null;
+        if (Common.networkConnected(activity)) {
+            String url = Url.URL + "/MembersServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "findByMemberId");
+            jsonObject.addProperty("member_Id", memId);
+            CommonTask getMemberTask = new CommonTask(url, jsonObject.toString());
+            try {
+                String result = getMemberTask.execute().get();
+                member = new Gson().fromJson(result, Member.class);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
+        }
+        return member;
     }
 
     private List<byte[]> getImages(List<String> base64Images) {

@@ -9,15 +9,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="321dp"
+        android:layout_height="329dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="60dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.467">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,19 +31,19 @@
                 android:id="@+id/tvaccs"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:textColor="@color/colorText"
                 android:gravity="center"
-                android:text="帳號:" />
+                android:text="帳號:"
+                android:textColor="@color/colorText" />
 
             <EditText
                 android:id="@+id/edaccs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/colorText"
-                android:theme="@style/MyEditText"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorText"
+                android:theme="@style/MyEditText" />
         </LinearLayout>
 
         <LinearLayout
@@ -55,18 +57,18 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/colorText"
-                android:text="密碼:" />
+                android:text="密碼:"
+                android:textColor="@color/colorText" />
 
             <EditText
                 android:id="@+id/edpassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/colorText"
-                android:theme="@style/MyEditText"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorText"
+                android:theme="@style/MyEditText" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,18 +82,18 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/colorText"
-                android:text="密碼確認:" />
+                android:text="密碼確認:"
+                android:textColor="@color/colorText" />
 
             <EditText
                 android:id="@+id/edagain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/colorText"
-                android:theme="@style/MyEditText"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorText"
+                android:theme="@style/MyEditText" />
         </LinearLayout>
 
         <LinearLayout
@@ -105,18 +107,18 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/colorText"
-                android:text="姓名:" />
+                android:text="姓名:"
+                android:textColor="@color/colorText" />
 
             <EditText
                 android:id="@+id/edname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/colorText"
-                android:theme="@style/MyEditText"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorText"
+                android:theme="@style/MyEditText" />
         </LinearLayout>
 
         <LinearLayout
@@ -130,18 +132,18 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="@color/colorText"
-                android:text="電話:" />
+                android:text="電話:"
+                android:textColor="@color/colorText" />
 
             <EditText
                 android:id="@+id/edphone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/colorText"
-                android:theme="@style/MyEditText"
                 android:ems="10"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:textColor="@color/colorText"
+                android:theme="@style/MyEditText" />
         </LinearLayout>
     </LinearLayout>
 
@@ -172,5 +174,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btCheck"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <Button
+        android:id="@+id/btIn"
+        android:layout_width="89dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/colorBackground"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

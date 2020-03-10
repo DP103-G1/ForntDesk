@@ -61,12 +61,11 @@ public class InsertFragment extends Fragment {
     private Date bkDate;
     private String bkTime;
     private int mem_id;
-    private SharedPreferences pref;
     private List<Booking> bookings;
     private List<Integer> tableIds;
     private String textPhone;
     private TextView tvTitle;
-
+    private String TextPhone;
 
 
     @Override
@@ -93,6 +92,7 @@ public class InsertFragment extends Fragment {
         final NavController navController = Navigation.findNavController(view);
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         etPhone = view.findViewById(R.id.etPhone);
+
         etPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
