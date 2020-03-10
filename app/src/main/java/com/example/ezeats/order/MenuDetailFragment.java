@@ -1,7 +1,6 @@
 package com.example.ezeats.order;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Table;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.socket.SocketMessage;
@@ -45,7 +45,7 @@ public class MenuDetailFragment extends Fragment {
     private Button btBill;
     private TextView tvTotal;
     private EditText edDiscount;
-    private Activity activity;
+    private MainActivity activity;
     private CommonTask DetailGetAllTask;
     private List<MenuDetail> menuDetails;
     private List<Order> orders;
@@ -57,7 +57,7 @@ public class MenuDetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = getActivity();
+        activity = (MainActivity) getActivity();
     }
 
     @Nullable
@@ -141,20 +141,27 @@ public class MenuDetailFragment extends Fragment {
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "update");
                     jsonObject.addProperty("order", new Gson().toJson(order));
+                    JsonObject updateTableJsonObjec = new JsonObject();
+                    String tableServletUrl = Url.URL + "/TableServlet";
+                    updateTableJsonObjec.addProperty("action", "updateBkId");
+                    updateTableJsonObjec.addProperty("tableId", table.getTableId());
                     int count = 0;
                     try {
                         String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                        String updateBkIdResule = new CommonTask(tableServletUrl, updateTableJsonObjec.toString()).execute().get();
                         count = Integer.valueOf(result);
+                        count += Integer.valueOf(updateBkIdResule);
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
                     }
-                    if (count != 0) {
+                    if (count == 2) {
                         table.setORD_ID(0);
                         SocketMessage socketMessage = new SocketMessage("seat", "waiter", Common.gson.toJson(table));
                         Common.eZeatsWebSocketClient.send(Common.gson.toJson(socketMessage));
                         Log.d(TAG, String.valueOf(distotal));
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("menudetail", distotal);
+                        activity.onResume();
                         Navigation.findNavController(v).navigate(R.id.action_menuDetailFragment_to_billFragment, bundle);
                     } else {
                         Common.showToast(activity, R.string.textNoBill);
