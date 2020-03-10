@@ -58,9 +58,8 @@ public class InsertFragment extends Fragment {
     private int mem_id;
     private List<Booking> bookings;
     private List<Integer> tableIds;
-    private String textPhone;
     private TextView tvTitle, etPhone;
-
+    private Member member;
 
 
 
@@ -85,31 +84,14 @@ public class InsertFragment extends Fragment {
         tvTitle.setText(R.string.textBooking);
         bookings = getBookings();
         tableIds = getTableIds();
+        member = getMemberData();
         final NavController navController = Navigation.findNavController(view);
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         etPhone = view.findViewById(R.id.etPhone);
-        etPhone.setText(bookings.get(mem_id).getMember().getphone());
-//        etPhone.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if (s.length() > 10) {
-//                    textPhone = s.subSequence(0, 10).toString();
-//                    etPhone.setText(textPhone);
-//                    etPhone.setSelection(textPhone.length());
-//                }
-//
-//            }
-//        });
+        etPhone.setText(member.getphone());
+
+
+
 
         spTime = view.findViewById(R.id.spTime);
         String[] timeArray = getResources().getStringArray(R.array.textTimeArray);
@@ -264,7 +246,6 @@ public class InsertFragment extends Fragment {
                 } else {
                     Common.showToast(getActivity(), R.string.textNoNetwork);
                 }
-//                navController.navigate(R.id.action_insertFragment_to_homeFragment);
             }
         });
     }
@@ -315,7 +296,6 @@ public class InsertFragment extends Fragment {
 
     private List<String> comparison() {
         List<Integer> tablesAvalible = tableIds.stream().collect(Collectors.toList());
-//        tablesAvalible.add(0, "請選取");
         if (!etDate.getText().toString().isEmpty()) {
             try {
                 bkDate = simpleDateFormat.parse(etDate.getText().toString());
@@ -324,7 +304,6 @@ public class InsertFragment extends Fragment {
             }
         }
         if (spTime.getSelectedItemPosition() != 0 && etDate != null) {
-//            Log.d(TAG, simpleDateFormat.format(bkDate) + " " + bkTime);
             List<Integer> tablesOrdered = bookings.stream().filter(v -> v.getBkTime().equals(bkTime)
                     && v.getBkDate().equals(bkDate)).map(v -> v.getTableId())
                     .collect(Collectors.toList());
@@ -334,7 +313,6 @@ public class InsertFragment extends Fragment {
             return selectTableList;
         }
         List<String> tablesNoSelect = new ArrayList<>();
-//        tablesNoSelect.add("請選取");
         return tablesNoSelect;
     }
 
@@ -368,7 +346,6 @@ public class InsertFragment extends Fragment {
 //                .flatMap(v -> Stream.of(v.getTableId())).collect(Collectors.toList());
         return tableIds;
     }
-
     private List<Booking> getBookings() {
 
         List<Booking> bookings = new ArrayList<>();
@@ -391,6 +368,29 @@ public class InsertFragment extends Fragment {
             Common.showToast(getActivity(), R.string.textNoNetwork);
         }
         return bookings;
+    }
+
+    private Member getMemberData() {
+        Member memberData = null;
+        if (Common.networkConnected(activity)) {
+            String url = Url.URL + "/MembersServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "findByMemberId");
+            jsonObject.addProperty("member_Id", mem_id);
+            String jsonOut = jsonObject.toString();
+            bookingGetAllTask = new CommonTask(url, jsonOut);
+            try {
+                String jsonIn = bookingGetAllTask.execute().get();
+                Type listType = new TypeToken<Member>() {
+                }.getType();
+                memberData = Common.gson.fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
+        }
+        return memberData;
     }
 
 }
