@@ -29,6 +29,7 @@ import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -48,7 +49,10 @@ public class SUGBoxFragment extends Fragment
     private RatingBar ratingBar;
     private int mem_id;
     private String textMessage;
-
+    private TabLayout tabLayout;
+    public SUGBoxFragment(TabLayout tabLayout) {
+        this.tabLayout = tabLayout;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,6 +94,7 @@ public class SUGBoxFragment extends Fragment
                         SUGBoxFragment.year,SUGBoxFragment.month,SUGBoxFragment.day);
                 dialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
                 dialog.show();
+
             }
         });
 
@@ -147,7 +152,9 @@ public class SUGBoxFragment extends Fragment
                                 .setPositiveButton(R.string.textConfirm, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        navController.navigate(R.id.listBoxFragment);
+//                                        navController.navigate(R.id.listBoxFragment);
+                                        tabLayout.setScrollX(tabLayout.getWidth());
+                                        tabLayout.getTabAt(1).select();
                                     }
                                 })
                                 .show();
