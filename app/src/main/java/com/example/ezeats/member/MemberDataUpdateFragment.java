@@ -1,27 +1,17 @@
 package com.example.ezeats.member;
 
 
-import android.accounts.Account;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +22,6 @@ import androidx.navigation.Navigation;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
-import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Url;
 import com.example.ezeats.task.CommonTask;
 import com.google.gson.Gson;
@@ -40,7 +29,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 
 public class MemberDataUpdateFragment extends Fragment {
@@ -85,49 +73,37 @@ public class MemberDataUpdateFragment extends Fragment {
         edPasswordGet.setText(member.getpassword());
         edNameGet.setText(member.getname());
         edPhoneGet.setText(member.getphone());
-        edPasswordGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    textPassword = edPasswordGet.getText().toString().trim();
-                    if (textPassword.isEmpty()) {
-                        edPasswordGet.setError(getString(R.string.textInputPassword));
+        edPasswordGet.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                textPassword = edPasswordGet.getText().toString().trim();
+                if (textPassword.isEmpty()) {
+                    edPasswordGet.setError(getString(R.string.textInputPassword));
 
-                    }
                 }
             }
         });
-        edNameGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    textName = edNameGet.getText().toString().trim();
-                    if (textName.isEmpty()) {
-                        edNameGet.setError(getString(R.string.textInputName));
-                    }
+        edNameGet.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                textName = edNameGet.getText().toString().trim();
+                if (textName.isEmpty()) {
+                    edNameGet.setError(getString(R.string.textInputName));
                 }
             }
         });
-        edPhoneGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    textPhone = edNameGet.getText().toString().trim();
-                    if (textName.isEmpty()) {
-                        edPhoneGet.setError(getString(R.string.textInputPhone));
-                    }
+        edPhoneGet.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                textPhone = edNameGet.getText().toString().trim();
+                if (textName.isEmpty()) {
+                    edPhoneGet.setError(getString(R.string.textInputPhone));
                 }
             }
         });
 
-        edPhoneGet.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus){
-                    textPhone = edPhoneGet.getText().toString().trim();
-                    if (textPhone.isEmpty()){
-                        edPhoneGet.setError(getString(R.string.textInputPhone));
-                    }
+        edPhoneGet.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus){
+                textPhone = edPhoneGet.getText().toString().trim();
+                if (textPhone.isEmpty()){
+                    edPhoneGet.setError(getString(R.string.textInputPhone));
                 }
             }
         });

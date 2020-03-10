@@ -9,16 +9,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.ezeats.R;
-import com.example.ezeats.order.OrderDetailFragment;
-import com.example.ezeats.order.OrderFragment;
+import com.google.android.material.tabs.TabLayout;
 
 public class MySugBoxAdapter extends FragmentStatePagerAdapter {
     private static final int[] TAB_TITLES = new int[]{R.string.textLeaveAMassage,R.string.textViewMassage};
     private Context mContext;
+    private TabLayout tabLayout;
 
-    public MySugBoxAdapter(@NonNull Context context, FragmentManager fm) {
+    public MySugBoxAdapter(@NonNull Context context, FragmentManager fm,TabLayout tabLayout) {
         super(fm);
         mContext = context;
+        this.tabLayout = tabLayout;
+
     }
 
     @NonNull
@@ -26,9 +28,8 @@ public class MySugBoxAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new SUGBoxFragment();
+                return new SUGBoxFragment(tabLayout);
             case 1:
-
                 return new ListBoxFragment();
             default:
                 return null;

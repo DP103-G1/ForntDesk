@@ -32,7 +32,7 @@ public class LoginFragment extends Fragment {
     private NavController navController;
     private BottomNavigationView bottomNavigationView;
     private EditText edAcc, edPass;
-    private Button btLogin, btReg, btForget;
+    private Button btLogin, btReg, btForget, btIn;
     private String textAccount, textPassword;
     private CommonTask loginTask;
 
@@ -78,6 +78,10 @@ public class LoginFragment extends Fragment {
                 navController.navigate(R.id.action_loginFragment_to_registeredFragment));
         btForget.setOnClickListener(v ->
                 navController.navigate(R.id.action_loginFragment_to_forgetFragment));
+        btIn.setOnClickListener(v -> {
+                edAcc.setText("1234@yahoo.com");
+                edPass.setText("1234");
+        });
     }
 
     private void handledViews(View view) {
@@ -88,6 +92,7 @@ public class LoginFragment extends Fragment {
         btLogin = view.findViewById(R.id.btLogin);
         btReg = view.findViewById(R.id.btReg);
         btForget = view.findViewById(R.id.btForget);
+        btIn = view.findViewById(R.id.btIn);
     }
 
     private void onLoginClick(View view) {

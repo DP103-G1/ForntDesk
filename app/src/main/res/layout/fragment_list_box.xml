@@ -7,10 +7,15 @@
     android:orientation="vertical"
     tools:context="com.example.ezeats.SUGBox.ListBoxFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvBoxList"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="431dp"
-        android:layout_marginTop="16dp" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBoxList"
+            android:layout_width="match_parent"
+            android:layout_height="431dp" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

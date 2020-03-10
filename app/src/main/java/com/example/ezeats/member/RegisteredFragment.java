@@ -33,7 +33,7 @@ public class RegisteredFragment extends Fragment {
     private Activity activity;
     private TextView tvTitle;
     private EditText edaccs, edpassword, edagain, edname, edphone;
-    private Button btCheck, btBack;
+    private Button btCheck, btBack, btIn;
     private String textAccount, textAgain, textPassword, textName, textPhone;
     private CommonTask memberInsertTask;
     private NavController navController;
@@ -127,6 +127,13 @@ public class RegisteredFragment extends Fragment {
 
         btCheck.setOnClickListener(this::onRegisterClick);
         btBack.setOnClickListener(v -> navController.popBackStack());
+        btIn.setOnClickListener(v -> {
+            edaccs.setText("1234@yahoo.com");
+            edpassword.setText("1234");
+            edagain.setText("1234");
+            edname.setText("王小明");
+            edphone.setText("0922883146");
+        });
     }
 
     private void handledViews(View view) {
@@ -138,6 +145,7 @@ public class RegisteredFragment extends Fragment {
         edphone = view.findViewById(R.id.edphone);
         btCheck = view.findViewById(R.id.btCheck);
         btBack = view.findViewById(R.id.btBack);
+        btIn = view.findViewById(R.id.btIn);
     }
 
     private void onRegisterClick(View view) {

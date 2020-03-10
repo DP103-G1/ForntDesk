@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,13 +27,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.ezeats.R;
 import com.example.ezeats.booking.Booking;
 import com.example.ezeats.main.Common;
+import com.example.ezeats.main.MainActivity;
 import com.example.ezeats.main.Url;
+import com.example.ezeats.member.Member;
 import com.example.ezeats.task.CommonTask;
-import com.example.ezeats.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+
 
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
@@ -45,7 +50,6 @@ public class SelectBookingFragment extends Fragment {
     private RecyclerView rvSelectBooking;
     private List<Booking> selectBooking;
     private CommonTask selectBookingGetAllTask;
-    private ImageTask selectBookingTask;
     private int memId;
     private TextView tvTitle;
 
@@ -125,10 +129,10 @@ public class SelectBookingFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull SelectBookingHolder holder, int position) {
             Booking booking = selectBooking.get(position);
-            String url = Url.URL + "/BookingServlet";
-            int memberId = booking.getMember().getmember_Id();
-            selectBookingTask = new ImageTask(url,String.valueOf(memberId));
-            selectBookingTask.execute();
+//            String url = Url.URL + "/BookingServlet";
+//            int memberId = booking.getMember().getmember_Id();
+//            selectBookingTask = new ImageTask(url,String.valueOf(memberId));
+//            selectBookingTask.execute();
             holder.tvBkId.setText(String.valueOf(booking.getBkId()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
@@ -145,13 +149,15 @@ public class SelectBookingFragment extends Fragment {
                     switch (item.getItemId()){
                         case R.id.selectDelete:
                             if (Common.networkConnected(activity)){
-                                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+//                                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:MM:dd").create();
                                 String url1 = Url.URL + "/BookingServlet";
                                 JsonObject jsonObject = new JsonObject();
-                                jsonObject.addProperty("action","update");
-                                booking.setStatus(0);
-                                jsonObject.addProperty("booking", Common.gson.toJson(booking));
+                                jsonObject.addProperty("action","deleteByStatus");
+                                jsonObject.addProperty("bkId",booking.getBkId());
 
+//                                jsonObject.addProperty("member_id",memId);
+//                                jsonObject.addProperty("status",0);
+//                                jsonObject.addProperty("booking",gson.toJson(booking));
                                 int count = 0;
 
                                 try {
@@ -225,10 +231,6 @@ public class SelectBookingFragment extends Fragment {
         if (selectBookingGetAllTask != null){
             selectBookingGetAllTask.cancel(true);
             selectBookingGetAllTask = null;
-        }
-        if (selectBookingTask != null){
-            selectBookingTask.cancel(true);
-            selectBookingTask = null;
         }
     }
 }

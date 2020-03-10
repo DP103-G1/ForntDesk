@@ -62,7 +62,6 @@ public class SelectBookingDetailFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         tvTitle = activity.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.textBookingDetail);
-        NavController navController = Navigation.findNavController(view);
         tvBkIdGet = view.findViewById(R.id.tvBkIdGet);
         tvTableGet = view.findViewById(R.id.tvTableGet);
         tvTimeGet = view.findViewById(R.id.tvTimeGet);
