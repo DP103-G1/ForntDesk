@@ -88,7 +88,7 @@ public class InsertFragment extends Fragment {
         final NavController navController = Navigation.findNavController(view);
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         etPhone = view.findViewById(R.id.etPhone);
-        etPhone.setText(bookings.get(mem_id).getMember().getphone());
+//        etPhone.setText(bookings.get(mem_id).getMember().getphone());
 //        etPhone.addTextChangedListener(new TextWatcher() {
 //            @Override
 //            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
