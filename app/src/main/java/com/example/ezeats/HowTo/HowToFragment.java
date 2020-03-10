@@ -65,7 +65,7 @@ public class HowToFragment extends Fragment {
         qaList.add(new QA("No.4", "如何查詢訂單", "點選下排功能表“會員”後選擇訂單查詢"));
         qaList.add(new QA("No.5", "如何點餐", "APP首頁點選餐點圖案後開始點餐"));
         qaList.add(new QA("No.6", "怎麼拿到優惠碼", "小遊戲過關即可拿到優惠碼"));
-        qaList.add(new QA("No.7", "營業時間幾點", "營業時間為早上9:00至晚上21:00"));
+        qaList.add(new QA("No.7", "營業時間", "營業時間為早上9:00至晚上21:00"));
         qaList.add(new QA("No.8", "反應用餐體驗", "點選下排功能表“會員”後選擇意見箱選擇我要留言"));
     }
 }
