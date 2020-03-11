@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ezeats.R;
+
 import com.example.ezeats.member.Member;
 import com.example.ezeats.order.Menu;
 import com.example.ezeats.task.CommonTask;
@@ -80,9 +81,9 @@ public class HomeFragment extends Fragment {
         handledViews();
         bottomNavigationView.setVisibility(View.VISIBLE);
         Member member = getMember(memid);
-        if (member.getState() == 1) {
-            flipperImage.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.selectMenuFragment));
-        }
+//        if (member.getState() == 1) {
+//            flipperImage.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.selectMenuFragment));
+//        }
     }
 
     private List<Menu> getMenu() {
