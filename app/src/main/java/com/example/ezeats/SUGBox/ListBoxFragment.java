@@ -17,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.ezeats.R;
 import com.example.ezeats.main.Common;
@@ -37,7 +38,7 @@ public class ListBoxFragment extends Fragment {
     private Activity activity;
     private CommonTask boxGetAllTask;
     private List<Box> boxes;
-
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +58,19 @@ public class ListBoxFragment extends Fragment {
         tvTitle = activity.findViewById(R.id.tvTitle);
         tvTitle.setText(R.string.textMassageBoard);
         rvBoxList = view.findViewById(R.id.rvBoxList);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvBoxList.setLayoutManager(new LinearLayoutManager(activity));
         boxes = getBoxes();
         showBoxes(boxes);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                boxes = getBoxes();
+                showBoxes(boxes);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private List<Box> getBoxes(){

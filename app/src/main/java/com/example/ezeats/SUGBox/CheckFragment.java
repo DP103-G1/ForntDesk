@@ -23,7 +23,7 @@ public class CheckFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private MySugBoxAdapter pagerAdapter;
-    private TextView tvTitle;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,10 +40,8 @@ public class CheckFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        tvTitle = activity.findViewById(R.id.tvTitle);
-//        tvTitle.setText(R.string.textMessageBoard);
-        pagerAdapter = new MySugBoxAdapter(activity,getChildFragmentManager());
         tabLayout = view.findViewById(R.id.tabLayout);
+        pagerAdapter = new MySugBoxAdapter(activity,getChildFragmentManager(),tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
