@@ -2,8 +2,6 @@ package com.example.ezeats.main;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -216,8 +214,8 @@ public class HomeFragment extends Fragment {
         return getImages(base64Images);
     }
 
-    private com.example.ezeats.member.Member getMember(int memId) {
-        com.example.ezeats.member.Member member = null;
+    private Member getMember(int memId) {
+        Member member = null;
         if (Common.networkConnected(activity)) {
             String url = Url.URL + "/MembersServlet";
             JsonObject jsonObject = new JsonObject();
