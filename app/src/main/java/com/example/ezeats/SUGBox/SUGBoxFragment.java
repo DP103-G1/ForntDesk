@@ -46,6 +46,7 @@ public class SUGBoxFragment extends Fragment
     private static int year,month,day;
     private SimpleDateFormat simpleDateFormat;
     private EditText etTopicKeyIn,etPurpose,etSource,etMessage;
+    private Button btQuik;
     private RatingBar ratingBar;
     private int mem_id;
     private String textMessage;
@@ -80,6 +81,7 @@ public class SUGBoxFragment extends Fragment
         etPurpose = view.findViewById(R.id.etPurpose);
         etSource = view.findViewById(R.id.etSource);
         etMessage = view.findViewById(R.id.etMessage);
+        btQuik = view.findViewById(R.id.btQuik);
         ratingBar =view.findViewById(R.id.ratingBar);
         tvShowDate = view.findViewById(R.id.tvShowDate);
         showNow();
@@ -184,6 +186,16 @@ public class SUGBoxFragment extends Fragment
                     etMessage.setText(textMessage);
                     etMessage.setSelection(textMessage.length());
                 }
+            }
+        });
+
+        btQuik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTopicKeyIn.setText("太鹹了！");
+                etPurpose.setText("家庭聚餐");
+                etSource.setText("雜誌報導");
+                etMessage.setText("你好，你們家東西很好吃，但是吃到最後有點太鹹了，要喝大口水才消除鹹味 （哭）");
             }
         });
 

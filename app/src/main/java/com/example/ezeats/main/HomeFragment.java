@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ezeats.R;
+
 import com.example.ezeats.member.Member;
 import com.example.ezeats.order.Menu;
 import com.example.ezeats.task.CommonTask;
