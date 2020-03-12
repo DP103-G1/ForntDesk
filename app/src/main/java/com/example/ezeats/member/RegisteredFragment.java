@@ -128,10 +128,10 @@ public class RegisteredFragment extends Fragment {
         btCheck.setOnClickListener(this::onRegisterClick);
         btBack.setOnClickListener(v -> navController.popBackStack());
         btIn.setOnClickListener(v -> {
-            edaccs.setText("1234@yahoo.com");
-            edpassword.setText("1234");
-            edagain.setText("1234");
-            edname.setText("王小明");
+            edaccs.setText("glen123@gmail.com");
+            edpassword.setText("1234567890");
+            edagain.setText("1234567890");
+            edname.setText("王名均");
             edphone.setText("0922883146");
         });
     }

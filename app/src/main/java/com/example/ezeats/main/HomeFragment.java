@@ -80,8 +80,10 @@ public class HomeFragment extends Fragment {
         handledViews();
         bottomNavigationView.setVisibility(View.VISIBLE);
         Member member = getMember(memid);
-        if (member.getState() == 1) {
-            flipperImage.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.selectMenuFragment));
+        if(memid != 0) {
+            if (member.getState() == 1) {
+                flipperImage.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.selectMenuFragment));
+            }
         }
     }
 

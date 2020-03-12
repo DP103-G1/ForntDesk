@@ -131,7 +131,7 @@ public class BillFragment extends Fragment {
 
                 String[] dayArray = getResources().getStringArray(R.array.textYear);
                 String day = String.valueOf(dayArray[spDay.getSelectedItemPosition()]);
-                if (day.equals("日")) {
+                if (day.equals("年")) {
                     Common.showToast(getActivity(), R.string.textMonthDay);
                     return;
                 }
@@ -158,8 +158,8 @@ public class BillFragment extends Fragment {
                     } else {
                         new AlertDialog.Builder(activity)
                                 .setTitle(R.string.textBillOK)
-                                .setMessage("原金額:" + " " + (total/(0.9)))
-                                .setMessage("折扣九折" + " " + (total*(0.1)))
+//                                .setMessage("原金額:" + " " + (total/(0.9)))
+//                                .setMessage("折扣九折" + " " + (total*(0.1)))
                                 .setMessage("總金額:" + " " + total)
                                 .setPositiveButton(R.string.textYes, (dialog, which) -> navigation.navigate(R.id.action_billFragment_to_homeFragment))
                                 .show();

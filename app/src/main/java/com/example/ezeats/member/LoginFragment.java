@@ -54,6 +54,9 @@ public class LoginFragment extends Fragment {
         tvTitle.setText(R.string.textLogin);
         navController = Navigation.findNavController(view);
         bottomNavigationView.setVisibility(View.GONE);
+
+
+
         edAcc.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 textAccount = edAcc.getText().toString().trim().toLowerCase();
@@ -76,11 +79,11 @@ public class LoginFragment extends Fragment {
         btLogin.setOnClickListener(this::onLoginClick);
         btReg.setOnClickListener(v ->
                 navController.navigate(R.id.action_loginFragment_to_registeredFragment));
-        btForget.setOnClickListener(v ->
-                navController.navigate(R.id.action_loginFragment_to_forgetFragment));
+//        btForget.setOnClickListener(v ->
+//                navController.navigate(R.id.action_loginFragment_to_forgetFragment));
         btIn.setOnClickListener(v -> {
-                edAcc.setText("1234@yahoo.com");
-                edPass.setText("1234");
+                edAcc.setText("glen123@gmail.com");
+                edPass.setText("1234567890");
         });
     }
 
@@ -91,7 +94,7 @@ public class LoginFragment extends Fragment {
         edPass = view.findViewById(R.id.edPass);
         btLogin = view.findViewById(R.id.btLogin);
         btReg = view.findViewById(R.id.btReg);
-        btForget = view.findViewById(R.id.btForget);
+//        btForget = view.findViewById(R.id.btForget);
         btIn = view.findViewById(R.id.btIn);
     }
 

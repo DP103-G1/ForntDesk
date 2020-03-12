@@ -47,7 +47,7 @@ public class MenuDetailFragment extends Fragment {
     private TextView tvTotal;
     private EditText edDiscount;
     private MainActivity activity;
-    private CommonTask DetailGetAllTask;
+    private CommonTask DetailGetAllTask, OrderGetAllTask;
     private List<MenuDetail> menuDetails;
     private List<Order> orders;
     private int memId, distotal;
@@ -97,17 +97,25 @@ public class MenuDetailFragment extends Fragment {
 
         menuDetails = getMenuDetail();
         showMenuDetail(menuDetails);
+        orders = getOrder();
         int bkid = table.getORD_ID();
         int ordid = menuDetails.get(0).getORD_ID();
+        Log.d(TAG, "ordId = " + ordid);
 //        int total = menuDetails.get(0).getORD_TOTAL();
+        for (Order order : orders) {
+            int ordId = order.getORD_ID();
+            if (order.getORD_ID() != ordid) {
+                for (MenuDetail menuDetail : menuDetails) {
+                    if (!menuDetail.isFOOD_ARRIVAL()) {
+                        Common.showToast(activity, R.string.textNoArrival);
+                        return;
+                    }
 
-        for (MenuDetail menuDetail : menuDetails) {
-            if (!menuDetail.isFOOD_ARRIVAL()) {
-                Common.showToast(activity, R.string.textNoArrival);
-                return;
+                }
+                total += order.getORD_TOTAL();
+            } else {
+                total = order.getORD_TOTAL();
             }
-
-            total+= menuDetail.getORD_TOTAL();
         }
         Log.d(TAG, "total = " + total);
 
@@ -199,6 +207,30 @@ public class MenuDetailFragment extends Fragment {
             Common.showToast(activity, R.string.textNoNetwork);
         }
         return menuDetails;
+    }
+
+    private List<Order> getOrder() {
+        List<Order> orders = null;
+        if (Common.networkConnected(activity)) {
+            String url = Url.URL + "/MenuDetailServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action", "getAllByMemberId");
+            jsonObject.addProperty("memberId", memId);
+            String jsonOut = jsonObject.toString();
+            OrderGetAllTask = new CommonTask(url, jsonOut);
+            try {
+                String jsonIn = OrderGetAllTask.execute().get();
+                Type listType = new TypeToken<List<Order>>() {
+                }.getType();
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                orders = gson.fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
+        }
+        return orders;
     }
 
     private void showMenuDetail(List<MenuDetail> menuDetails) {
