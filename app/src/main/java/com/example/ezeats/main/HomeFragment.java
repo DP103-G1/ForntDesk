@@ -80,6 +80,7 @@ public class HomeFragment extends Fragment {
         navController = Navigation.findNavController(view);
         handledViews();
         bottomNavigationView.setVisibility(View.VISIBLE);
+        Log.d(TAG, "memid = " + memid );
         Member member = getMember(memid);
         if(memid != 0) {
             if (member.getState() == 1) {

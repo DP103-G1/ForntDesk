@@ -56,7 +56,6 @@ public class LoginFragment extends Fragment {
         bottomNavigationView.setVisibility(View.GONE);
 
 
-
         edAcc.setOnFocusChangeListener((v, hasFocus) -> {
             if (!hasFocus) {
                 textAccount = edAcc.getText().toString().trim().toLowerCase();
@@ -82,8 +81,8 @@ public class LoginFragment extends Fragment {
 //        btForget.setOnClickListener(v ->
 //                navController.navigate(R.id.action_loginFragment_to_forgetFragment));
         btIn.setOnClickListener(v -> {
-                edAcc.setText("glen123@gmail.com");
-                edPass.setText("1234567890");
+            edAcc.setText("glen123@gmail.com");
+            edPass.setText("1234567890");
         });
     }
 
@@ -117,6 +116,7 @@ public class LoginFragment extends Fragment {
                 activity.onResume();
                 Common.showToast(activity, getString(R.string.textLoginSuccess));
             }
+
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }

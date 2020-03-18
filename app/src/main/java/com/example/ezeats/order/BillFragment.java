@@ -91,7 +91,7 @@ public class BillFragment extends Fragment {
         spDay.setOnItemSelectedListener(listener);
 
         btIn.setOnClickListener(v -> {
-            edName.setText("王小明");
+            edName.setText("王名均");
             edNumber.setText("5279576950541443");
             edLast.setText("593");
             spMou.setSelection(5);

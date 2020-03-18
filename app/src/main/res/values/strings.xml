@@ -306,6 +306,7 @@
     <string name="textServerFail">請稍後再試</string>
     <string name="textWelcomeToEZeate">歡迎你立即訂位喔！</string>
     <string name="textNewBooking">請先訂位</string>
+    <string name="textNoRegistered">請先註冊</string>
 
 
 </resources>
